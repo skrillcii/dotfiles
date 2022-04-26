@@ -1,20 +1,28 @@
 # README.md
 This README.md is a markdown templete.
 
-## Prerequisite
-This is an inline code `$ which pip`.
+## Table of Contents
+1. [Inline Code](#inline-code)
+2. [Ordered List](#ordered-list)
+3. [Unordered List](#unordered-list)
+4. [Table](#table)
+5. [Snippet](#snippet)
+6. [References](#references)
 
-## Bullet Points
-* Unordered list
-* Unordered list
-    * Unordered list
-    * Unordered list
+## Inline Code
+`$ this is an inline code`.
 
-## Index Listing
-1. Ordered list
-1. Ordered list
-    1. Ordered list
-    1. Ordered list
+## Ordered List
+1. Item 1
+1. Item 2
+    1. Item 3
+    1. Item 4
+
+## Unordered List
+* Item A
+* Item B
+    * Item C
+    * Item D
 
 ## Table
 | Column 1 | Column 2 |
