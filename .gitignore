@@ -1,0 +1,20 @@
+# Macos meta files
+*.DS_Store
+
+# Development meta files
+*.swo
+*.swp
+Session.vim
+*.vim/
+*tags
+*.python-version
+
+# Byte-compiled
+__pycache__/
+*.class
+*.egg-info
+
+# Pytest
+.coverage
+.pytest*
+htmlcov

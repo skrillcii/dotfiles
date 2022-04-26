@@ -1,0 +1,91 @@
+"==================================
+" Vim PluginInstall
+"==================================
+call plug#begin('~/.vim/plugged')
+" Plug 'tomasr/molokai'
+" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+" Plug 'davidhalter/jedi-vim'
+" Plug 'JamshedVesuna/vim-markdown-preview'
+" Plug 'vim-latex/vim-latex'
+call plug#end()
+
+"==================================
+" YouCompleteMe settings
+"==================================
+" let g:ycm_path_to_python_interpreter='~/.pyenv/shims/python3'
+" let g:ycm_auto_hover=''
+" nmap sh <Plug>(YCMHover)
+" nmap gd :YcmCompleter GoTo<CR>
+" nmap gr :YcmCompleter GoToReferences<CR>
+" nmap sd :YcmCompleter GetDoc<CR>
+" nmap st :YcmCompleter GetType<CR>
+" nmap rr :YcmCompleter RefactorRename<space>
+
+"==================================
+" Jedi settings
+"==================================
+" set completeopt-=preview
+" let g:jedi#auto_initialization=1
+" let g:jedi#completions_enabled=0
+" let g:jedi#auto_vim_configuration=0
+" let g:jedi#use_tabs_not_buffers=1
+" let g:jedi#use_splits_not_buffers='left'
+" let g:jedi#popup_on_dot=0
+" let g:jedi#show_call_signatures='1'
+" let g:jedi#max_doc_height=20
+" 
+" let g:jedi#completions_command='<C-Space>'
+" let g:jedi#goto_command='<leader>d'
+" let g:jedi#goto_assignments_command='<leader>g'
+" let g:jedi#goto_stubs_command='<leader>s'
+" let g:jedi#goto_definitions_command=''
+" let g:jedi#documentation_command='K'
+" let g:jedi#usages_command='<leader>n'
+" let g:jedi#rename_command='<leader>r'
+
+"==================================
+" Vim markdown preview settings
+"==================================
+" let vim_markdown_preview_github=1
+" let vim_markdown_preview_hotkey='<space>m'
+" let vim_markdown_preview_temp_file=0
+
+"==================================
+" Vim airline theme settings
+"==================================
+" colorscheme molokai
+" let g:airline_theme='molokai'
+
+" Tab line settings
+" let g:airline#extensions#tabline#enabled=1
+" let g:airline#extensions#tabline#left_sep=' '
+" let g:airline#extensions#tabline#left_alt_sep='|'
+" let g:airline#extensions#tabline#formatter='default'
+
+" To refresh tabline buffers
+" autocmd BufDelete * call airline#extensions#tabline#buflist#invalidate()
+
+" Powerline symbols settings
+" let g:airline_powerline_fonts=1
+" if !exists('g:airline_symbols')
+"     let g:airline_symbols={}
+" endif
+
+" if has("gui_running")
+"     let g:airline#extensions#tabline#left_sep=''
+"     let g:airline#extensions#tabline#left_alt_sep =''
+"     let g:airline#extensions#tabline#right_sep=''
+"     let g:airline#extensions#tabline#right_alt_sep=''
+"     let g:airline_left_sep=''
+"     let g:airline_left_alt_sep=''
+"     let g:airline_right_sep=''
+"     let g:airline_right_alt_sep=''
+"     let g:airline_symbols.branch=''
+"     let g:airline_symbols.readonly=''
+"     let g:airline_symbols.linenr=''
+" else
+"     let g:airline_left_sep=''
+"     let g:airline_left_alt_sep=''
+"     let g:airline_right_sep=''
+"     let g:airline_right_alt_sep=''
+" endif

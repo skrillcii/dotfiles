@@ -1,0 +1,166 @@
+# Vim modeline settings
+# vim: ft=tmux
+# Tmux configuration file for version 3.0a
+
+######################
+### CUSTOM CONTROL ###
+######################
+
+# Set default shell
+# set -g default-shell /usr/local/bin/zsh
+
+# Resurrect options
+set -g @resurrect-capture-pane-contents 'on'
+set -g @resurrect-strategy-vim 'session'
+
+# Continuum options
+set -g @continuum-restore 'on'
+set -g @continuum-save-interval '15'
+set -g @continuum-boot 'off'
+set -g @continuum-restore 'off'
+
+# Enable mouse mode
+set -g mouse on
+
+# replace C-b by C-a instead of using both prefixes
+unbind C-a
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# Reload config file
+bind r source-file ~/.tmux.conf.local
+
+# Split panes using | and -
+unbind '"'
+unbind '%'
+bind | split-window -h -c "#{pane_current_path}"
+bind _ split-window -v -c "#{pane_current_path}"
+
+# Set windows/panes synchronise
+bind e setw synchronize-panes on
+bind E setw synchronize-panes off
+
+# Force Vi mode
+set-window-option -g mode-keys vi
+set -g status-keys vi
+set -g mode-keys vi
+
+# Copy & paste from tmux terminal
+bind Enter copy-mode # enter copy mode
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -i -selection clipboard'
+
+# Pane navigfation
+bind -r C-h select-pane -L  # move left
+bind -r C-j select-pane -D  # move down
+bind -r C-k select-pane -U  # move up
+bind -r C-l select-pane -R  # move right
+bind -r H resize-pane -L 2
+bind -r J resize-pane -D 2
+bind -r K resize-pane -U 2
+bind -r L resize-pane -R 2
+bind ] swap-pane -D       # swap current pane with the next one
+bind [ swap-pane -U       # swap current pane with the previous one
+
+# Window navigation
+unbind n
+unbind p
+bind -r h previous-window # select previous window
+bind -r l next-window     # select next window
+bind < swap-window -t -1
+bind > swap-window -t +1
+
+# Status left/right sections separators
+tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
+tmux_conf_theme_left_separator_sub='\uE0B1'   #     you only need fonts patched with
+tmux_conf_theme_right_separator_main='\uE0B2' #     Powerline symbols or the standalone
+tmux_conf_theme_right_separator_sub='\uE0B3'  #     PowerlineSymbols.otf font, see README.md
+
+# In copy mode, copying selection also copies to the OS clipboard
+#   - true
+#   - false (default)
+# On macOS, this requires installing reattach-to-user-namespace, see README.md
+# On Linux, this requires xsel or xclip
+tmux_conf_copy_to_os_clipboard=true
+
+
+######################
+### GRUVBOX SCHEME ###
+######################
+
+# Source from https://github.com/egel/tmux-gruvbox
+# To make this theme work along with oh-my-tmux
+# following configuration is made to disable original theme set by oh-my-tmux
+tmux_conf_theme_pane_border='gruvbox'
+
+# COLORSCHEME: gruvbox dark
+set-option -g status "on"
+
+# default statusbar color
+set-option -g status-style bg=colour237,fg=colour223 # bg=bg1, fg=fg1
+
+# default window title colors
+set-window-option -g window-status-style bg=colour214,fg=colour237 # bg=yellow, fg=bg1
+
+# default window with an activity alert
+set-window-option -g window-status-activity-style bg=colour237,fg=colour248 # bg=bg1, fg=f
+
+# active window title colors
+set-window-option -g window-status-current-style bg=red,fg=colour237 # fg=bg1
+
+# pane border
+set-option -g pane-active-border-style fg=colour250 #fg2
+set-option -g pane-border-style fg=colour237 #bg1
+
+# message infos
+set-option -g message-style bg=colour239,fg=colour223 # bg=bg2, fg=fg1
+
+# writing commands inactive
+set-option -g message-command-style bg=colour239,fg=colour223 # bg=fg3, fg=bg1
+
+# pane number display
+set-option -g display-panes-active-colour colour250 #fg2
+set-option -g display-panes-colour colour237 #bg1
+
+# clock
+set-window-option -g clock-mode-colour colour109 #blue
+
+# bell
+set-window-option -g window-status-bell-style bg=colour167,fg=colour235 # bg=red, fg=bg
+
+# theme settings mixed with colors (unfortunately, but there is no cleaner way)
+set-option -g status-justify "left"
+set-option -g status-left-style none
+set-option -g status-left-length "80"
+set-option -g status-right-style none
+set-option -g status-right-length "80"
+set-window-option -g window-status-separator ""
+
+set-option -g status-left "#[fg=colour248, bg=colour241] #S #[fg=colour241, bg=colour237, nobold, noitalics, nounderscore]"
+set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] %Y-%m-%d  %H:%M #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour237, bg=colour248] #h "
+
+set-window-option -g window-status-current-format "#[fg=colour237, bg=colour214, nobold, noitalics, nounderscore]#[fg=colour239, bg=colour214] #I #[fg=colour239, bg=colour214, bold] #W #[fg=colour214, bg=colour237, nobold, noitalics, nounderscore]"
+set-window-option -g window-status-format "#[fg=colour237,bg=colour239,noitalics]#[fg=colour223,bg=colour239] #I #[fg=colour223, bg=colour239] #W #[fg=colour239, bg=colour237, noitalics]"
+
+
+######################
+### PLUGIN OPTIONS ###
+######################
+
+# Synatx is different from origianl tpm due to compatibility between tpm & oh-my-tmux
+# https://github.com/tmux-plugins/tpm/issues/141
+# List of plugins
+set -g @tpm_plugins '           \
+    tmux-plugins/tpm            \
+    tmux-plugins/tmux-resurrect \
+    tmux-plugins/tmux-continuum \
+    egel/tmux-gruvbox           \
+    '
+set -g @tmux-gruvbox 'dark'
+
+# Initialize TMUX plugin manager (keep this line at the end)
+run '~/.tmux/plugins/tpm/tpm'
+
+# To overwrite tmux-gruvbox theme settings
+set-option -g pane-active-border-style fg=colour214

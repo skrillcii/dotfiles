@@ -1,0 +1,358 @@
+"================================================
+" Basic settings
+"================================================
+" Visual options
+set number
+set ruler
+set hidden
+set showcmd
+set cmdheight=1
+set laststatus=2
+set cursorline
+set t_Co=256
+set termguicolors
+set list
+set listchars=tab:>-,trail:-,eol:$,extends:>,precedes:<
+
+" Text options
+set nofoldenable
+set foldmethod=syntax
+set conceallevel=0
+set encoding=utf-8
+
+" Indentation options
+set autoindent
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+" Search options
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" Operational options
+set autoread
+set modeline
+set mouse=a
+set wildmenu
+set cmdheight=1
+set backspace=indent,eol,start
+set clipboard=unnamedplus,unnamed
+set pastetoggle=<F3>
+set diffopt+=vertical
+set updatetime=200
+
+"================================================
+" Vim plugin manager
+"================================================
+call plug#begin('~/.vim/plugged')
+" Theme, colorsheme:
+Plug 'vim-airline/vim-airline'
+Plug 'morhetz/gruvbox'
+
+" File navigation:
+Plug 'mhinz/vim-startify'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Fzf support:
+" The 'junegunn/fzf' installs latest fzf binary.
+" However, if you have local fzf installed, you can use '~/.fzf' instead.
+" The 'junegunn/fzf.vim' adds more features to the basic fzf vim warpper.
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug '~/.fzf'
+
+" Edit enhancement:
+Plug 'easymotion/vim-easymotion'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular'
+
+" Html enhancement:
+Plug 'mattn/emmet-vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'mattn/vim-lsp-settings'
+
+" Git enhancement:
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'jreybert/vimagit'
+
+" Productivity:
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-obsession'
+Plug 'jpalardy/vim-slime'
+Plug 'majutsushi/tagbar'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+" Language Server Protocol
+Plug 'hashivim/vim-terraform' , { 'for': 'terraform'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Plugin icons:
+" This must be load after nerdtree-git-plugin
+" to avoid mis-alignment of git and icon.
+Plug 'ryanoasis/vim-devicons'
+call plug#end()
+
+"================================================
+" Basic keybinding
+"================================================
+" Set <Leader> key
+let mapleader='\'
+
+" Basic operation
+nnoremap <ESC><ESC> :nohl<CR>
+nnoremap <Space>w :bd<CR>
+nnoremap <Space>q :q<CR>
+nnoremap <Space>s :w<CR>
+nnoremap <Space>r :source ~/.vimrc<CR>
+
+" Tab navigation
+nnoremap <Space>t :tabnew<CR>
+nnoremap <Space>H :tabm -1<CR>
+nnoremap <Space>L :tabm +1<CR>
+
+" Pane navigation
+nnoremap <Space>h <C-w><Left>
+nnoremap <Space>l <C-w><Right>
+nnoremap <Space>j <C-w><Down>
+nnoremap <Space>k <C-w><Up>
+nnoremap <C-h> :vertical resize -1<CR>
+nnoremap <C-l> :vertical resize +1<CR>
+nnoremap <C-j> :res +1<CR>
+nnoremap <C-k> :res -1<CR>
+
+"================================================
+" Permanent undo history
+"================================================
+if !isdirectory($HOME . '/.vim/undofiles')
+    call mkdir($HOME . '/.vim/undofiles','p')
+endif
+set undodir=$HOME/.vim/undofiles
+set undofile
+if !isdirectory($HOME . '/.vim/backupfiles')
+    call mkdir($HOME . '/.vim/backupfiles','p')
+endif
+set backupdir=$HOME/.vim/backupfiles
+set backup
+
+"================================================
+" Always show one line above and blow the cursor
+"================================================
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
+
+"================================================
+" Devicon settings
+"================================================
+" The amount of space to use after the glyph character
+" (default '  ')
+let g:WebDevIconsNerdTreeAfterGlyphPadding=' '
+" The amount of space to use after the glyph character
+" in vim-airline tabline (default ' ')
+let g:WebDevIconsTabAirLineAfterGlyphPadding=' '
+" The amount of space to use before the glyph character
+" in vim-airline tabline (default ' ')
+let g:WebDevIconsTabAirLineBeforeGlyphPadding=' '
+
+"================================================
+" Nerdtree settings
+"================================================
+nnoremap <Space>n :NERDTreeToggle<CR>
+" Opens the selected file in a new horizontally split 
+" window and puts the cursor in the new window.
+let g:NERDTreeMapOpenSplit='s'
+" Opens the selected file in a new horizontally split 
+" window and keep the cursor in the current window.
+let g:NERFTreeMapPreviewSplit='gs'
+" Opens the selected file in a new vertically split 
+" window and puts the cursor in the new window.
+let g:NERDTreeMapOpenVSplit='v'
+" Opens the selected file in a new vertically split 
+" window and keep the cursor in the current window.
+let g:NERFTreeMapPreviewVSplit='gv'
+
+"================================================
+" Nerdtree git settings
+"================================================
+let g:NERDTreeGitStatusIndicatorMapCustom={
+            \ 'Modified'  :'✹',
+            \ 'Staged'    :'✚',
+            \ 'Untracked' :'✭',
+            \ 'Renamed'   :'➜',
+            \ 'Unmerged'  :'═',
+            \ 'Deleted'   :'✖',
+            \ 'Dirty'     :'✗',
+            \ 'Ignored'   :'☒',
+            \ 'Clean'     :'✔︎',
+            \ 'Unknown'   :'?',
+            \ }
+let g:NERDTreeGitStatusUseNerdFonts=1
+
+"================================================
+" CtrlP settings
+"================================================
+let g:ctrlp_match_window='bottom,order:ttb'
+let g:ctrlp_switch_buffer=0
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_cmd='CtrlPMRU'
+
+"================================================
+" FZF settings
+"================================================
+nnoremap <Space>f :Files ~/<CR>
+nnoremap <Space>d :GFiles?<CR>
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+"================================================
+" Vim Easymotion
+"================================================
+" Move to line
+map  gl <Plug>(easymotion-bd-jk)
+nmap gl <Plug>(easymotion-overwin-line)
+" Type two leading chars and jump to
+nmap ff <Plug>(easymotion-overwin-f2)
+vmap ff <Plug>(easymotion-bd-f2)
+" Search a word and jump to
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+" type `l` and match `l`&`L` but not otherwise
+let g:EasyMotion_smartcase=1
+
+"================================================
+" Indentline settings
+"================================================
+let g:indentLine_setColors=1
+let g:indentLine_char='¦'
+
+"================================================
+" Obsession settings
+"================================================
+nnoremap <Space>o :Obsession<CR>
+let g:airline#extensions#obsession#indicator_text='Obsessed'
+
+"================================================
+" Tagbar settings
+"================================================
+nnoremap <Space>b :Tagbar<CR>
+
+"================================================
+" Slime setting
+"================================================
+let g:slime_target="tmux"
+let g:slime_paste_file="$HOME/.slime_paste"
+
+"================================================
+" Tabular settings
+"================================================
+nmap t= :Tabularize /=<CR>
+vmap t= :Tabularize /=<CR>
+nmap t: :Tabularize /:<CR>
+vmap t: :Tabularize /:<CR>
+nmap t, :Tabularize /,<CR>
+vmap t, :Tabularize /,<CR>
+
+"================================================
+" Emmet settings
+"================================================
+let g:user_emmet_leader_key='<C-y>'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+"================================================
+" Tabular settings
+"================================================
+nmap tj :!jq <CR>
+vmap tj :!jq <CR>
+
+"==================================
+" Markdown preview settings
+"==================================
+nmap <Space>m <Plug>MarkdownPreviewToggle
+" Specify and open local port
+let g:mkdp_echo_preview_url = 1
+let g:mkdp_open_to_the_world = 1
+let g:mkdp_open_ip = '127.0.0.1'
+let g:mkdp_port = 8888
+
+"================================================
+" Fugitive settings
+"================================================
+nnoremap <Space>g :Git<CR><C-w>J:10wincmd_<CR>
+nnoremap <Space>p :Git push<CR>
+nnoremap gb :Git blame<CR>
+
+"================================================
+" GitGutter settings
+"================================================
+let g:gitgutter_enabled=1
+let g:gitgutter_map_keys=0
+nmap gj <Plug>(GitGutterNextHunk)
+nmap gk <Plug>(GitGutterPrevHunk)
+nmap gs <Plug>(GitGutterStageHunk)
+nmap gu <plug>(GitGutterUndoHunk)
+nmap gp <plug>(GitGutterPreviewHunk)
+
+"================================================
+" Vimagit settings
+"================================================
+" nnoremap gm :Magit<CR>
+
+"================================================
+" Terraform settings
+"================================================
+" autocmd BufEnter *.tf* colorscheme icansee
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
+"================================================
+" Coc settings
+"================================================
+nnoremap <Space>e :CocList extensions<CR>
+" Install global extensions
+let g:coc_global_extensions=[
+    \'coc-java'   , 'coc-pyright' , 'coc-go'      ,
+    \'coc-html'   , 'coc-css'     , 'coc-vimtex'  ,
+    \'coc-json'   , 'coc-xml'     , 'coc-yaml'    ,
+    \'coc-vimlsp' , 'coc-yank'    , 'coc-snippets',
+    \'coc-sh']
+source $HOME/.config/coc/coc.vim
+
+"================================================
+" Vim airline + gruvbox theme settings
+"================================================
+set background=dark
+" Load powerline symbol
+let g:airline_powerline_fonts=1
+if !exists('g:airline_symbols')
+    let g:airline_symbols={}
+endif
+" Tabline settings
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#show_splits=1
+let g:airline#extensions#tabline#show_buffers=0
+let g:airline#extensions#tabline#show_close_button=0
+let g:airline#extensions#tabline#tab_nr_type=1
+let g:airline#extensions#tabline#fnamemod=':t'
+let g:airline#extensions#tabline#formatter='unique_tail'
+" Load gruvbox colorscheme
+autocmd vimenter * ++nested colorscheme gruvbox

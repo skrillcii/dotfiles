@@ -1,0 +1,518 @@
+"==================================
+" Basic settings
+"==================================
+set number
+set hidden
+set showcmd
+set wildmenu
+set hlsearch
+set incsearch
+set cursorline
+set foldenable
+set foldmethod=syntax
+set clipboard=unnamedplus,unnamed
+set conceallevel=0
+set cmdheight=1
+set mouse=a
+set t_Co=256
+set autoindent
+set expandtab
+set modeline
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set laststatus=2
+set encoding=utf-8
+set backspace=indent,eol,start
+set list
+set listchars=tab:>-,trail:-,eol:$,extends:>,precedes:<
+set pastetoggle=<F3>
+set updatetime=200
+set termguicolors
+set diffopt+=vertical
+
+" Set <Leader> key
+let mapleader='\'
+
+"==================================
+" Coc settings
+"==================================
+" Install global extensions
+let g:coc_global_extensions=['coc-python', 'coc-java', 'coc-html', 'coc-css',
+                            \'coc-json', 'coc-xml', 'coc-yaml',
+                            \'coc-vimlsp', 'coc-yank', 'coc-snippets']
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+    let col=col('.') - 1
+    return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> g[ <Plug>(coc-diagnostic-prev)
+nmap <silent> g] <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+" Currently not taking effect
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming. (currerntly having issue with pyenv)
+nmap rr <Plug>(coc-rename)
+
+" Formatting selected code.
+" Not very effective, needs more tuning and testing
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Coc-snippets
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next='<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev='<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x <Plug>(coc-convert-snippet)
+
+"==================================
+" Keybinding
+"==================================
+"Basic setting
+nnoremap <ESC><ESC> :nohl<CR>
+nnoremap <space>w :bd<CR>
+nnoremap <space>q :q<CR>
+nnoremap <space>s :w<CR>
+nnoremap <space>ss :source ~/.vimrc<CR>
+
+" Tab navigation
+nnoremap <space>t :tabnew<CR>
+nnoremap <space>H :tabm -1<CR>
+nnoremap <space>L :tabm +1<CR>
+
+" Pane navigation
+nnoremap <space>h <C-w><Left>
+nnoremap <space>l <C-w><Right>
+nnoremap <space>j <C-w><Down>
+nnoremap <space>k <C-w><Up>
+nnoremap <C-h> :vertical resize -1<CR>
+nnoremap <C-l> :vertical resize +1<CR>
+nnoremap <C-j> :res +1<CR>
+nnoremap <C-k> :res -1<CR>
+
+" Plugin settings
+nnoremap <space>f :Autoformat<CR>
+nnoremap <space>c :SyntasticToggleMode<CR>
+nnoremap <space>n :NERDTreeToggle<CR>
+nnoremap <space>u :UndotreeToggle<CR>
+nnoremap <space>b :Tagbar<CR>
+nnoremap <space>g :Git<CR>:20wincmd_<CR>
+nnoremap <space>p :Git push<CR>
+nnoremap <space>ll :Git pull<CR>
+nnoremap <space>r :QuickRun<CR>
+nnoremap <space>, :LLPStartPreview<CR>
+nnoremap <space>v :VimtexView<CR>
+nnoremap <space>. :VimtexCompileSS<CR>
+nnoremap <space>/ :VimtexClean<CR>
+nnoremap <space>wm :mks! ~/.vim/sessions/ws.vim<CR>
+nnoremap <space>ws :source ~/.vim/sessions/ws.vim<CR>
+nnoremap <space>o :Obsession<CR>
+nnoremap <C-p> :CtrlPMRU<CR>
+
+" Coc settings
+nnoremap <space>y :<C-u>CocList -A --normal yank<cr>
+nnoremap <space>e :<C-u>CocList extensions<CR>
+
+"==================================
+" Vim PluginInstall
+"==================================
+call plug#begin('~/.vim/plugged')
+Plug 'mhinz/vim-startify'
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree'
+
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'jreybert/vimagit'
+Plug 'jpalardy/vim-slime'
+Plug 'thinca/vim-quickrun'
+Plug 'tpope/vim-obsession'
+
+Plug 'easymotion/vim-easymotion'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
+Plug 'Yggdroot/indentLine'
+Plug 'Chiel92/vim-autoformat'
+Plug 'vim-syntastic/syntastic'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vim-vdebug/vdebug'
+
+Plug 'tmux-plugins/vim-tmux'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'lervag/vimtex'
+Plug 'xuhdev/vim-latex-live-preview'
+Plug 'sirtaj/vim-openscad'
+Plug 'ekalinin/Dockerfile.vim'
+call plug#end()
+
+"==================================
+" Permanent undo history
+"==================================
+if !isdirectory($HOME . '/.vim/undofiles')
+    call mkdir($HOME . '/.vim/undofiles','p')
+endif
+
+set undodir=$HOME/.vim/undofiles
+set undofile
+
+if !isdirectory($HOME . '/.vim/backupfiles')
+    call mkdir($HOME . '/.vim/backupfiles','p')
+endif
+
+set backupdir=$HOME/.vim/backupfiles
+set backup
+
+"==================================
+" Tabular settings
+"==================================
+nmap t= :Tabularize /=<CR>
+vmap t= :Tabularize /=<CR>
+nmap t: :Tabularize /:<CR>
+vmap t: :Tabularize /:<CR>
+nmap t, :Tabularize /,<CR>
+vmap t, :Tabularize /,<CR>
+
+"==================================
+" Vim Easymotion
+"==================================
+" Move to line
+map  gl <Plug>(easymotion-bd-jk)
+nmap gl <Plug>(easymotion-overwin-line)
+
+" s{char}{char} to move to {char}{char}
+nmap ff <Plug>(easymotion-overwin-f2)
+vmap ff <Plug>(easymotion-bd-f2)
+
+" Gif config
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" type `l` and match `l`&`L`
+let g:EasyMotion_smartcase=1
+
+"==================================
+" Indentline settings
+"==================================
+let g:indentLine_setColors=1
+let g:indentLine_char='¦'
+
+"==================================
+" CtrlP settings
+"==================================
+let g:ctrlp_match_window='bottom,order:ttb'
+let g:ctrlp_switch_buffer=0
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_cmd='CtrlPMRU'
+
+"==================================
+" Undotree settings
+"==================================
+if !exists('g:undotree_WindowLayout')
+    let g:undotree_WindowLayout=3
+endif
+
+"==================================
+" QuickRun settings
+"==================================
+let g:quickrun_config={'*': {'split': ''}}
+set splitbelow
+
+"==================================
+" Slime setting
+"==================================
+let g:slime_target="tmux"
+let g:slime_paste_file="$HOME/.slime_paste"
+
+"==================================
+" GitGutter settings
+"==================================
+let g:gitgutter_enabled=1
+let g:gitgutter_map_keys=0
+nmap gj <Plug>(GitGutterNextHunk)
+nmap gk <Plug>(GitGutterPrevHunk)
+nmap gs <Plug>(GitGutterStageHunk)
+nmap gu <plug>(GitGutterUndoHunk)
+nmap gp <plug>(GitGutterPreviewHunk)
+
+"==================================
+" Fugitive settings
+"==================================
+" Show commits for every source line
+nnoremap gb :Git blame<CR>
+
+"==================================
+" Vimagit settings
+"==================================
+" Open vimagit pane
+nnoremap gm :Magit<CR>
+
+"==================================
+" Nerdtree settings
+"==================================
+let NERDTreeNodeDelimiter="|"
+let g:NERDTreeDirArrowExpandable='▸'
+let g:NERDTreeDirArrowCollapsible='▾'
+
+"==================================
+" Nerdtree git settings
+"==================================
+let g:NERDTreeGitStatusIndicatorMapCustom={
+            \ 'Modified'  :'✹',
+            \ 'Staged'    :'✚',
+            \ 'Untracked' :'✭',
+            \ 'Renamed'   :'➜',
+            \ 'Unmerged'  :'═',
+            \ 'Deleted'   :'✖',
+            \ 'Dirty'     :'✗',
+            \ 'Ignored'   :'☒',
+            \ 'Clean'     :'✔︎',
+            \ 'Unknown'   :'?',
+            \ }
+let g:NERDTreeGitStatusUseNerdFonts=1
+
+"==================================
+" Devicon settings
+"==================================
+" The amount of space to use after the glyph character (default ' ')
+let g:WebDevIconsNerdTreeAfterGlyphPadding=' '
+
+" The amount of space to use after the glyph character in vim-airline
+let g:WebDevIconsTabAirLineAfterGlyphPadding=''
+
+"==================================
+" Vim-startify settings
+"==================================
+" Display NerdTree bookmarks as separated list
+" Read ~/.NERDTreeBookmarks file and takes its second column
+function! s:nerdtreeBookmarks()
+    let bookmarks=systemlist("cut -d' ' -f 2 ~/.NERDTreeBookmarks")
+    let bookmarks=bookmarks[0:-2] " Slices an empty last line
+    return map(bookmarks, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists=[
+        \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
+        \]
+
+" Show modified and untracked git files
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files=systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files=systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists=[
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+"==================================
+" Json file formatting
+"==================================
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+"==================================
+" Autoformat settings
+"==================================
+let g:formatterpath=''
+let g:autoformat_autoindent=1
+let g:autoformat_retab=1
+let g:autoformat_remove_trailing_spaces=1
+let g:autoformat_verbosemode=1
+
+" Disable autoformat functions for tex file
+autocmd FileType tex let b:autoformat_autoindent=0
+
+" Set python interpreter
+let g:python3_host_prog='~/.pyenv/shims/python3'
+let g:formatters_python=['autopep8']
+
+"==================================
+" Syntastic settings
+"==================================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_mode_map={ 'mode': 'passive' }
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+
+" Check for python3 syntax
+let g:syntastic_python_python_exec='python3'
+
+" Enable python and flake8 checker (will check for pep8 conversion as well)
+let g:syntastic_python_checkers=['python', 'flake8']
+
+" Syntastic tex checkers
+let g:syntastic_tex_checkers=['lacheck', 'text/language_check']
+
+" Ignore syntax check of pep8
+let g:syntastic_python_flake8_args='--ignore=E501,E401,E402,E203,E221,F401,F403'
+let g:syntastic_python_flake8_args='--max-line-length=120'
+
+" Python3 syntax logic check with pyflakes
+let g:syntastic_python_pyflakes_exe='python3 -m pyflakes'
+
+"==================================
+" Nvim markdown preview settings
+"==================================
+nmap <M-s> <Plug>MarkdownPreview
+nmap <M-s> <Plug>MarkdownPreviewStop
+nmap <space>m <Plug>MarkdownPreviewToggle
+
+" Specify and open local port
+let g:mkdp_echo_preview_url = 1
+let g:mkdp_open_to_the_world = 1
+let g:mkdp_open_ip = '127.0.0.1'
+let g:mkdp_port = 8888
+
+"==================================
+" Vimtex settings
+"==================================
+let g:tex_flavor='latex'
+" let g:vimtex_view_method='open -a Skim'
+" let g:vimtex_compiler_tectonic={
+"     \ 'build_dir' : '',
+"     \ 'options' : [
+"     \   '--keep-logs',
+"     \   '--synctex'
+"     \ ],
+"     \}
+
+"==================================
+" Livetexpreviewer settings
+"==================================
+autocmd Filetype tex setl updatetime=1000
+" It is required to install tex engine
+" For ubuntu system run the following command
+" sudo apt-get install texlive-latex-extra
+
+" Select PDF review
+" let g:livepreview_use_bibe=1
+" let g:livepreview_previewer='open -a Preview'
+let g:livepreview_previewer='open -a Skim'
+let g:livepreview_cursorhold_recompile=0
+
+"==================================
+" Vim airline theme settings
+"==================================
+colorscheme gruvbox
+set bg=dark
+let g:airline_theme='gruvbox'
+
+" Tab line settings
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#fnamemod=':t'
+let g:airline#extensions#tabline#left_sep=' '
+let g:airline#extensions#tabline#left_alt_sep='|'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#show_splits=1
+let g:airline#extensions#obsession#indicator_text='$'
+
+" To refresh tabline buffers
+autocmd BufDelete * call airline#extensions#tabline#buflist#invalidate()
+
+" Powerline symbols settings
+let g:airline_powerline_fonts=1
+if !exists('g:airline_symbols')
+    let g:airline_symbols={}
+endif
+
+let g:airline#extensions#tabline#left_sep=''
+let g:airline#extensions#tabline#left_alt_sep =''
+let g:airline#extensions#tabline#right_sep=''
+let g:airline#extensions#tabline#right_alt_sep=''
+let g:airline_left_sep=''
+let g:airline_left_alt_sep=''
+let g:airline_right_sep=''
+let g:airline_right_alt_sep=''
+let g:airline_symbols.branch=''
+let g:airline_symbols.readonly=''
+let g:airline_symbols.linenr=''

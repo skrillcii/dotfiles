@@ -1,0 +1,31 @@
+show-summary: true
+show-tags: true
+show-fundamentals: true
+show-separator: true
+show-holdings: true
+interval: 5
+currency: USD
+sort: user
+watchlist:
+    - BTC-USD
+    - AMZN
+    - GOOG
+    - TSLA
+    - FB
+    - MSFT
+    - AAPL
+    - IBM
+    - ORCL
+    - KO
+    - V
+    - C
+    - ACWI
+    - SPY
+    - VOO
+    - VOOG
+    - VB
+    - VTI
+lots:
+  - symbol: "IBM"
+    quantity: 100.0
+    unit_cost: 100.00
