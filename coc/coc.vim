@@ -180,4 +180,5 @@ endif
 " Use <leader>x for convert visual selected code to snippet
 " xmap <leader>x <Plug>(coc-convert-snippet)
 
+" Auto-detect project root path
 autocmd FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.venv', '.python-version', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
