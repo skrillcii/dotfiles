@@ -217,7 +217,4 @@ alias gs='git status'
 # Git show graph
 alias gg='git log --all --decorate --oneline --graph'
 # Git list branch
-alias gls='git branch -a'
-
-# Terraform settings
-alias tf='terraform'
+alias gb='git branch -a'
