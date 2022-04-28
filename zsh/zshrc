@@ -215,8 +215,8 @@ alias dkp='sudo watch docker ps -a'
 # Git show status
 alias gs='git status'
 # Git list branch
-alias gf='git fetch'
+alias gf='git fetch --all --verbose'
 # Git list branch
-alias gb='git branch -a'
+alias gb='git branch -all'
 # Git show graph
-alias gg='git log --all --decorate --oneline --graph'
+alias gg='git log --all --oneline --decorate --graph'
