@@ -49,18 +49,18 @@ set updatetime=200
 " Vim plugin manager
 "================================================
 call plug#begin('~/.vim/plugged')
-" Theme, colorsheme:
+" Theme & colorsheme
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
 
-" File navigation:
+" File navigation
 Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ctrlpvim/ctrlp.vim'
 
-" Fzf support:
+" Fzf support
 " The 'junegunn/fzf' installs latest fzf binary.
 " However, if you have local fzf installed, you can use '~/.fzf' instead.
 " The 'junegunn/fzf.vim' adds more features to the basic fzf vim warpper.
@@ -68,26 +68,24 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf.vim'
 Plug '~/.fzf'
 
-" Edit enhancement:
+" Edit enhancement
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 
-" Html enhancement:
+" Html/CSS enhancement
 Plug 'mattn/emmet-vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'mattn/vim-lsp-settings'
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'gregsexton/MatchTag'
 
-" Git enhancement:
+" Git enhancement
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
 
-" Productivity:
+" Productivity
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-obsession'
 Plug 'jpalardy/vim-slime'
@@ -97,8 +95,13 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " Language Server Protocol
 Plug 'hashivim/vim-terraform' , { 'for': 'terraform'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'mattn/vim-lsp-settings'
+" Plug 'dense-analysis/ale'
 
-" Plugin icons:
+" Plugin icons
 " This must be load after nerdtree-git-plugin
 " to avoid mis-alignment of git and icon.
 Plug 'ryanoasis/vim-devicons'
@@ -251,15 +254,15 @@ nnoremap <Space>o :Obsession<CR>
 let g:airline#extensions#obsession#indicator_text='Obsessed'
 
 "================================================
-" Tagbar settings
-"================================================
-nnoremap <Space>b :Tagbar<CR>
-
-"================================================
 " Slime setting
 "================================================
 let g:slime_target="tmux"
 let g:slime_paste_file="$HOME/.slime_paste"
+
+"================================================
+" Tagbar settings
+"================================================
+nnoremap <Space>b :Tagbar<CR>
 
 "================================================
 " Tabular settings
@@ -274,25 +277,26 @@ vmap t, :Tabularize /,<CR>
 "================================================
 " Emmet settings
 "================================================
-let g:user_emmet_leader_key='<C-y>'
+let g:user_emmet_leader_key=','
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
 "================================================
-" Tabular settings
+" Tagalong settings
 "================================================
-nmap tj :!jq <CR>
-vmap tj :!jq <CR>
+let g:tagalong_verbose=1
+let g:tagalong_filetypes=['html']
+
 
 "==================================
 " Markdown preview settings
 "==================================
 nmap <Space>m <Plug>MarkdownPreviewToggle
 " Specify and open local port
-let g:mkdp_echo_preview_url = 1
-let g:mkdp_open_to_the_world = 1
-let g:mkdp_open_ip = '127.0.0.1'
-let g:mkdp_port = 8888
+let g:mkdp_echo_preview_url=1
+let g:mkdp_open_to_the_world=1
+let g:mkdp_open_ip='127.0.0.1'
+let g:mkdp_port=8888
 
 "================================================
 " Fugitive settings
@@ -315,7 +319,7 @@ nmap gp <plug>(GitGutterPreviewHunk)
 "================================================
 " Vimagit settings
 "================================================
-" nnoremap gm :Magit<CR>
+nnoremap gm :Magit<CR>
 
 "================================================
 " Terraform settings
@@ -336,6 +340,20 @@ let g:coc_global_extensions=[
     \'coc-vimlsp' , 'coc-yank'    , 'coc-snippets',
     \'coc-sh']
 source $HOME/.config/coc/coc.vim
+
+"================================================
+" ALE settings
+"================================================
+" let g:ale_fixers={'html': ['prettier'], 'css': ['stylelint']}
+" let g:ale_linters={'html': ['htmlhint'], 'css': ['stylelint']}
+" let g:ale_linters_explicit=1
+" let g:ale_fix_on_save=1
+
+"================================================
+" Json formatter settings
+"================================================
+nmap tj :!jq <CR>
+vmap tj :!jq <CR>
 
 "================================================
 " Vim airline + gruvbox theme settings
