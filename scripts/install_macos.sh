@@ -14,7 +14,7 @@ install_macos_general() {
                  htop glances watch
     # Install pyenv dependcies
     brew install openssl readline sqlite3 xz zlib \
-                 pyenv pyenv-virtualenv rbenv ruby-build
+                 pyenv pyenv-virtualenv rbenv ruby-build tfenv
     # Install desktop utilities
     brew install --cask google-chrome firefox spotify vlc \
                         iterm2 docker visual-studio-code notion

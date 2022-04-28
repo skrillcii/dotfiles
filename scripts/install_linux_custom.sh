@@ -9,7 +9,7 @@ install_ubuntu_general () {
     # Install desktop utilities
     sudo apt install -y vlc redshift xclip lm-sensors mesa-utils
     # Install java-11
-    sudo apt install -y default-jre default-jdk maven
+    sudo apt install -y default-jre default-jdk maven tfenv
 
     # Package install lightdm
     # \\\\\\\\\\\\\\\\ #
