@@ -95,6 +95,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " Language Server Protocol
 Plug 'hashivim/vim-terraform' , { 'for': 'terraform'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'vim-syntastic/syntastic'
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'prabirshrestha/asyncomplete.vim'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
