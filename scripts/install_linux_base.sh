@@ -30,11 +30,23 @@ install_ubuntu_general() {
 install_nerd_fonts() {
     echo -e "\n >>> Nerd-fonts Installation Started..."
     # Download
-    git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/nerd-fonts
+    cur_version=`git --version | awk '{{ print $3 }}'`
+    req_version='2.26.0'
+    if [[ "$(printf '%s\n' "$req_version" "$cur_version" | sort -V | head -n1)" = "$req_version" ]]; then
+        echo "Current git version is $cur_version, greater than required version $req_version"
+        # Clone specified fonts
+        git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts ~/nerd-fonts
+        cd ~/nerd-fonts
+        git sparse-checkout add patched-fonts/Hack
+    else
+        # Clone all fonts
+        echo "Current git version is $cur_version, less than required version $req_version"
+        git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/nerd-fonts
+    fi
     # Install
-    ~/nerd-fonts/install.sh Hack
+    # ~/nerd-fonts/install.sh Hack
     # Clean-up
-    rm -rf ~/near-fonts
+    # rm -rf ~/near-fonts
     echo -e " <<< Nerd-fonts Installation Finished!"
 }
 
@@ -99,13 +111,7 @@ install_nvm() {
     source ~/.nvm/nvm.sh
     source ~/.profile
     source ~/.bashrc
-    nvm install v17.2.0
-    # Export
-    echo -e 'exporting environmental variabls...'
-    echo '# Nvm settings'
-    echo 'export NVM_DIR="$HOME/.nvm"$'
-    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
-    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"'
+    nvm install v17.9.0
     echo -e " <<< Nvm Installation Finished!"
 }
 
@@ -115,7 +121,6 @@ install_pyenv() {
     git clone https://github.com/pyenv/pyenv.git ~/.pyenv
     # Environment variables settings
     echo -e 'exporting environmental variabls...'
-    echo '# Pyenv settings'
     echo 'export PYENV_ROOT="~/.pyenv"' >> ~/.bashrc
     echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
     echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
@@ -184,19 +189,47 @@ install_docker() {
     echo -e " <<< Docker Installation Finished!"
 }
 
+install_nvidia_driver() {
+    echo -e "\n >>> Nvidia Driver Installation Started..."
+    # Install
+    sudo apt install -y `ubuntu-drivers devices | grep recommended | awk '{{ print $3 }}'` nvidia-cuda-toolkit
+    echo -e " <<< Nvidia Driver Installation Finished!"
+}
+
+install_nvidia_docker() {
+    echo -e "\n >>> Nvidia Docker Installation Started..."
+    # Add GPG key
+    distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+        && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
+        sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+        && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+        sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+    # Install
+    sudo apt-get update
+    sudo apt-get install -y nvidia-docker2
+    # Restart
+    sudo systemctl restart docker
+    # Verify installation
+    sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+    echo -e " <<< Nvidia Docker Installation Finished!"
+}
+
 ##################
 # Functions Call #
 ##################
-sudo apt update && sudo apt upgrade -y
-install_ubuntu_general
+# sudo apt update && sudo apt upgrade -y
+# install_ubuntu_general
 install_nerd_fonts
-install_oh_my_zsh
-install_oh_my_tmux
-install_ranger
-install_fzf
-install_nvm
-install_pyenv
-install_vim_plugin_manager
-install_coc
-install_docker
-sudo apt autoremove
+# install_oh_my_zsh
+# install_oh_my_tmux
+# install_ranger
+# install_fzf
+# install_nvm
+# install_pyenv
+# install_vim_plugin_manager
+# install_coc
+# install_docker
+# install_nvidia_driver
+# install_nvidia_docker
+# sudo apt autoremove
