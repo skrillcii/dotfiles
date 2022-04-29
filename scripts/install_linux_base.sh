@@ -218,18 +218,18 @@ install_nvidia_docker() {
 ##################
 # Functions Call #
 ##################
-# sudo apt update && sudo apt upgrade -y
-# install_ubuntu_general
+sudo apt update && sudo apt upgrade -y
+install_ubuntu_general
 install_nerd_fonts
-# install_oh_my_zsh
-# install_oh_my_tmux
-# install_ranger
-# install_fzf
-# install_nvm
-# install_pyenv
-# install_vim_plugin_manager
-# install_coc
-# install_docker
-# install_nvidia_driver
-# install_nvidia_docker
-# sudo apt autoremove
+install_oh_my_zsh
+install_oh_my_tmux
+install_ranger
+install_fzf
+install_nvm
+install_pyenv
+install_vim_plugin_manager
+install_coc
+install_docker
+install_nvidia_driver
+install_nvidia_docker
+sudo apt autoremove
