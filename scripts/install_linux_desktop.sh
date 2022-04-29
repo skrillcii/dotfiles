@@ -7,20 +7,12 @@
 install_ubuntu_general () {
     echo -e "\n >>> General Installation Started..."
     # Install desktop utilities
-    sudo apt install -y vlc redshift xclip lm-sensors mesa-utils
+    sudo apt install -y vlc redshift xclip lm-sensors mesa-utils \
+                        sensors-detect tfenv
+    # Install fcitx
+    sudo apt install -y fcitx-bin fcitx-chewing fcitx-mozc fcitx-googlepinyin
     # Install java-11
-    sudo apt install -y default-jre default-jdk maven tfenv
-
-    # Package install lightdm
-    # \\\\\\\\\\\\\\\\ #
-    # Needs automation #
-    # \\\\\\\\\\\\\\\\ #
-    sudo apt install -y lightdm
-    # Initialize lm-sensors
-    # \\\\\\\\\\\\\\\\ #
-    # Needs automation #
-    # \\\\\\\\\\\\\\\\ #
-    sudo sensors-detect
+    sudo apt install -y default-jre default-jdk maven
 
     # Create symbolic links
     echo -e 'creating symbolic links...'
@@ -29,18 +21,63 @@ install_ubuntu_general () {
     echo -e " <<< General Installation Finished!"
 }
 
+install_docker() {
+    echo -e "\n >>> Docker Installation Started..."
+    # Uninstall old versions
+    sudo apt remove -y docker docker-engine docker.io containerd runc
+    # Install dependcies
+    sudo apt install -y ca-certificates curl gnupg lsb-release
+    # Add GPG key
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    # Setup repository
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    # Install
+    sudo apt update
+    sudo apt install -y docker-ce docker-ce-cli containerd.io
+    # Verify installation
+    sudo docker run hello-world
+    echo -e " <<< Docker Installation Finished!"
+}
+
+install_nvidia_driver() {
+    echo -e "\n >>> Nvidia Driver Installation Started..."
+    # Install
+    sudo apt install -y `ubuntu-drivers devices | grep recommended | awk '{{ print $3 }}'` nvidia-cuda-toolkit
+    echo -e " <<< Nvidia Driver Installation Finished!"
+}
+
+install_nvidia_docker() {
+    echo -e "\n >>> Nvidia Docker Installation Started..."
+    # Add GPG key
+    distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+        && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
+        sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+        && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+        sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+    # Install
+    sudo apt-get update
+    sudo apt-get install -y nvidia-docker2
+    # Restart
+    sudo systemctl restart docker
+    # Verify installation
+    sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+    echo -e " <<< Nvidia Docker Installation Finished!"
+}
+
 install_vim_build_from_source() {
     echo -e "\n >>> Vim Installation Started..."
+    # Remove old version
+    sudo apt remove vim vim-runtime gvim
     # Install dependencies
     sudo apt install -y libncurses5-dev libgnome2-dev libgnomeui-dev \
                         libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
                         libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
                         python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
-    # Remove old version
-    sudo apt remove vim vim-runtime gvim
     # Download
     git clone https://github.com/vim/vim.git ~/vim
-    cd vim
+    cd ~/vim
     # Use '$(python3-config --configdir)' to check for flag '--with-python3-config-dir'
     # To check python path in vim ':python3 import sys; print(sys.path)'
     make clean distclean
@@ -176,4 +213,14 @@ install_ffmpeg() {
 # Functions Call #
 ##################
 sudo apt update && sudo apt upgrade -y
+install_docker
+install_nvidia_driver
+install_nvidia_docker
+install_vim_build_from_source
+install_i3wm
+install_spotify
+install_moonlander
+install_screenkey
+install_kazam
+install_ffmpeg
 sudo apt autoremove

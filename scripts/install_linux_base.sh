@@ -170,51 +170,6 @@ install_coc() {
     echo -e " <<< CoC Installation Finished!"
 }
 
-install_docker() {
-    echo -e "\n >>> Docker Installation Started..."
-    # Uninstall old versions
-    sudo apt remove -y docker docker-engine docker.io containerd runc
-    # Install dependcies
-    sudo apt install -y ca-certificates curl gnupg lsb-release
-    # Add GPG key
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    # Setup repository
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    # Install
-    sudo apt update
-    sudo apt install -y docker-ce docker-ce-cli containerd.io
-    # Verify installation
-    sudo docker run hello-world
-    echo -e " <<< Docker Installation Finished!"
-}
-
-install_nvidia_driver() {
-    echo -e "\n >>> Nvidia Driver Installation Started..."
-    # Install
-    sudo apt install -y `ubuntu-drivers devices | grep recommended | awk '{{ print $3 }}'` nvidia-cuda-toolkit
-    echo -e " <<< Nvidia Driver Installation Finished!"
-}
-
-install_nvidia_docker() {
-    echo -e "\n >>> Nvidia Docker Installation Started..."
-    # Add GPG key
-    distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
-        && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
-        sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-        && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
-        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-        sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-    # Install
-    sudo apt-get update
-    sudo apt-get install -y nvidia-docker2
-    # Restart
-    sudo systemctl restart docker
-    # Verify installation
-    sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
-    echo -e " <<< Nvidia Docker Installation Finished!"
-}
-
 ##################
 # Functions Call #
 ##################
@@ -229,7 +184,4 @@ install_nvm
 install_pyenv
 install_vim_plugin_manager
 install_coc
-install_docker
-install_nvidia_driver
-install_nvidia_docker
 sudo apt autoremove
