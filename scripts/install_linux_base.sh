@@ -14,10 +14,6 @@ install_ubuntu_general() {
     sudo apt install -y net-tools nmap
     # Install fcitx
     sudo apt install -y fcitx-bin fcitx-chewing fcitx-mozc fcitx-googlepinyin
-    # Install pyenv dependcies
-    sudo apt install -y make build-essential libssl-dev zlib1g-dev \
-                        libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
-                        libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
     # Git global settings
     git config --global core.excludesfile ~/dotfiles/.gitignore
     git config --global diff.tool vimdiff
@@ -117,8 +113,14 @@ install_nvm() {
 
 install_pyenv() {
     echo -e "\n >>> Pyenv Installation Started..."
+    # Install pyenv dependcies
+    sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+                        libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+                        libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
     # Download pyenv
     git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    # Download pyenv-virtualenv
+    git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
     # Environment variables settings
     echo -e 'exporting environmental variabls...'
     echo 'export PYENV_ROOT="~/.pyenv"' >> ~/.bashrc

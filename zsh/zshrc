@@ -182,6 +182,11 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
+# Pyenv-virtualenv auto-activation
+# This automatically activates specified pyenv-virtualenv if a .python-version file exists
+# This configuration is optional
+# eval "$(pyenv virtualenv-init -)"
+
 # Setup default text editor
 case `uname` in
     Darwin)
