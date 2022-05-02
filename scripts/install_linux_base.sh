@@ -20,6 +20,7 @@ install_ubuntu_general() {
     git config --global difftool.prompt false
     git config --global merge.tool vimdiff
     git config --global mergetool.prompt false
+    git config --global pull.ff only
     echo -e " <<< General Installation Finished!"
 }
 
