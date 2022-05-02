@@ -209,6 +209,14 @@ if [[ ! -n $TMUX ]]; then
     tmux -2 attach || tmux -2 new-session
 fi
 
+# Trash settings
+# Change rm to move files or directory to trash
+alias rm='trash -v'
+# List items in trash
+alias tl='trash -l'
+# Securely empty trash
+alias te='trash -e'
+
 # Docker settings
 # Docker kill all running containers
 alias dkk='sudo docker kill $(sudo docker ps -q)'
