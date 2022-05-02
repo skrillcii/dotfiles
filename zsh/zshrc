@@ -228,6 +228,13 @@ alias gb='git branch --all'
 alias gf='git fetch --all --verbose'
 # Git show graph
 alias gg='git log --all --oneline --decorate --graph'
+# Git prune local branch
+function gp() {
+    git fetch -p ; git branch -r | awk '{print $1}' \
+        | egrep -v -f /dev/fd/0 <(git branch -vv  \
+        | grep origin) | awk '{print $1}' | xargs git branch -d
+}
+
 
 #################################
 # Specific Environment Settings #
