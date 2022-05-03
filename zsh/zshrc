@@ -205,6 +205,9 @@ case `uname` in
         if [[ -f /usr/local/bin/vim ]]; then
             export EDITOR=/usr/local/bin/vim
             alias vim='/usr/local/bin/vim'
+        else
+            export EDITOR=/usr/bin/vim
+            alias vim='/usr/bin/vim'
         fi
     ;;
 esac
