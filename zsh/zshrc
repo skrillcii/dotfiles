@@ -187,6 +187,12 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 # This configuration is optional
 # eval "$(pyenv virtualenv-init -)"
 
+# Tmux settings
+# Attach to an existing session or start new session otherwise
+if [[ ! -n $TMUX ]]; then
+    tmux -2 attach || tmux -2 new-session
+fi
+
 # Setup default text editor
 case `uname` in
     Darwin)
@@ -203,19 +209,21 @@ case `uname` in
     ;;
 esac
 
-# Tmux settings
-# Attach to an existing session or start new session otherwise
-if [[ ! -n $TMUX ]]; then
-    tmux -2 attach || tmux -2 new-session
-fi
-
 # Trash settings
-# Change rm to move files or directory to trash
-alias rm='trash -v'
-# List items in trash
-alias tl='trash -l'
-# Securely empty trash
-alias te='trash -e'
+case `uname` in
+    Darwin)
+        alias rm='trash -v'
+        alias tl='trash -l'
+        alias tr='trash -r'
+        alias te='trash -e'
+    ;;
+    Linux)
+        alias rm='trash-put -v'
+        alias tl='trash-list'
+        alias tr='trash-restore'
+        alias te='trash-empty'
+    ;;
+esac
 
 # Docker settings
 # Docker kill all running containers
