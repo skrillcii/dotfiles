@@ -140,7 +140,7 @@ install_spotify(){
     echo -e " <<< Spotify Installation Finished!"
 }
 
-install_moonlander(){
+install_zsa(){
     echo -e "\n >>> Moonlander Installation Started..."
     # Install dependcies
     # Currently, only cli dependency is listed here
@@ -148,10 +148,11 @@ install_moonlander(){
     # Download wally binary version 'gui' or 'cli'
     # Currently only wally-cli is used and is already provided in dotfiles
     # cd ~ && wget https://configure.ergodox-ez.com/wally/linux
+    # cd ~ && wget https://github.com/zsa/wally-cli/releases/download/2.1.3-linux/wally
     # cd ~ && wget https://github.com/zsa/wally-cli/releases/download/2.0.0-linux/wally-cli
     # Low-level device communication kernel scripts
-    sudo ln -s -f ~/dotfiles/moonlander/50-oryx.rules /etc/udev/rules.d/
-    sudo ln -s -f ~/dotfiles/moonlander/50-wally.rules /etc/udev/rules.d/
+    sudo ln -s -f ~/dotfiles/zsa/50-oryx.rules /etc/udev/rules.d/
+    sudo ln -s -f ~/dotfiles/zsa/50-wally.rules /etc/udev/rules.d/
     # # Check if plugdev group exists and if user is in plugdev group, if not create and add
     if [ $(getent group 'plugdev') ]; then
         echo "Group plugdev exists! Done!"
@@ -219,7 +220,7 @@ install_nvidia_docker
 install_vim_build_from_source
 install_i3wm
 install_spotify
-install_moonlander
+install_zsa
 install_screenkey
 install_kazam
 install_ffmpeg
