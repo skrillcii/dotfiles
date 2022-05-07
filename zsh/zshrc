@@ -232,6 +232,8 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
 # Print environment path
 alias pp='echo "${PATH//:/$'\\n'}"'
+# Watch alias
+alias wa='watch --color '
 
 # Docker settings
 # Docker kill all running containers
@@ -251,7 +253,7 @@ alias gb='git branch --all'
 # Git fetch remote
 alias gf='git fetch --all --verbose'
 # Git show graph
-alias gg='git log --all --oneline --decorate --graph'
+alias gg='git log --all --oneline --decorate --graph --color'
 # Git show graph pretty
 pretty=("%C(auto)%h%C(magenta) %cd %C(yellow)[%cr]%C(auto)%d%n"
         "%C(auto)%s%n %C(green)Committer:%cN <%cE>%n"

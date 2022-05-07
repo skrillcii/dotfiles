@@ -384,7 +384,7 @@ set -g @tmux-gruvbox 'dark'
 
 # Resurrect options
 set -g @resurrect-processes ' \
-    "~vim" "~ranger" "watch" \
+    "~vim" "~ranger" "watch" "wa gg" \
     "~glances" "nvidia-smi" "nvtop" "sudo powertop" \
     "cointop" "ticker" "mop"'
 # set -g @resurrect-strategy-vim 'session'
