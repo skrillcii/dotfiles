@@ -387,8 +387,8 @@ set -g @resurrect-processes ' \
     "~vim" "~ranger" "watch" "wa gg" \
     "~glances" "nvidia-smi" "nvtop" "sudo powertop" \
     "cointop" "ticker" "mop"'
+set -g @resurrect-capture-pane-contents 'on'
 # set -g @resurrect-strategy-vim 'session'
-# set -g @resurrect-capture-pane-contents 'on'
 
 # Continuum options
 set -g @continuum-restore 'on'
