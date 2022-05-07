@@ -266,6 +266,10 @@ function gp() {
 # Specific Environment Settings #
 #################################
 
+# Wally settings
+# function wally() {~/dotfiles/zsa/wally}
+# function wally-cli() {~/dotfiles/zsa/wally-cli}
+
 # Terraform settings
 # Terraform autocomplete
 # autoload -U +X bashcompinit && bashcompinit
