@@ -162,6 +162,11 @@ endif
 set display+=lastline
 
 "================================================
+" Startify settings
+"================================================
+let g:startify_session_autoload=1
+
+"================================================
 " Devicon settings
 "================================================
 " The amount of space to use after the glyph character
