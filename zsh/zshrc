@@ -160,11 +160,6 @@ export FZF_DEFAULT_COMMAND='find .'
 # Autojump settings
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
-# Nvm settings
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
 # Oh-my-zsh timer settings
 export TIMER_PRECISION=2 
 export TIMER_FORMAT='[%d]'
@@ -172,26 +167,6 @@ export TIMER_THRESHOLD=0
 
 # Oh-my-zsh completions settings
 autoload -U compinit && compinit
-
-# Pyenv path settings
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PATH"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
-export PYTHON_CONFIGURE_OPTS="--enable-shared"
-
-# Pyenv-virtualenv auto-activation
-# This automatically activates specified pyenv-virtualenv if a .python-version file exists
-# This configuration is optional
-# eval "$(pyenv virtualenv-init -)"
-
-# Tmux settings
-# Attach to an existing session or start new session otherwise
-if [[ ! -n $TMUX ]]; then
-    tmux -2 attach || tmux -2 new-session
-fi
 
 # Setup default text editor
 case `uname` in
@@ -217,16 +192,18 @@ case `uname` in
     Darwin)
         alias rm='trash -v'
         alias tl='trash -l'
-        alias tr='trash -r'
         alias te='trash -e'
     ;;
     Linux)
         alias rm='trash-put -v'
         alias tl='trash-list'
-        alias tr='trash-restore'
+        alias ts='trash-restore'
         alias te='trash-empty'
     ;;
 esac
+
+# Print environment path
+alias pp='echo "${PATH//:/$'\\n'}"'
 
 # Docker settings
 # Docker kill all running containers
@@ -261,6 +238,37 @@ function gp() {
         | grep origin) | awk '{print $1}' | xargs git branch -d
 }
 
+###############################
+# Tmux Environment Settings   #
+###############################
+
+# Tmux settings
+# Attach to an existing session or start new session otherwise
+if [[ ! -n $TMUX ]]; then
+    tmux -2 attach || tmux -2 new-session
+fi
+
+# Nvm settings
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Gvm settings
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+# Pyenv settings
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/shims:$PATH"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
+export PYTHON_CONFIGURE_OPTS="--enable-shared"
+
+# Pyenv-virtualenv auto-activation
+# This automatically activates specified pyenv-virtualenv if a .python-version file exists
+# This configuration is optional
+# eval "$(pyenv virtualenv-init -)"
 
 #################################
 # Specific Environment Settings #
@@ -269,6 +277,9 @@ function gp() {
 # Wally settings
 # function wally() {~/dotfiles/zsa/wally}
 # function wally-cli() {~/dotfiles/zsa/wally-cli}
+
+# Mop settings
+# function mop() {~/mop/mop}
 
 # Terraform settings
 # Terraform autocomplete
