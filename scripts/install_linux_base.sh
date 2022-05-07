@@ -26,7 +26,7 @@ install_ubuntu_general() {
 
 install_nerd_fonts() {
     echo -e "\n >>> Nerd-fonts Installation Started..."
-    # Download
+    # Check git version
     cur_version=`git --version | awk '{{ print $3 }}'`
     req_version='2.26.0'
     if [[ "$(printf '%s\n' "$req_version" "$cur_version" | sort -V | head -n1)" = "$req_version" ]]; then
@@ -40,10 +40,10 @@ install_nerd_fonts() {
         echo "Current git version is $cur_version, less than required version $req_version"
         git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/nerd-fonts
     fi
-    # Install
-    # ~/nerd-fonts/install.sh Hack
+    # Install fonts
+    ~/nerd-fonts/install.sh Hack
     # Clean-up
-    # rm -rf ~/near-fonts
+    rm -rf ~/near-fonts
     echo -e " <<< Nerd-fonts Installation Finished!"
 }
 
@@ -77,7 +77,7 @@ install_ranger() {
     echo -e "\n >>> Ranger Installation Started..."
     # Check if configuration directory exists
     # Create if it does not exist
-    echo -e 'creating directory...'
+    echo -e 'checking directory...'
     if [[ ! -e ~/.config/ranger ]] ; then
         mkdir -p ~/.config/ranger
     fi
@@ -129,7 +129,7 @@ install_pyenv() {
     echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
     # Install python with --enable-shared
     env PYTHON_CONFIGURE_OPTS="--enable-shared" ~/.pyenv/bin/pyenv install 3.8.6
-    # Install packages
+    # Install python packages
     ~/.pyenv/bin/pyenv global 3.8.6 system
     ~/.pyenv/shims/pip3 install -U pip pip-autoremove autopep8 pylint flake8 yapf ipdb pdbpp
     # Create symbolic links
@@ -155,7 +155,7 @@ install_coc() {
     echo -e "\n >>> CoC Installation Started..."
     # Check if configuration directory exists
     # Create if it does not exist
-    echo -e 'creating directory...'
+    echo -e 'checking directory...'
     if [[ ! -e ~/.config/coc ]] ; then
         mkdir -p ~/.config/coc
     fi
