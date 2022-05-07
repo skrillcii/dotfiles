@@ -21,7 +21,7 @@ curl -Ls https://api.github.com/repos/achannarasappa/ticker/releases/latest \
 
 Configuration file
 ```
-$ ln -s ~/dotfiles/ticker/ticker.yaml ~/.ticker.yaml
+$ ln -sf ~/dotfiles/ticker/ticker.yaml ~/.ticker.yaml
 ```
 
 ## Reference
