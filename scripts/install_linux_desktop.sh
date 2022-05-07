@@ -216,6 +216,64 @@ install_ffmpeg() {
     echo -e " <<< Ffmpeg Installation Finished!"
 }
 
+###################
+# Financial Tools #
+###################
+
+install_cointop() {
+    echo -e "\n >>> Cointop Installation Started..."
+    # Check golang version
+    cur_version=`go version | awk '{{ print $3 }}'`
+    req_version='go1.17.0'
+    if [[ "$(printf '%s\n' "$req_version" "$cur_version" | sort -V | head -n1)" = "$req_version" ]]; then
+        echo "Current golang version is $cur_version, greater than required version $req_version."
+        echo "Installation started..."
+        # Install
+        go install github.com/cointop-sh/cointop@latest
+    else
+        echo "Current golang version is $cur_version, less than required version $req_version."
+        echo "Installation terminated."
+    fi
+    echo -e " <<< Cointop Installation Finished!"
+}
+
+install_mop() {
+    echo -e "\n >>> Mop Installation Started..."
+    # Download
+    git clone https://github.com/mop-tracker/mop ~/mop
+    # Build
+    cd ~/mop && go build ./cmd/mop
+    # Install
+    cd ~/mop/cmd/mop && go install
+    # Install
+    cd ~ && rm -rf ~/mop
+    # Keybindings
+    # +   Add stocks to the list.
+    # -   Remove stocks from the list.
+    # o   Change column sort order.
+    # g   Group stocks by advancing/declining issues.
+    # f   Set a filtering expression.
+    # F   Unset a filtering expression.
+    # ?   Display help screen.
+    # esc Quit mop.
+    echo -e " <<< Mop Installation Finished!"
+}
+
+install_ticker() {
+    echo -e "\n >>> Ticker Installation Started..."
+    curl -Ls https://api.github.com/repos/achannarasappa/ticker/releases/latest \
+        | grep -wo "https.*linux-amd64*.tar.gz" \
+        | wget -qi - \
+        && tar -xvf ticker*.tar.gz ticker \
+        && rm ticker*.tar.gz \
+        && chmod +x ./ticker \
+        && sudo mv ticker /usr/local/bin/
+    # Create symbolic links
+    ln -sf ~/dotfiles/ticker/ticker.yaml ~/.ticker.yaml
+    echo -e " <<< Ticker Installation Finished!"
+}
+
+
 ##################
 # Functions Call #
 ##################
