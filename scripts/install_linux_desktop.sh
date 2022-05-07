@@ -14,11 +14,17 @@ install_ubuntu_general () {
     # Install java-11
     sudo apt install -y default-jre default-jdk maven
 
-    # Create symbolic links
-    echo -e 'creating symbolic links...'
-    ln -s -f ~/dotfiles/x/xprofile ~/.xprofile
-    ln -s -f ~/dotfiles/redshift/redshift.conf ~/.config/redshift.conf
-    echo -e " <<< General Installation Finished!"
+install_gvm () {
+    echo -e "\n >>> Gvm Installation Started..."
+    # Install dependcies
+    sudo apt install -y curl git mercurial make binutils bison gcc build-essential golang
+    # Install gvm
+    bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+    # Install golang (using binary option -B)
+    gvm install go1.17.9 -B
+    # Set golang
+    gvm use go1.17.9 --default
+    echo -e " <<< Gvm Installation Finished!"
 }
 
 install_docker() {
