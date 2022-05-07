@@ -1,18 +1,29 @@
 #!/usr/bin/bash
 
-#########################
-# Functions Definitions #
-#########################
+#############################
+# Development Installations #
+#############################
 
 install_ubuntu_general () {
     echo -e "\n >>> General Installation Started..."
-    # Install desktop utilities
-    sudo apt install -y vlc redshift xclip lm-sensors mesa-utils \
+    # Install
+    sudo apt install -y vlc xclip lm-sensors mesa-utils \
                         sensors-detect tfenv
-    # Install fcitx
+    # Install
     sudo apt install -y fcitx-bin fcitx-chewing fcitx-mozc fcitx-googlepinyin
-    # Install java-11
+    # [Optional] Create symbolic links
+    # echo -e 'creating symbolic links...'
+    # ln -s -f ~/dotfiles/x/xprofile ~/.xprofile
+    # ln -s -f ~/dotfiles/redshift/redshift.conf ~/.config/redshift.conf
+    echo -e " <<< General Installation Finished!"
+}
+
+install_java () {
+    echo -e "\n >>> Java Installation Started..."
+    # Install
     sudo apt install -y default-jre default-jdk maven
+    echo -e " <<< Java Installation Finished!"
+}
 
 install_gvm () {
     echo -e "\n >>> Gvm Installation Started..."
@@ -107,34 +118,9 @@ install_vim_build_from_source() {
     echo -e " <<< Vim Installation Finished!"
 }
 
-install_i3wm() {
-    echo -e "\n >>> I3wn Installation Started..."
-    # Install
-    sudo apt install -y i3 i3blocks
-    # Install extensions
-    sudo apt install -y imagemagick feh playerctl
-    # Pip install extensions
-    pip3 install psutil netifaces
-    # Convert Ubuntu 20.04 default wallpaper from .jpg to .png
-    convert -scale 2560x1440 /usr/share/backgrounds/matt-mcnulty-nyc-2nd-ave.jpg /usr/share/backgrounds/lockscreen.png
-    # Download extensions
-    git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/awesome-terminal-fonts
-    cd ~/awesome-terminal-fonts && ./install.sh
-    cd .. && rm -rf ~/awesome-terminal-fonts
-    git clone https://github.com/tobi-wan-kenobi/bumblebee-status.git ~/bumblebee-status
-    # Check if configuration directory exists
-    # Create if it does not exist
-    if [[ ! -e ~/.config/i3 ]] ; then
-        mkdir -p ~/.config/i3
-    fi
-    mv ~/bumblebee-status ~/.config/i3/bumblebee-status
-    # Create symbolic links
-    ln -s -f ~/.config/i3/bumblebee-status/bumblebee-status ~/.config/i3/bumblebee-status/bumblebee-status.py
-    ln -s -f ~/dotfiles/i3/i3main.conf ~/.config/i3/config
-    ln -s -f ~/dotfiles/i3/i3status.conf ~/.i3status.conf
-    sudo ln -s -f ~/dotfiles/i3/i3exit.sh /usr/local/bin/i3exit
-    echo -e " <<< I3wm Installation Finished!"
-}
+#####################
+# Desktop Utilities #
+#####################
 
 install_spotify(){
     echo -e "\n >>> Spotify Installation Started..."
@@ -170,6 +156,35 @@ install_zsa(){
         echo "Done!"
     fi
     echo -e " <<< Moonlander Installation Finished!"
+}
+
+install_i3wm() {
+    echo -e "\n >>> I3wn Installation Started..."
+    # Install
+    sudo apt install -y i3 i3blocks
+    # Install extensions
+    sudo apt install -y imagemagick feh playerctl
+    # Pip install extensions
+    pip3 install psutil netifaces
+    # Convert Ubuntu 20.04 default wallpaper from .jpg to .png
+    convert -scale 2560x1440 /usr/share/backgrounds/matt-mcnulty-nyc-2nd-ave.jpg /usr/share/backgrounds/lockscreen.png
+    # Download extensions
+    git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/awesome-terminal-fonts
+    cd ~/awesome-terminal-fonts && ./install.sh
+    cd .. && rm -rf ~/awesome-terminal-fonts
+    git clone https://github.com/tobi-wan-kenobi/bumblebee-status.git ~/bumblebee-status
+    # Check if configuration directory exists
+    # Create if it does not exist
+    if [[ ! -e ~/.config/i3 ]] ; then
+        mkdir -p ~/.config/i3
+    fi
+    mv ~/bumblebee-status ~/.config/i3/bumblebee-status
+    # Create symbolic links
+    ln -s -f ~/.config/i3/bumblebee-status/bumblebee-status ~/.config/i3/bumblebee-status/bumblebee-status.py
+    ln -s -f ~/dotfiles/i3/i3main.conf ~/.config/i3/config
+    ln -s -f ~/dotfiles/i3/i3status.conf ~/.i3status.conf
+    sudo ln -s -f ~/dotfiles/i3/i3exit.sh /usr/local/bin/i3exit
+    echo -e " <<< I3wm Installation Finished!"
 }
 
 install_screenkey() {
@@ -282,10 +297,13 @@ install_docker
 install_nvidia_driver
 install_nvidia_docker
 install_vim_build_from_source
-install_i3wm
 install_spotify
 install_zsa
+install_i3wm
 install_screenkey
 install_kazam
 install_ffmpeg
+install_cointop
+install_mop
+install_ticker
 sudo apt autoremove
