@@ -278,9 +278,6 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 # function wally() {~/dotfiles/zsa/wally}
 # function wally-cli() {~/dotfiles/zsa/wally-cli}
 
-# Mop settings
-# function mop() {~/mop/mop}
-
 # Terraform settings
 # Terraform autocomplete
 # autoload -U +X bashcompinit && bashcompinit
