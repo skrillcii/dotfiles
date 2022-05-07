@@ -12,7 +12,7 @@ go get github.com/miguelmota/cointop
 
 Configuration file
 ```
-$ ln -s ~/dotfiles/cointop/config.toml ~/.config/cointop/config.toml
+$ ln -sf ~/dotfiles/cointop/config.toml ~/.config/cointop/config.toml
 ```
 
 ## Reference
