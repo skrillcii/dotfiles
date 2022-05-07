@@ -247,6 +247,13 @@ alias gb='git branch --all'
 alias gf='git fetch --all --verbose'
 # Git show graph
 alias gg='git log --all --oneline --decorate --graph'
+# Git show graph pretty
+pretty=("%C(auto)%h%C(magenta) %cd %C(yellow)[%cr]%C(auto)%d%n"
+        "%C(auto)%s%n %C(green)Committer:%cN <%cE>%n"
+        "%C(blue)Author :%aN <%aE>%Creset")
+function ggg() {
+    git log --graph --all --date=local --pretty=format:"$pretty"
+}
 # Git prune local branch
 function gp() {
     git fetch -p ; git branch -r | awk '{print $1}' \
