@@ -30,14 +30,17 @@ install_nerd_fonts() {
     cur_version=`git --version | awk '{{ print $3 }}'`
     req_version='2.26.0'
     if [[ "$(printf '%s\n' "$req_version" "$cur_version" | sort -V | head -n1)" = "$req_version" ]]; then
-        echo "Current git version is $cur_version, greater than required version $req_version"
+        echo "Current git version is $cur_version, greater than required version $req_version."
+        echo "Cloning specified fonts..."
         # Clone specified fonts
         git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts ~/nerd-fonts
         cd ~/nerd-fonts
         git sparse-checkout add patched-fonts/Hack
     else
         # Clone all fonts
-        echo "Current git version is $cur_version, less than required version $req_version"
+        echo "Current git version is $cur_version, less than required version $req_version."
+        echo "Cloning specified fonts not supported."
+        echo "Cloning all fonts..."
         git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/nerd-fonts
     fi
     # Install fonts
@@ -104,10 +107,11 @@ install_nvm() {
     echo -e "\n >>> Nvm Installation Started..."
     # Download
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-    # Install
+    # Source
     source ~/.nvm/nvm.sh
     source ~/.profile
     source ~/.bashrc
+    # Install
     nvm install v17.9.0
     echo -e " <<< Nvm Installation Finished!"
 }
