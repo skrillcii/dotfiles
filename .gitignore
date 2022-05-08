@@ -2,12 +2,12 @@
 *.DS_Store
 
 # Development meta files
+*.python-version
 *.swo
 *.swp
-Session.vim
 *.vim/
-*tags
-*.python-version
+tags
+Session.vim
 
 # Byte-compiled
 __pycache__/
