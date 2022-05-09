@@ -11,7 +11,7 @@ install_macos_general() {
     # Install terminal utilities
     brew install zsh tmux vim ranger autojump ripgrep \
                  wget curl git bat universal-ctags tree jq \
-                 htop glances watch trash
+                 htop glances watch trash-cli
     # Install pyenv dependcies
     brew install openssl readline sqlite3 xz zlib \
                  pyenv pyenv-virtualenv rbenv ruby-build tfenv
@@ -21,6 +21,8 @@ install_macos_general() {
     # Install nerd-fonts
     brew tap homebrew/cask-fonts
     brew install --cask font-hack-nerd-font
+    # Install financial tools
+    brew install cointop
     # Git global settings
     git config --global core.excludesfile ~/dotfiles/.gitignore
     git config --global diff.tool vimdiff

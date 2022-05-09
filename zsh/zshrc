@@ -193,21 +193,6 @@ case `uname` in
     ;;
 esac
 
-# Trash settings
-case `uname` in
-    Darwin)
-        alias rm='trash -v'
-        alias tl='trash -l'
-        alias te='trash -e'
-    ;;
-    Linux)
-        alias rm='trash-put -v'
-        alias tl='trash-list'
-        alias ts='trash-restore'
-        alias te='trash-empty'
-    ;;
-esac
-
 # Nvm settings
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -229,6 +214,12 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 # This automatically activates specified pyenv-virtualenv if a .python-version file exists
 # This configuration is optional
 # eval "$(pyenv virtualenv-init -)"
+
+# Trash settings
+alias rm='trash-put -v'
+alias tl='trash-list'
+alias ts='trash-restore'
+alias te='trash-empty'
 
 # Print environment path
 alias pp='echo "${PATH//:/$'\\n'}"'
