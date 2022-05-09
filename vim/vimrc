@@ -165,6 +165,19 @@ set display+=lastline
 " Startify settings
 "================================================
 let g:startify_session_autoload=1
+" Start in new tab
+if has('nvim')
+  autocmd TabNewEntered * Startify
+else
+  autocmd BufWinEnter *
+        \ if !exists('t:startify_new_tab')
+        \     && empty(expand('%'))
+        \     && empty(&l:buftype)
+        \     && &l:modifiable |
+        \   let t:startify_new_tab = 1 |
+        \   Startify |
+        \ endif
+endif
 
 "================================================
 " Devicon settings
