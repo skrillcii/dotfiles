@@ -117,13 +117,11 @@ install_vim_build_from_source() {
         --enable-cscope \
         --enable-fail-if-missing \
         --prefix=/usr/local
-        # --with-luajit \
         # --enable-gpm \
-        # --enable-acl \
-        # --enable-xim \
-        # --with-x \
+        # --enable-fontset \
+        # --with-luajit \
     # Build
-    make VIMRUNTIMEDIR=/usr/local/bin/vim
+    make
     # Install
     sudo checkinstall
     echo -e " <<< Vim Installation Finished!"

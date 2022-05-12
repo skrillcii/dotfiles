@@ -52,6 +52,8 @@ install_nerd_fonts() {
 
 install_oh_my_zsh() {
     echo -e "\n >>> Oh-my-zsh Installation Started..."
+    # Install
+    sudo apt install -y zsh
     # Download and install
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     # Download plugins
@@ -67,6 +69,8 @@ install_oh_my_zsh() {
 
 install_oh_my_tmux() {
     echo -e "\n >>> Oh-my-tmux Installation Started..."
+    # Install
+    sudo apt install -y tmux
     # Download
     git clone https://github.com/gpakosz/.tmux.git ~/.oh-my-tmux
     # Create symbolic links
@@ -78,6 +82,8 @@ install_oh_my_tmux() {
 
 install_ranger() {
     echo -e "\n >>> Ranger Installation Started..."
+    # Install
+    sudo apt install -y ranger
     # Check if configuration directory exists
     # Create if it does not exist
     echo -e 'checking directory...'
@@ -144,6 +150,8 @@ install_pyenv() {
 
 install_vim_plugin_manager() {
     echo -e "\n >>> Vim-plugin-manager Installation Started..."
+    # Install
+    sudo apt install -y vim
     # Download
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
