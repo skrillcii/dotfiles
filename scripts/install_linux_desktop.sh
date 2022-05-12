@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 #############################
 # Development Installations #
@@ -89,33 +89,43 @@ install_vim_build_from_source() {
     # Remove old version
     sudo apt remove vim vim-runtime gvim
     # Install dependencies
-    sudo apt install -y libncurses5-dev libgnome2-dev libgnomeui-dev \
-                        libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
-                        libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
-                        python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
+    # Deprecated dependencies: libatk1.0-dev libbonoboui2-dev libcairo2-dev
+    sudo apt install -y git build-essential gettext autoconf automake cproto \
+                        libtinfo-dev libacl1-dev libgpm-dev libtool-bin libx11-dev\
+                        libgtk-3-dev libxmu-dev libxpm-dev libxt-dev libncurses-dev \
+                        libperl-dev liblua5.2-dev lua5.2 luajit libluajit-5.1 \
+                        python-dev python3-dev ruby-dev clang
+
     # Download
     git clone https://github.com/vim/vim.git ~/vim
     cd ~/vim
+    # Checkout specific version
+    git checkout v8.23175
+    make clean distclean
+    # Configure
     # Use '$(python3-config --configdir)' to check for flag '--with-python3-config-dir'
     # To check python path in vim ':python3 import sys; print(sys.path)'
-    make clean distclean
     ./configure --with-features=huge \
         --enable-multibyte \
         --enable-terminal \
+        --enable-perlinterp=yes \
         --enable-rubyinterp=yes \
         --enable-python3interp=yes \
         --with-python3-config-dir=$(python3-config --configdir) \
-        --enable-perlinterp=yes \
+        --enable-luainterp=yes \
         --enable-gui=gtk3 \
         --enable-cscope \
-        --prefix=/usr/local \
         --enable-fail-if-missing \
-    make VIMRUNTIMEDIR=/usr/local/share/vim/vim82
+        --prefix=/usr/local
+        # --with-luajit \
+        # --enable-gpm \
+        # --enable-acl \
+        # --enable-xim \
+        # --with-x \
+    # Build
+    make VIMRUNTIMEDIR=/usr/local/bin/vim
     # Install
-    cd ~/vim
     sudo checkinstall
-    # Clean
-    sudo rm -rf ~/vim
     echo -e " <<< Vim Installation Finished!"
 }
 
