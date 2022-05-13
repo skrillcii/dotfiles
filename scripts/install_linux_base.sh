@@ -46,7 +46,7 @@ install_nerd_fonts() {
     # Install fonts
     ~/nerd-fonts/install.sh Hack
     # Clean-up
-    rm -rf ~/near-fonts
+    rm -rf ~/nerd-fonts
     echo -e " <<< Nerd-fonts Installation Finished!"
 }
 
