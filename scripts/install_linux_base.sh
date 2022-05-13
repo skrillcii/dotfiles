@@ -141,7 +141,8 @@ install_pyenv() {
     env PYTHON_CONFIGURE_OPTS="--enable-shared" ~/.pyenv/bin/pyenv install 3.8.6
     # Install python packages
     ~/.pyenv/bin/pyenv global 3.8.6 system
-    ~/.pyenv/shims/pip3 install -U pip pip-autoremove autopep8 pylint flake8 yapf ipdb pdbpp
+    ~/.pyenv/shims/pip3 install --use-feature=2020-resolver \
+        -U pip pip-autoremove autopep8 pylint flake8 yapf ipdb pdbpp
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/pdb/pdbrc.py ~/.pdbrc.py
