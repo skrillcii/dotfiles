@@ -50,7 +50,7 @@ RUN apt-get update && \
 #############
 # Add user
 RUN useradd -r -m -d ${HOME} -s ${SHELL} -G sudo \
-    -u ${PERSONALIZED_UID} ${PERSONALIZED_USR} -p "$(openssl passwd -1 ${PERSONALIZED_USR})"
+    -u ${PERSONALIZED_UID} ${PERSONALIZED_USR} -p "$(openssl passwd -6 ${PERSONALIZED_USR})"
 USER ${PERSONALIZED_USR}
 WORKDIR ${HOME}
 
