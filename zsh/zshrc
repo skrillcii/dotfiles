@@ -234,9 +234,9 @@ alias dkr='sudo docker rm $(sudo docker ps -a -q)'
 # Docker remove dangling containers
 alias dkd='sudo docker rmi $(sudo docker images --filter "dangling=true" -q --no-trunc)'
 # Docker show images
-alias dki='watch sudo docker images'
+alias dki='sudo docker images'
 # Docker show process status
-alias dkp='watch sudo docker ps -a'
+alias dkp='sudo docker ps -a'
 
 # Git settings
 # Git show status
