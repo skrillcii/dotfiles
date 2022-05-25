@@ -315,4 +315,4 @@ install_ffmpeg
 install_cointop
 install_mop
 install_ticker
-sudo apt autoremove
+sudo apt autoremove -y
