@@ -200,4 +200,4 @@ install_nvm
 install_pyenv
 install_vim_plugin_manager
 install_coc
-sudo apt autoremove
+sudo apt autoremove -y
