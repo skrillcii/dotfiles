@@ -425,6 +425,9 @@ set -g @continuum-restore 'on'
 # Set default shell
 # set -g default-shell /usr/local/bin/zsh
 
+# Unbind default keybind for sort layout
+unbind Space
+
 # Split panes using | and -
 unbind '"'
 unbind '%'
