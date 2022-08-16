@@ -101,6 +101,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'mattn/vim-lsp-settings'
 " Plug 'dense-analysis/ale'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Plugin icons
 " This must be load after nerdtree-git-plugin
@@ -354,12 +355,32 @@ let g:terraform_fmt_on_save=1
 nnoremap <Space>e :CocList extensions<CR>
 " Install global extensions
 let g:coc_global_extensions=[
-    \'coc-java'   , 'coc-pyright' , 'coc-go'      ,
-    \'coc-html'   , 'coc-css'     , 'coc-vimtex'  ,
     \'coc-json'   , 'coc-xml'     , 'coc-yaml'    ,
-    \'coc-vimlsp' , 'coc-yank'    , 'coc-snippets',
-    \'coc-sh']
+    \'coc-html'   , 'coc-css'     , 'coc-vimtex'  ,
+    \'coc-sh'     , 'coc-clangd'  , 'coc-cmake'   ,
+    \'coc-java'   , 'coc-pyright' , 'coc-go'      ,
+    \'coc-vimlsp' , 'coc-yank'    , 'coc-snippets']
 source $HOME/.config/coc/coc.vim
+" Disable newer CoC version warming
+let g:coc_disable_startup_warning=1
+
+"================================================
+" Vim-lsp clangd settings
+"================================================
+" if executable('clangd')
+"     augroup lsp_clangd
+"         autocmd!
+"         autocmd User lsp_setup call lsp#register_server({
+"                     \ 'name': 'clangd',
+"                     \ 'cmd': {server_info->['clangd']},
+"                     \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+"                     \ })
+"         autocmd FileType c setlocal omnifunc=lsp#complete
+"         autocmd FileType cpp setlocal omnifunc=lsp#complete
+"         autocmd FileType objc setlocal omnifunc=lsp#complete
+"         autocmd FileType objcpp setlocal omnifunc=lsp#complete
+"     augroup end
+" endif
 
 "================================================
 " ALE settings
@@ -368,6 +389,19 @@ source $HOME/.config/coc/coc.vim
 " let g:ale_linters={'html': ['htmlhint'], 'css': ['stylelint']}
 " let g:ale_linters_explicit=1
 " let g:ale_fix_on_save=1
+
+"================================================
+" Vim-cpp-enhanced-highlight settings
+"================================================
+let g:cpp_class_scope_highlight=1
+let g:cpp_member_variable_highlight=1
+let g:cpp_class_decl_highlight=1
+let g:cpp_posix_standard=1
+let g:cpp_experimental_simple_template_highlight=1
+let g:cpp_experimental_template_highlight=1
+let g:cpp_concepts_highlight=1
+let g:cpp_no_function_highlight=1
+let c_no_curly_error=1
 
 "================================================
 " Json formatter settings

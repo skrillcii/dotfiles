@@ -51,10 +51,28 @@ inoremap <expr> <C-k>
 "   inoremap <silent><expr> <C-@> coc#refresh()
 " endif
 
+"-------------------------------------------------------------------------~
+" Below works for CoC version before v0.0.82.
 " Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <CR> could be remapped by other vim plugin
-inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
+" format on enter, <CR> could be remapped by other vim plugin.
+" inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
+"                               \: "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
+
+" Below works for CoC version after (include) v0.0.82.
+" This is to comply with CoC v0.0.82 updated behavior settings for <Tab> completions
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <C-x><C-z> coc#pum#visible() ? coc#pum#stop() : "\<C-x>\<C-z>"
+"Remap for complete to use tab and <CR>
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1):
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <c-space> coc#refresh()
+
+hi CocSearch ctermfg=12 guifg=#18A3FF
+hi CocMenuSel ctermbg=109 guibg=#13354A
+"-------------------------------------------------------------------------~
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
