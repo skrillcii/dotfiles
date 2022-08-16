@@ -174,7 +174,7 @@ else
         \     && empty(expand('%'))
         \     && empty(&l:buftype)
         \     && &l:modifiable |
-        \   let t:startify_new_tab = 1 |
+        \   let t:startify_new_tab=1 |
         \   Startify |
         \ endif
 endif
@@ -239,8 +239,9 @@ let g:ctrlp_cmd='CtrlPMRU'
 "================================================
 nnoremap <Space>f :Files ~/<CR>
 nnoremap <Space>d :GFiles?<CR>
+nnoremap <Space>z :Rg<CR>
 " This is the default extra key bindings
-let g:fzf_action = {
+let g:fzf_action={
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
@@ -297,7 +298,7 @@ vmap t, :Tabularize /,<CR>
 " Emmet settings
 "================================================
 let g:user_emmet_leader_key=','
-let g:user_emmet_install_global = 0
+let g:user_emmet_install_global=0
 autocmd FileType html,css EmmetInstall
 
 "================================================
