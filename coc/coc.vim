@@ -60,6 +60,7 @@ inoremap <expr> <C-k>
 
 " Below works for CoC version after (include) v0.0.82.
 " This is to comply with CoC v0.0.82 updated behavior settings for <Tab> completions
+" Reference https://github.com/neoclide/coc.nvim/pull/3862.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <C-x><C-z> coc#pum#visible() ? coc#pum#stop() : "\<C-x>\<C-z>"
 "Remap for complete to use tab and <CR>
