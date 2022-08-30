@@ -42,8 +42,13 @@ set cmdheight=1
 set backspace=indent,eol,start
 set clipboard=unnamedplus,unnamed
 set pastetoggle=<F3>
-set diffopt+=vertical
 set updatetime=200
+
+" Difftool options
+if &diff
+    set diffopt-=internal
+    set diffopt+=vertical
+endif
 
 "================================================
 " Vim plugin manager
