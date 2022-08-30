@@ -1,18 +1,28 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"],
+  "python.venvPath": "~/.pyenv/versions",
+  "pyright.enable": true,
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--generated-members=numpy.*, torch.*",
+    "--disable=C0103,C0114,C0115,C0116,C0301,C0411,C0413,R0902,R0903,R0913,R0914,R0915"
+  ],
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--ignore=E128,E203,E221,E226,E401,E402,E501,F401,F403"
+  ],
 
-    "python.venvPath": "~/.pyenv/versions",
-    "pyright.enable": true,
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.pylintArgs": [
-        "--generated-members=numpy.*, torch.*",
-        "--disable=C0103,C0114,C0115,C0116,C0301,C0411,C0413,R0902,R0903,R0913,R0914,R0915"
-    ],
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": [
-        "--ignore=E128,E203,E221,E226,E401,E402,E501,F401,F403"
-    ],
+  "eslint.autoFixOnSave": true,
+  "tsserver.formatOnType": true,
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
 
-    "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips"
+  "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips"
 }
