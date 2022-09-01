@@ -102,6 +102,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'mattn/vim-lsp-settings'
 " Plug 'dense-analysis/ale'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'sheerun/vim-polyglot'
 
 " Plugin icons
 " This must be load after nerdtree-git-plugin
