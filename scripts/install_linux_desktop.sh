@@ -22,8 +22,7 @@ install_ubuntu_general () {
 install_docker() {
     echo -e "\n >>> Docker Installation Started..."
     # Uninstall old versions
-    sudo apt remove -y docker docker-engine docker.io containerd runc
-    # Install dependcies
+    sudo apt remove -y docker docker-engine docker.io docker-compose containerd runc
     sudo apt install -y ca-certificates curl gnupg lsb-release
     # Add GPG key
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -32,7 +31,7 @@ install_docker() {
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     # Install
     sudo apt update
-    sudo apt install -y docker-ce docker-ce-cli containerd.io
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose
     # Verify installation
     sudo docker run hello-world
     echo -e " <<< Docker Installation Finished!"
