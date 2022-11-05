@@ -19,26 +19,6 @@ install_ubuntu_general () {
     echo -e " <<< General Installation Finished!"
 }
 
-install_java () {
-    echo -e "\n >>> Java Installation Started..."
-    # Install
-    sudo apt install -y default-jre default-jdk maven
-    echo -e " <<< Java Installation Finished!"
-}
-
-install_gvm () {
-    echo -e "\n >>> Gvm Installation Started..."
-    # Install dependcies
-    sudo apt install -y curl git mercurial make binutils bison gcc build-essential golang
-    # Install gvm
-    bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-    # Install golang (using binary option -B)
-    gvm install go1.17.9 -B
-    # Set golang
-    gvm use go1.17.9 --default
-    echo -e " <<< Gvm Installation Finished!"
-}
-
 install_docker() {
     echo -e "\n >>> Docker Installation Started..."
     # Uninstall old versions
@@ -82,6 +62,26 @@ install_nvidia_docker() {
     # Verify installation
     sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
     echo -e " <<< Nvidia Docker Installation Finished!"
+}
+
+install_java () {
+    echo -e "\n >>> Java Installation Started..."
+    # Install
+    sudo apt install -y default-jre default-jdk maven
+    echo -e " <<< Java Installation Finished!"
+}
+
+install_gvm () {
+    echo -e "\n >>> Gvm Installation Started..."
+    # Install dependcies
+    sudo apt install -y curl git mercurial make binutils bison gcc build-essential golang
+    # Install gvm
+    bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+    # Install golang (using binary option -B)
+    gvm install go1.17.9 -B
+    # Set golang
+    gvm use go1.17.9 --default
+    echo -e " <<< Gvm Installation Finished!"
 }
 
 install_vim_build_from_source() {
@@ -302,17 +302,25 @@ install_ticker() {
 # Functions Call #
 ##################
 sudo apt update && sudo apt upgrade -y
-install_docker
-install_nvidia_driver
-install_nvidia_docker
-install_vim_build_from_source
-install_spotify
-install_zsa
-install_i3wm
-install_screenkey
-install_kazam
-install_ffmpeg
-install_cointop
-install_mop
-install_ticker
+
+# install_ubuntu_general
+# install_docker
+# install_nvidia_driver
+# install_nvidia_docker
+
+# install_java
+# install_gvm
+# install_vim_build_from_source
+
+# install_spotify
+# install_zsa
+# install_i3wm
+# install_screenkey
+# install_kazam
+# install_ffmpeg
+
+# install_cointop
+# install_mop
+# install_ticker
+
 sudo apt autoremove -y
