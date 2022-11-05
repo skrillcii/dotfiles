@@ -33,7 +33,7 @@ install_nerd_fonts() {
         echo "Current git version is $cur_version, greater than required version $req_version."
         echo "Cloning specified fonts..."
         # Clone specified fonts
-        git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts ~/nerd-fonts
+        git clone --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts ~/nerd-fonts
         cd ~/nerd-fonts
         git sparse-checkout add patched-fonts/Hack
     else
@@ -136,7 +136,7 @@ install_pyenv() {
     echo -e 'exporting environmental variabls...'
     echo 'export PYENV_ROOT="~/.pyenv"' >> ~/.bashrc
     echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-    echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
     # Install python with --enable-shared
     env PYTHON_CONFIGURE_OPTS="--enable-shared" ~/.pyenv/bin/pyenv install 3.8.6
     # Install python packages
