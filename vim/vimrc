@@ -417,6 +417,13 @@ let g:cpp_no_function_highlight=1
 let c_no_curly_error=1
 
 "================================================
+" Protocol buffer syntax highlight settings
+"================================================
+augroup filetype
+  au! BufRead,BufNewFile *.proto setfiletype proto
+augroup end
+
+"================================================
 " Json formatter settings
 "================================================
 nmap tj :!jq <CR>

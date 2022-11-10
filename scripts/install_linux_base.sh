@@ -178,11 +178,18 @@ install_coc() {
     if [[ ! -e ~/.config/coc/ultisnips ]] ; then
         mkdir -p ~/.config/coc/ultisnips
     fi
+    # Check if configuration directory exists
+    # Create if it does not exist
+    echo -e 'creating directory...'
+    if [[ ! -e ~/.vim/syntax ]] ; then
+        mkdir -p ~/.vim/syntax
+    fi
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/coc/coc.vim ~/.config/coc/coc.vim
     ln -sf ~/dotfiles/coc/coc-settings.json ~/.vim/coc-settings.json
     ln -sf ~/dotfiles/coc/python.snippets ~/.config/coc/ultisnips/python.snippets
+    ln -sf ~/dotfiles/coc/proto.vim ~/.vim/syntax/proto.vim
     echo -e " <<< CoC Installation Finished!"
 }
 
