@@ -1,6 +1,8 @@
 {
   "python.venvPath": "~/.pyenv/versions",
   "pyright.enable": true,
+  "pyright.inlayHints.variableTypes": false,
+  "pyright.inlayHints.functionReturnTypes": false,
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
