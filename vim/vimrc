@@ -80,15 +80,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 
-" Html/CSS enhancement
-Plug 'mattn/emmet-vim'
-Plug 'AndrewRadev/tagalong.vim'
-Plug 'gregsexton/MatchTag'
-
-" CPP enhancement
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'rhysd/vim-clang-format'
-
 " Git enhancement
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -101,6 +92,15 @@ Plug 'jpalardy/vim-slime'
 Plug 'majutsushi/tagbar'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
+" Html/CSS enhancement
+Plug 'mattn/emmet-vim'
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'gregsexton/MatchTag'
+
+" CPP enhancement
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'rhysd/vim-clang-format'
+
 " Language Server Protocol
 Plug 'hashivim/vim-terraform' , { 'for': 'terraform'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -110,11 +110,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'mattn/vim-lsp-settings'
 " Plug 'dense-analysis/ale'
-<<<<<<< Updated upstream
-Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'sheerun/vim-polyglot'
-=======
->>>>>>> Stashed changes
 
 " Plugin icons
 " This must be load after nerdtree-git-plugin
