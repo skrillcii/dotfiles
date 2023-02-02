@@ -233,8 +233,11 @@ alias dkk='sudo docker kill $(sudo docker ps -q)'
 alias dkr='sudo docker rm $(sudo docker ps -a -q)'
 # Docker remove dangling containers
 alias dkd='sudo docker rmi $(sudo docker images --filter "dangling=true" -q --no-trunc)'
+# Docker show images
+alias dki='sudo docker images'
 # Docker show images (sorted by repository name)
-alias dki='sudo docker images | head -n1 && sudo docker images | tail -n+2 | sort -h -k1'
+alias dkis='sudo docker images | head -n1 ; sudo docker images | tail -n+2 | sort -h -k1'
+
 
 # Docker show process status
 alias dkp='sudo docker ps -a'
