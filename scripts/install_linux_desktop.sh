@@ -7,8 +7,7 @@
 install_ubuntu_general () {
     echo -e "\n >>> General Installation Started..."
     # Install
-    sudo apt install -y vlc xsel xclip  mesa-utils \
-                        lm-sensors sensors-detect \
+    sudo apt install -y vlc mesa-utils lm-sensors sensors-detect \
                         powertop nvtop tfenv
     # Install
     sudo apt install -y fcitx-bin fcitx-chewing fcitx-mozc fcitx-googlepinyin
