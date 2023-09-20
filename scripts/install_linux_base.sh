@@ -8,7 +8,7 @@ install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
     # Install terminal utilities
     sudo apt install -y zsh tmux vim ranger autojump ripgrep \
-                        wget curl git exuberant-ctags tree jq \
+                        wget curl git exuberant-ctags tree jq gh \
                         htop glances trash-cli clangd clang-format
     # Install network utilities
     sudo apt install -y net-tools nmap

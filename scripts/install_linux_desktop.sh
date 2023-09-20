@@ -296,6 +296,15 @@ install_ticker() {
     echo -e " <<< Ticker Installation Finished!"
 }
 
+#####################
+# Engineering Tools #
+#####################
+
+install_mechatronics() {
+    echo -e "\n >>> Mechatronics Installation Started..."
+    sudo apt install -y kicad kicad-packages3d openscad
+    echo -e " <<< Mechatronics Installation Finished!"
+}
 
 ##################
 # Functions Call #
@@ -321,5 +330,6 @@ sudo apt update && sudo apt upgrade -y
 # install_cointop
 # install_mop
 # install_ticker
+# install_mechatronics
 
 sudo apt autoremove -y
