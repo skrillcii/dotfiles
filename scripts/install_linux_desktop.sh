@@ -305,6 +305,17 @@ install_mechatronics() {
     echo -e " <<< Mechatronics Installation Finished!"
 }
 
+install_drawio() {
+    echo -e "\n >>> Drawio Installation Started..."
+    # release notes:
+    #   https://github.com/jgraph/drawio-desktop/releases/
+    wget https://github.com/jgraph/drawio-desktop/releases/download/v21.7.5/drawio-amd64-21.7.5.deb \
+        -P $home/Downloads
+    sudo apt install $home/Downloads/drawio-amd64-21.7.5.deb
+    rm $home/Downloads/drawio-amd64-21.7.5.deb
+    echo -e " <<< Drawio Installation Finished!"
+}
+
 ##################
 # Functions Call #
 ##################
