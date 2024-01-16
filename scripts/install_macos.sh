@@ -9,7 +9,7 @@ install_macos_general() {
     # Install homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # Install terminal utilities
-    brew install zsh tmux vim ranger autojump ripgrep \
+    brew install zsh tmux vim ranger autojump ripgrep imagemagick \
                  wget curl git bat universal-ctags tree jq \
                  htop glances watch trash-cli llvm clang-format
     # Install pyenv dependcies
