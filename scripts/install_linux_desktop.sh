@@ -7,8 +7,7 @@
 install_ubuntu_general () {
     echo -e "\n >>> General Installation Started..."
     # Install
-    sudo apt install -y vlc xsel xclip  mesa-utils \
-                        lm-sensors sensors-detect \
+    sudo apt install -y vlc mesa-utils lm-sensors sensors-detect \
                         powertop nvtop tfenv
     # Install
     sudo apt install -y fcitx-bin fcitx-chewing fcitx-mozc fcitx-googlepinyin
@@ -296,6 +295,26 @@ install_ticker() {
     echo -e " <<< Ticker Installation Finished!"
 }
 
+#####################
+# Engineering Tools #
+#####################
+
+install_mechatronics() {
+    echo -e "\n >>> Mechatronics Installation Started..."
+    sudo apt install -y kicad kicad-packages3d openscad
+    echo -e " <<< Mechatronics Installation Finished!"
+}
+
+install_drawio() {
+    echo -e "\n >>> Drawio Installation Started..."
+    # release notes:
+    #   https://github.com/jgraph/drawio-desktop/releases/
+    wget https://github.com/jgraph/drawio-desktop/releases/download/v21.7.5/drawio-amd64-21.7.5.deb \
+        -P $home/Downloads
+    sudo apt install $home/Downloads/drawio-amd64-21.7.5.deb
+    rm $home/Downloads/drawio-amd64-21.7.5.deb
+    echo -e " <<< Drawio Installation Finished!"
+}
 
 ##################
 # Functions Call #
@@ -321,5 +340,6 @@ sudo apt update && sudo apt upgrade -y
 # install_cointop
 # install_mop
 # install_ticker
+# install_mechatronics
 
 sudo apt autoremove -y
