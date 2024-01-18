@@ -301,7 +301,7 @@ install_ticker() {
 
 install_mechatronics() {
     echo -e "\n >>> Mechatronics Installation Started..."
-    sudo apt install -y kicad kicad-packages3d openscad
+    sudo apt install -y kicad kicad-packages3d openscad freecad blender libreoffice
     echo -e " <<< Mechatronics Installation Finished!"
 }
 
