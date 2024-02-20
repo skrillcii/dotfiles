@@ -215,16 +215,28 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 # This configuration is optional
 # eval "$(pyenv virtualenv-init -)"
 
+# Pretty print environment path
+alias pp='echo "${PATH//:/$'\\n'}"'
+# Watch alias
+alias wa='watch --color '
+# Apt update
+alias aptu='sudo apt update '
+# Apt upgrade
+alias aptg='sudo apt upgrade '
+# Apt install
+alias apti='sudo apt install '
+# Apt remove
+alias apti='sudo apt remove '
+# Apt search
+alias apts='apt-cache search '
+# Apt policy
+alias aptp='apt-cache policy '
+
 # Trash settings
 alias rm='trash-put -v'
 alias tl='trash-list'
 alias ts='trash-restore'
 alias te='trash-empty'
-
-# Print environment path
-alias pp='echo "${PATH//:/$'\\n'}"'
-# Watch alias
-alias wa='watch --color '
 
 # Docker settings
 # Docker show process status

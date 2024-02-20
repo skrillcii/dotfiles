@@ -109,12 +109,12 @@ Plug 'rhysd/vim-clang-format'
 " Language Server Protocol
 Plug 'hashivim/vim-terraform' , { 'for': 'terraform'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'vim-syntastic/syntastic'
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'prabirshrestha/asyncomplete.vim'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'mattn/vim-lsp-settings'
 " Plug 'dense-analysis/ale'
+" Plug 'vim-syntastic/syntastic'
 Plug 'sheerun/vim-polyglot'
 
 " Plugin icons
