@@ -434,6 +434,7 @@ autocmd FileType c,cpp,objc nnoremap <buffer><Space>c :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><Space>c :ClangFormat<CR>
 let g:clang_format#style_options = {
     \ "BasedOnStyle" : "Google",
+    \ "IndentWidth": 4,
     \ "AccessModifierOffset" : -4,
     \ "AllowShortIfStatementsOnASingleLine" : "true",
     \ }

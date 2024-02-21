@@ -14,6 +14,8 @@ install_ubuntu_general() {
                         clang clang-format clang-tidy clangd \
                         gcc g++ gdb libstdc++-12-dev llvm \
                         htop glances trash-cli
+    # Add gdb dashboard
+    wget -P ~ https://github.com/cyrus-and/gdb-dashboard/raw/master/.gdbinit
     # Install network utilities
     sudo apt install -y net-tools nmap
     # Install fcitx

@@ -221,6 +221,8 @@ alias pe='env -0 | sort -z | tr "\0" "\n"'
 alias pp='echo "${PATH//:/$'\\n'}"'
 # Watch alias
 alias wa='watch --color '
+# Gdb alias
+alias gdb='gdb -ex start'
 # Apt update
 alias aptu='sudo apt update'
 # Apt upgrade
