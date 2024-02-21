@@ -215,7 +215,9 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 # This configuration is optional
 # eval "$(pyenv virtualenv-init -)"
 
-# Pretty print environment path
+# Pretty print all environment variables
+alias pe='env -0 | sort -z | tr "\0" "\n"'
+# Pretty print path environment variable
 alias pp='echo "${PATH//:/$'\\n'}"'
 # Watch alias
 alias wa='watch --color '
