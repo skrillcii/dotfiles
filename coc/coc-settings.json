@@ -26,5 +26,7 @@
     "typescriptreact"
   ],
 
+  "inlayHint.display": false,
+
   "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips"
 }

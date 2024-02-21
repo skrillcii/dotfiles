@@ -6,10 +6,13 @@
 
 install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
+    # Unoffical packages for vim
+    sudo add-apt-repository ppa:jonathonf/vim -y
     # Install terminal utilities
     sudo apt install -y zsh tmux vim ranger autojump ripgrep xsel xclip  \
                         wget curl git exuberant-ctags tree jq gh \
-                        clang clang-format clang-tidy clangd libstdc++-12-dev
+                        clang clang-format clang-tidy clangd \
+                        gcc g++ gdb libstdc++-12-dev llvm \
                         htop glances trash-cli
     # Install network utilities
     sudo apt install -y net-tools nmap
