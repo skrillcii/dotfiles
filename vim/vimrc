@@ -286,7 +286,6 @@ let g:EasyMotion_smartcase=1
 "================================================
 " Vim Commentary
 "================================================
-" Set comment style from /**/ to //
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 
 "================================================
