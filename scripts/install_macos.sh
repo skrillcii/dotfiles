@@ -11,7 +11,8 @@ install_macos_general() {
     # Install terminal utilities
     brew install zsh tmux vim ranger autojump ripgrep imagemagick \
                  wget curl git bat universal-ctags tree jq \
-                 htop glances watch trash-cli llvm clang-format
+                 llvm clang clang-format clangd gcc g++ \
+                 htop glances watch trash-cli
     # Install pyenv dependcies
     brew install openssl readline sqlite3 xz zlib \
                  pyenv pyenv-virtualenv rbenv ruby-build tfenv
