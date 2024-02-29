@@ -11,11 +11,7 @@ install_ubuntu_general() {
     # Install terminal utilities
     sudo apt install -y zsh tmux vim ranger autojump ripgrep xsel xclip  \
                         wget curl git exuberant-ctags tree jq gh \
-                        clang clang-format clang-tidy clangd \
-                        gcc g++ gdb libstdc++-12-dev llvm \
                         htop glances trash-cli
-    # Add gdb dashboard
-    wget -P ~ https://github.com/cyrus-and/gdb-dashboard/raw/master/.gdbinit
     # Install network utilities
     sudo apt install -y net-tools nmap
     # Install fcitx
@@ -197,6 +193,20 @@ install_coc() {
     ln -sf ~/dotfiles/coc/python.snippets ~/.config/coc/ultisnips/python.snippets
     ln -sf ~/dotfiles/coc/proto.vim ~/.vim/syntax/proto.vim
     echo -e " <<< CoC Installation Finished!"
+}
+
+install_cpp() {
+    echo -e "\n >>> CPP Installation Started..."
+    # Install compilers and debuggers
+    sudo apt install -y clang clang-format clang-tidy clangd \
+                        gcc g++ gdb libstdc++-12-dev llvm lldb \
+    # Add debugger configurations
+    ln -sf ~/dotfiles/gdb/gdbinit ~/.gdbinit
+    # Install python dependcies
+    ~/.pyenv/shims/pip3 install --use-feature=2020-resolver \
+        -U pygments
+
+    echo -e " <<< CPP Installation Finished!"
 }
 
 ##################
