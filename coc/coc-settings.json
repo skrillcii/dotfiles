@@ -3,6 +3,7 @@
   "pyright.enable": true,
   "pyright.inlayHints.variableTypes": false,
   "pyright.inlayHints.functionReturnTypes": false,
+
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
@@ -14,6 +15,14 @@
     "--ignore=E128,E203,E221,E226,E401,E402,E501,F401,F403"
   ],
 
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": [
+    "--max-line-length=120"
+  ],
+  "python.formatting.yapfArgs": [
+    "--style={based_on_style: google, column_limit:120, indent_width: 4}"
+  ],
+
   "eslint.autoFixOnSave": true,
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
@@ -23,10 +32,15 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "python"
   ],
 
   "inlayHint.display": false,
 
-  "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips"
+  "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips",
+  "snippets.extends": {
+    "python": ["python"],
+    "cpp": ["c"]
+  }
 }

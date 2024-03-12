@@ -144,7 +144,7 @@ install_pyenv() {
     # Install python packages
     ~/.pyenv/bin/pyenv global 3.8.6 system
     ~/.pyenv/shims/pip3 install --use-feature=2020-resolver \
-        -U pip pip-autoremove autopep8 pylint flake8 yapf ipdb pdbpp
+        -U pip pip-autoremove pylint flake8 autopep8 yapf black ipdb pdbpp
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/pdb/pdbrc.py ~/.pdbrc.py
@@ -191,6 +191,7 @@ install_coc() {
     ln -sf ~/dotfiles/coc/coc.vim ~/.config/coc/coc.vim
     ln -sf ~/dotfiles/coc/coc-settings.json ~/.vim/coc-settings.json
     ln -sf ~/dotfiles/coc/python.snippets ~/.config/coc/ultisnips/python.snippets
+    ln -sf ~/dotfiles/coc/c.snippets ~/.config/coc/ultisnips/c.snippets
     ln -sf ~/dotfiles/coc/proto.vim ~/.vim/syntax/proto.vim
     echo -e " <<< CoC Installation Finished!"
 }
