@@ -207,7 +207,7 @@ SpacesInParentheses: false
 SpacesInSquareBrackets: false
 SpaceBeforeSquareBrackets: false
 BitFieldColonSpacing: Both
-Standard: Auto
+Standard: C++11
 StatementAttributeLikeMacros:
   - Q_EMIT
 StatementMacros:
