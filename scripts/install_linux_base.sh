@@ -203,10 +203,11 @@ install_cpp() {
                         gcc g++ gdb libstdc++-12-dev llvm lldb \
     # Add debugger configurations
     ln -sf ~/dotfiles/gdb/gdbinit ~/.gdbinit
-    # Install python dependcies
+    # Add foramtter configurations
+    ln -sf ~/dotfiles/coc/clang-format-ubuntu.yml ~/.clang-format
+    # Install python dependcies for gdb
     ~/.pyenv/shims/pip3 install --use-feature=2020-resolver \
         -U pygments
-
     echo -e " <<< CPP Installation Finished!"
 }
 

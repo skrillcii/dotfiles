@@ -33,7 +33,8 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "python"
+    "python",
+    "yaml"
   ],
 
   "inlayHint.display": false,

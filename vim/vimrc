@@ -11,7 +11,7 @@ set laststatus=2
 set cursorline
 set t_Co=256
 set termguicolors
-set colorcolumn=120
+set colorcolumn=100
 set list
 set listchars=tab:>-,trail:-,eol:$,extends:>,precedes:<
 
@@ -432,12 +432,16 @@ set foldlevelstart=20
 " Bind space + c to format
 autocmd FileType c,cpp,objc nnoremap <buffer><Space>c :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><Space>c :ClangFormat<CR>
+let g:clang_format#detect_style_file = 1
 let g:clang_format#style_options = {
-    \ "BasedOnStyle" : "Google",
-    \ "IndentWidth": 4,
-    \ "AccessModifierOffset" : -4,
-    \ "AllowShortIfStatementsOnASingleLine" : "true",
-    \ }
+      \ "Standard": "C++11",
+      \ "BasedOnStyle": "Google",
+      \ "AccessModifierOffset": -4,
+      \ "ColumnLimit": 100,
+      \ "IndentWidth": 4,
+      \ "AllowShortFunctionsOnASingleLine": "false",
+      \ "AllowShortBlocksOnASingleLine": "Empty",
+      \ }
 " Enalbe auto formatting
 autocmd FileType c ClangFormatAutoEnable
 

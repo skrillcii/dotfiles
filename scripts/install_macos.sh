@@ -11,7 +11,6 @@ install_macos_general() {
     # Install terminal utilities
     brew install zsh tmux vim ranger autojump ripgrep imagemagick \
                  wget curl git bat universal-ctags tree jq \
-                 llvm clang clang-format clangd gcc g++ \
                  htop glances watch trash-cli
     # Install pyenv dependcies
     brew install openssl readline sqlite3 xz zlib \
@@ -154,9 +153,19 @@ install_coc() {
     echo -e " <<< CoC Installation Finished!"
 }
 
+install_cpp(){
+    echo -e "\n >>> CoC Installation Started..."
+    # Install compilers and debuggers
+    brew install llvm lldb clang clang-format clangd gcc g++ \
+    # Add foramtter configurations
+    ln -sf ~/dotfiles/coc/clang-format-macos.yml ~/.clang-format
+    echo -e " <<< CoC Installation Finished!"
+}
+
 ##################
 # Functions Call #
 ##################
+brew update && brew upgrade
 install_macos_general
 install_oh_my_zsh
 install_oh_my_tmux
@@ -166,3 +175,4 @@ install_nvm
 install_pip_packages
 install_vim_plugin_manager
 install_coc
+install_cpp
