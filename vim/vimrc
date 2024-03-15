@@ -432,7 +432,7 @@ set foldlevelstart=20
 " Bind space + c to format
 autocmd FileType c,cpp,objc nnoremap <buffer><Space>c :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><Space>c :ClangFormat<CR>
-let g:clang_format#detect_style_file = 1
+let g:clang_format#detect_style_file = 0
 let g:clang_format#style_options = {
       \ "Standard": "C++11",
       \ "BasedOnStyle": "Google",
