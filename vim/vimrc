@@ -434,12 +434,12 @@ autocmd FileType c,cpp,objc nnoremap <buffer><Space>c :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><Space>c :ClangFormat<CR>
 let g:clang_format#detect_style_file = 1
 let g:clang_format#style_options = {
-      \ "Standard": "C++11",
+      \ "Standard": "c++17",
       \ "BasedOnStyle": "Google",
       \ "AccessModifierOffset": -4,
       \ "ColumnLimit": 100,
       \ "IndentWidth": 4,
-      \ "AllowShortFunctionsOnASingleLine": "false",
+      \ "AllowShortFunctionsOnASingleLine": "Empty",
       \ "AllowShortBlocksOnASingleLine": "Empty",
       \ }
 " Enalbe auto formatting
