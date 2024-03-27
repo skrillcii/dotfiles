@@ -166,6 +166,34 @@ install_vim_plugin_manager() {
     echo -e " <<< Vim-plugin-manager Installation Finished!"
 }
 
+install_code_minimap() {
+    #
+    # Comment:
+    #   This function downloads code-minimap binary for x86_64 architecture.
+    #   This is for a vim plugin, "wfxr/minimap.vim"
+    #
+    echo -e "\n >>> Code-Minimap Installation Started..."
+    # Create if it does not exist
+    target_dir=".vim/plugged/minimap.vim/code-minimap"
+    target_ver="v0.6.7"
+    target_tar="code-minimap-v0.6.7-x86_64-unknown-linux-gnu.tar.gz"
+    target_bin="code-minimap-v0.6.7-x86_64-unknown-linux-gnu/code-minimap"
+    echo -e 'checking directory...'
+    if [[ ! -e ~/${target_dir} ]] ; then
+        mkdir -p ~/${target_dir}
+    fi
+    echo ~/${target_dir}/${target_tar}
+    # Download
+    wget -O ~/${target_dir}/${target_tar} \
+        https://github.com/wfxr/code-minimap/releases/download/${target_ver}/${target_tar}
+    # Extract
+    tar -xvf ~/${target_dir}/${target_tar} -C ~/${target_dir}
+    # Create symbolic links
+    echo -e 'creating symbolic links...'
+    sudo ln -sf ~/${target_dir}/${target_bin} /usr/local/bin/code-minimap
+    echo -e " <<< Code-Minimap Installation Finished!"
+}
+
 install_coc() {
     echo -e "\n >>> CoC Installation Started..."
     # Check if configuration directory exists
@@ -224,5 +252,6 @@ install_fzf
 install_nvm
 install_pyenv
 install_vim_plugin_manager
+install_code_minimap
 install_coc
 sudo apt autoremove -y

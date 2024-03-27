@@ -87,6 +87,7 @@ Plug 'github/copilot.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
+Plug 'wfxr/minimap.vim'
 
 " Productivity
 Plug 'Yggdroot/indentLine'
@@ -136,6 +137,10 @@ nnoremap <Space>w :bd<CR>
 nnoremap <Space>q :q<CR>
 nnoremap <Space>s :w<CR>
 nnoremap <Space>r :source ~/.vimrc<CR>
+
+" Edit operation
+nnoremap <S-j> :m +1<CR>
+nnoremap <S-k> :m -2<CR>
 
 " Tab navigation
 nnoremap <Space>t :tabnew<CR>
@@ -368,6 +373,14 @@ nmap gp <plug>(GitGutterPreviewHunk)
 " Vimagit settings
 "================================================
 nnoremap gm :Magit<CR>
+
+"================================================
+" Minimap settings
+"================================================
+let g:minimap_width = 10
+let g:minimap_auto_start = 0
+let g:minimap_auto_start_win_enter = 0
+nmap <space>a :MinimapToggle<CR>
 
 "================================================
 " Terraform settings
