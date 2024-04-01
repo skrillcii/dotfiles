@@ -156,6 +156,14 @@ esac
 #     printf "\n ➜";
 # }
 
+# Terminal settings
+case `uname` in
+    Linux)
+        export TERMINAL=gnome-terminal
+    ;;
+esac
+
+
 # Bat settings
 export BAT_THEME="gruvbox-dark"
 case `uname` in

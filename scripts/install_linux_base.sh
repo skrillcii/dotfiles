@@ -52,6 +52,20 @@ install_nerd_fonts() {
     echo -e " <<< Nerd-fonts Installation Finished!"
 }
 
+install_gogh_color_scheme() {
+    echo -e "\n >>> Gogh Color Scheme Installation Started..."
+    # Install dependencies
+    sudo apt install dconf-cli uuid-runtime
+    # Clone
+    git clone https://github.com/Gogh-Co/Gogh.git ~/gogh
+    cd ~/gogh/install
+    # Necessary in the Gnome terminal on ubuntu
+    export TERMINAL=gnome-terminal
+    # Install theme
+    ./gruvbox-dark.sh
+    echo -e " <<< Gogh Color Scheme Installation Finished!"
+}
+
 install_oh_my_zsh() {
     echo -e "\n >>> Oh-my-zsh Installation Started..."
     # Install
@@ -250,6 +264,7 @@ install_cpp() {
 sudo apt update && sudo apt upgrade -y
 install_ubuntu_general
 install_nerd_fonts
+install_gogh_color_scheme
 install_oh_my_zsh
 install_oh_my_tmux
 install_ranger
