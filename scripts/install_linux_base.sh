@@ -11,7 +11,7 @@ install_ubuntu_general() {
     # Install terminal utilities
     sudo apt install -y zsh tmux vim ranger autojump ripgrep xsel xclip  \
                         wget curl git exuberant-ctags tree jq gh \
-                        htop glances trash-cli
+                        exa bat htop glances trash-cli
     # Install network utilities
     sudo apt install -y net-tools nmap
     # Install fcitx
@@ -64,8 +64,13 @@ install_oh_my_zsh() {
     git clone https://github.com/zsh-users/zsh-completions.git ~/.oh-my-zsh/custom/plugins/zsh-completions
     # Download themes
     curl -L https://raw.githubusercontent.com/sbugzu/gruvbox-zsh/master/gruvbox.zsh-theme > ~/.oh-my-zsh/custom/themes/gruvbox.zsh-theme
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    # Create symbolic links
+    echo -e 'creating symbolic links...'
+    ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
     # Source configurations
-    echo 'source ~/dotfiles/zsh/zshrc' >> ~/.zshrc
+    # echo 'source ~/dotfiles/zsh/zshrc' >> ~/.zshrc
+    # echo 'source ~/dotfiles/zsh/p10k.zsh' >> ~/.zshrc
     echo -e " <<< Oh-my-zsh Installation Finished!"
 }
 
