@@ -85,7 +85,7 @@ install_oh_my_tmux() {
 install_ranger() {
     echo -e "\n >>> Ranger Installation Started..."
     # Install
-    sudo apt install -y ranger
+    sudo apt install -y ranger atool
     # Check if configuration directory exists
     # Create if it does not exist
     echo -e 'checking directory...'
