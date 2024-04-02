@@ -104,8 +104,9 @@ Plug 'pedrohdz/vim-yaml-folds'
 
 " Html/CSS enhancement
 Plug 'mattn/emmet-vim'
-Plug 'AndrewRadev/tagalong.vim'
+Plug 'alvan/vim-closetag'
 Plug 'gregsexton/MatchTag'
+Plug 'AndrewRadev/tagalong.vim'
 
 " CPP enhancement
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -341,8 +342,9 @@ autocmd FileType html,css EmmetInstall
 " Tagalong settings
 "================================================
 let g:tagalong_verbose=1
-let g:tagalong_filetypes=['html']
-
+let g:tagalong_filetypes=[
+    \ 'xml', 'html', 'jsx', 'php',
+    \ 'javascriptreact',  'typescriptreact']
 
 "==================================
 " Markdown preview settings
@@ -398,12 +400,12 @@ let g:terraform_fmt_on_save=1
 nnoremap <Space>e :CocList extensions<CR>
 " Install global extensions
 let g:coc_global_extensions=[
-    \'coc-json'     , 'coc-xml'     , 'coc-yaml'      ,
-    \'coc-html'     , 'coc-css'     , 'coc-vimtex'    ,
-    \'coc-sh'       , 'coc-clangd'  , 'coc-cmake'     ,
-    \'coc-java'     , 'coc-pyright' , 'coc-go'        ,
-    \'coc-vimlsp'   , 'coc-yank'    , 'coc-snippets'  ,
-    \'coc-tsserver' , 'coc-eslint'  , 'coc-prettier']
+    \ 'coc-json'     , 'coc-xml'     , 'coc-yaml'      ,
+    \ 'coc-html'     , 'coc-css'     , 'coc-vimtex'    ,
+    \ 'coc-sh'       , 'coc-clangd'  , 'coc-cmake'     ,
+    \ 'coc-java'     , 'coc-pyright' , 'coc-go'        ,
+    \ 'coc-vimlsp'   , 'coc-yank'    , 'coc-snippets'  ,
+    \ 'coc-tsserver' , 'coc-eslint'  , 'coc-prettier']
 source $HOME/.config/coc/coc.vim
 " Disable newer CoC version warming
 let g:coc_disable_startup_warning=1

@@ -27,13 +27,14 @@
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": [
-    "css",
     "markdown",
+    "html",
+    "css",
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "python",
+    "python"
   ],
 
   "inlayHint.display": false,
