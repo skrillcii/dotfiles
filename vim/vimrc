@@ -51,6 +51,9 @@ if &diff
     set diffopt+=vertical
 endif
 
+" Set tmux local configuration file type for syntax highlight
+autocmd BufEnter tmux.conf.local :setlocal filetype=tmux
+
 "================================================
 " Vim plugin manager
 "================================================
