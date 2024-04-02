@@ -1,3 +1,10 @@
+## Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -77,9 +84,11 @@ plugins=(
   sudo
   tmux
   # timer
+  aliases
   extract
   docker
   docker-compose
+  web-search
   zsh-completions
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -157,6 +166,7 @@ esac
 # }
 
 # Terminal settings
+# This is for Gogh terminal color scheme specifically for Gnome terminal
 case `uname` in
     Linux)
         export TERMINAL=gnome-terminal
@@ -173,10 +183,19 @@ case `uname` in
 esac
 
 # Exa settings
-alias ls="exa"
-alias ll="exa -lh"
-alias la="exa -alh"
-alias tree="exa --tree"
+case `uname` in
+    Darwin)
+        alias ls="lsd"
+        alias ll="lsd -lh"
+        alias la="lsd -alh"
+    ;;
+    Linux)
+        alias ls="exa"
+        alias ll="exa -lh"
+        alias la="exa -alh"
+        alias tree="exa --tree"
+    ;;
+esac
 
 # Fzf settings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -11,7 +11,7 @@ install_macos_general() {
     # Install terminal utilities
     brew install zsh tmux vim ranger autojump ripgrep imagemagick \
                  wget curl git bat universal-ctags tree jq \
-                 htop glances watch trash-cli
+                 lsd bat htop glances watch trash-cli
     # Install pyenv dependcies
     brew install openssl readline sqlite3 xz zlib \
                  pyenv pyenv-virtualenv rbenv ruby-build tfenv
@@ -33,6 +33,16 @@ install_macos_general() {
     echo -e " <<< General Installation Finished!"
 }
 
+install_iterm2_color_scheme() {
+    echo -e "\n >>> iTerm2 Color Scheme Installation Started..."
+    # Clone
+    git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/iTerm2-Color-Schemes
+    # Install theme
+    cd ~/iTerm2-Color-Schemes
+    ./tools/import-scheme.sh 'schemes/GruvboxDark.itermcolors'
+    echo -e " <<< iTerm2 Color Scheme Installation Finished!"
+}
+
 install_oh_my_zsh() {
     echo -e "\n >>> Oh-my-zsh Installation Started..."
     # Download and install
@@ -43,8 +53,13 @@ install_oh_my_zsh() {
     git clone https://github.com/zsh-users/zsh-completions.git ~/.oh-my-zsh/custom/plugins/zsh-completions
     # Download themes
     curl -L https://raw.githubusercontent.com/sbugzu/gruvbox-zsh/master/gruvbox.zsh-theme > ~/.oh-my-zsh/custom/themes/gruvbox.zsh-theme
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    # Create symbolic links
+    echo -e 'creating symbolic links...'
+    ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
     # Source configurations
-    echo 'source ~/dotfiles/zsh/zshrc' >> ~/.zshrc
+    # echo 'source ~/dotfiles/zsh/zshrc' >> ~/.zshrc
+    # echo 'source ~/dotfiles/zsh/p10k.zsh' >> ~/.zshrc
     echo -e " <<< Oh-my-zsh Installation Finished!"
 }
 
