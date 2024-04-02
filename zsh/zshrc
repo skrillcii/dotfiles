@@ -273,6 +273,8 @@ alias aptg='sudo apt upgrade'
 alias apti='sudo apt install'
 # Apt remove
 alias aptr='sudo apt remove'
+# Apt autoclean
+alias aptc='sudo apt autoclean'
 # Apt autoremove
 alias apta='sudo apt autoremove'
 # Apt show
