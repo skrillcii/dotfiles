@@ -349,3 +349,4 @@ source ~/dotfiles/zsh/p10k.zsh
 # alias tf='terraform'
 # Terraform autocomplete
 # complete -o nospace -C /usr/local/bin/terraform terraform
+# complete -o nospace -C /opt/homebrew/bin/terraform terraform
