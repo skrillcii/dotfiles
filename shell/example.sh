@@ -20,7 +20,7 @@ do
    esac
 done
 
-# Print helpFunction in case parameters are empty
+# Print helpFunction() in case parameters are empty
 if [ -z "$parameterA" ] || [ -z "$parameterB" ] || [ -z "$parameterC" ]
 then
    echo "Some or all of the parameters are empty";

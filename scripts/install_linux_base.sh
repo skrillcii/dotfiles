@@ -11,7 +11,7 @@ install_ubuntu_general() {
     # Install terminal utilities
     sudo apt install -y zsh tmux vim ranger autojump ripgrep xsel xclip  \
                         wget curl git exuberant-ctags tree jq gh \
-                        exa bat htop glances trash-cli
+                        exa htop glances trash-cli
     # Install network utilities
     sudo apt install -y net-tools nmap
     # Install fcitx
@@ -99,6 +99,17 @@ install_oh_my_tmux() {
     ln -sf ~/.oh-my-tmux/.tmux.conf ~/.tmux.conf
     ln -sf ~/dotfiles/tmux/tmux.conf.local ~/.tmux.conf.local
     echo -e " <<< Oh-my-tmux Installation Finished!"
+}
+
+install_bat() {
+    echo -e "\n >>> Bat Installation Started..."
+    # Download
+    wget https://github.com/sharkdp/bat/releases/download/v0.24.0/bat_0.24.0_amd64.deb -P ~/Downloads
+    # Install
+    sudo apt install -i ~/Downloads/bat_0.24.0_amd64.deb
+    # Clean-up
+    rm ~/Downloads/bat_0.24.0_amd64.deb
+    echo -e " <<< Bat Installation Finished!"
 }
 
 install_ranger() {

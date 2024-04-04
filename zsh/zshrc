@@ -186,7 +186,9 @@ esac
 export BAT_THEME="gruvbox-dark"
 case `uname` in
     Linux)
-        alias bat="batcat"
+        if [ command -v "batcat" > /dev/null 2>&1 ]; then
+          alias bat='batcat'
+        fi
     ;;
 esac
 
