@@ -56,7 +56,7 @@ install_gogh_color_scheme() {
     echo -e "\n >>> Gogh Color Scheme Installation Started..."
     # Install dependencies
     sudo apt install dconf-cli uuid-runtime
-    # Clone
+    # Download
     git clone https://github.com/Gogh-Co/Gogh.git ~/gogh
     cd ~/gogh/install
     # Necessary in the Gnome terminal on ubuntu

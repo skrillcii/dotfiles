@@ -108,7 +108,7 @@ source $ZSH/oh-my-zsh.sh
 # export TIMER_THRESHOLD=0
 
 # Oh-my-zsh completions settings
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -333,14 +333,19 @@ source ~/dotfiles/zsh/p10k.zsh
 #################################
 # Specific Environment Settings #
 #################################
+#
+# Order of operation
+# .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
+#
+# Use separate local .zlogin to enable the following options
+# Do not include the local settings in this repository
 
 # Wally settings
 # function wally() {~/dotfiles/zsa/wally}
 # function wally-cli() {~/dotfiles/zsa/wally-cli}
 
 # Terraform settings
-# Terraform autocomplete
-# autoload -U +X bashcompinit && bashcompinit
-# complete -o nospace -C /opt/homebrew/Cellar/tfenv/2.2.3/versions/1.1.9/terraform terraform
 # Terraform alias
-# alias tf='tf'
+# alias tf='terraform'
+# Terraform autocomplete
+# complete -o nospace -C /usr/local/bin/terraform terraform

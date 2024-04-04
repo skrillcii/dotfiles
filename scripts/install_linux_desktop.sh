@@ -8,7 +8,7 @@ install_ubuntu_general () {
     echo -e "\n >>> General Installation Started..."
     # Install
     sudo apt install -y vlc mesa-utils lm-sensors sensors-detect \
-                        powertop nvtop tfenv
+                        powertop nvtop
     # Install
     sudo apt install -y fcitx-bin fcitx-chewing fcitx-mozc fcitx-googlepinyin
     # [Optional] Create symbolic links
@@ -80,6 +80,15 @@ install_gvm () {
     # Set golang
     gvm use go1.17.9 --default
     echo -e " <<< Gvm Installation Finished!"
+}
+
+install_tfenv(){
+    echo -e "\n >>> Tfenv Installation Started..."
+    # Download
+    git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
+    # Create symbolic link
+    sudo ln -sf ~/.tfenv/bin/* /usr/local/bin/
+    echo -e " <<< Tfenv Installation Finished!"
 }
 
 install_vim_build_from_source() {
@@ -187,10 +196,10 @@ install_i3wm() {
     fi
     mv ~/bumblebee-status ~/.config/i3/bumblebee-status
     # Create symbolic links
-    ln -s -f ~/.config/i3/bumblebee-status/bumblebee-status ~/.config/i3/bumblebee-status/bumblebee-status.py
-    ln -s -f ~/dotfiles/i3/i3main.conf ~/.config/i3/config
-    ln -s -f ~/dotfiles/i3/i3status.conf ~/.i3status.conf
-    sudo ln -s -f ~/dotfiles/i3/i3exit.sh /usr/local/bin/i3exit
+    ln -sf ~/.config/i3/bumblebee-status/bumblebee-status ~/.config/i3/bumblebee-status/bumblebee-status.py
+    ln -sf ~/dotfiles/i3/i3main.conf ~/.config/i3/config/
+    ln -sf ~/dotfiles/i3/i3status.conf ~/.i3status.conf
+    sudo ln -sf ~/dotfiles/i3/i3exit.sh /usr/local/bin/i3exit
     echo -e " <<< I3wm Installation Finished!"
 }
 
