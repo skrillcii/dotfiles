@@ -133,13 +133,13 @@ install_fzf() {
 install_nvm() {
     echo -e "\n >>> Nvm Installation Started..."
     # Download
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
     # Source
     source ~/.nvm/nvm.sh
     source ~/.profile
     source ~/.bashrc
     # Install
-    nvm install v17.9.0
+    nvm install v20.12.1
     echo -e " <<< Nvm Installation Finished!"
 }
 
