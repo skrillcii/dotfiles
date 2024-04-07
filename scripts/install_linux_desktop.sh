@@ -7,11 +7,8 @@
 install_ubuntu_general () {
     echo -e "\n >>> General Installation Started..."
     # Install
-    sudo apt install -y vlc mesa-utils lm-sensors sensors-detect \
-                        powertop nvtop
-    # Install
-    sudo apt install -y fcitx-bin fcitx-chewing fcitx-mozc fcitx-googlepinyin
-    # [Optional] Create symbolic links
+    sudo apt install -y vlc mesa-utils lm-sensors sensors-detect powertop nvtop
+    # Optional symbolic links
     # echo -e 'creating symbolic links...'
     # ln -s -f ~/dotfiles/x/xprofile ~/.xprofile
     # ln -s -f ~/dotfiles/redshift/redshift.conf ~/.config/redshift.conf
@@ -22,15 +19,20 @@ install_docker() {
     echo -e "\n >>> Docker Installation Started..."
     # Uninstall old versions
     sudo apt remove -y docker docker-engine docker.io docker-compose containerd runc
-    sudo apt install -y ca-certificates curl gnupg lsb-release
-    # Add GPG key
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    # Setup repository
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    # Install
+    # Add Docker's official GPG key
     sudo apt update
-    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose
+    sudo apt install ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    # Add the repository
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt update
+    # Install
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     # Verify installation
     sudo docker run hello-world
     echo -e " <<< Docker Installation Finished!"
@@ -89,49 +91,6 @@ install_tfenv(){
     # Create symbolic link
     sudo ln -sf ~/.tfenv/bin/* /usr/local/bin/
     echo -e " <<< Tfenv Installation Finished!"
-}
-
-install_vim_build_from_source() {
-    echo -e "\n >>> Vim Installation Started..."
-    # Remove old version
-    sudo apt remove vim vim-runtime gvim
-    # Install dependencies
-    # Deprecated dependencies: libatk1.0-dev libbonoboui2-dev libcairo2-dev
-    sudo apt install -y git build-essential gettext autoconf automake cproto \
-                        libtinfo-dev libacl1-dev libgpm-dev libtool-bin libx11-dev\
-                        libgtk-3-dev libxmu-dev libxpm-dev libxt-dev libncurses-dev \
-                        libperl-dev liblua5.2-dev lua5.2 luajit libluajit-5.1 \
-                        python-dev python3-dev ruby-dev clang
-
-    # Download
-    git clone https://github.com/vim/vim.git ~/vim
-    cd ~/vim
-    # Checkout specific version
-    git checkout v8.23175
-    make clean distclean
-    # Configure
-    # Use '$(python3-config --configdir)' to check for flag '--with-python3-config-dir'
-    # To check python path in vim ':python3 import sys; print(sys.path)'
-    ./configure --with-features=huge \
-        --enable-multibyte \
-        --enable-terminal \
-        --enable-perlinterp=yes \
-        --enable-rubyinterp=yes \
-        --enable-python3interp=yes \
-        --with-python3-config-dir=$(python3-config --configdir) \
-        --enable-luainterp=yes \
-        --enable-gui=gtk3 \
-        --enable-cscope \
-        --enable-fail-if-missing \
-        --prefix=/usr/local
-        # --enable-gpm \
-        # --enable-fontset \
-        # --with-luajit \
-    # Build
-    make
-    # Install
-    sudo checkinstall
-    echo -e " <<< Vim Installation Finished!"
 }
 
 #####################
@@ -325,9 +284,9 @@ install_drawio() {
     echo -e " <<< Drawio Installation Finished!"
 }
 
-##################
-# Functions Call #
-##################
+#################
+# Function Call #
+#################
 sudo apt update && sudo apt upgrade -y
 
 # install_ubuntu_general

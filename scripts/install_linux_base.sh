@@ -1,16 +1,14 @@
 #!/bin/bash
 
-#########################
-# Functions Definitions #
-#########################
+########################
+# Function Definitions #
+########################
 
 install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
-    # Unoffical packages for vim
-    sudo add-apt-repository ppa:jonathonf/vim -y
     # Install terminal utilities
     sudo apt install -y zsh tmux vim ranger autojump ripgrep xsel xclip  \
-                        wget curl git exuberant-ctags tree jq gh \
+                        git wget curl exuberant-ctags tree jq gh \
                         exa htop glances trash-cli
     # Install network utilities
     sudo apt install -y net-tools nmap
@@ -24,46 +22,6 @@ install_ubuntu_general() {
     git config --global mergetool.prompt false
     git config --global pull.ff only
     echo -e " <<< General Installation Finished!"
-}
-
-install_nerd_fonts() {
-    echo -e "\n >>> Nerd-fonts Installation Started..."
-    # Check git version
-    cur_version=`git --version | awk '{{ print $3 }}'`
-    req_version='2.26.0'
-    if [[ "$(printf '%s\n' "$req_version" "$cur_version" | sort -V | head -n1)" = "$req_version" ]]; then
-        echo "Current git version is $cur_version, greater than required version $req_version."
-        echo "Cloning specified fonts..."
-        # Clone specified fonts
-        git clone --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts ~/nerd-fonts
-        cd ~/nerd-fonts
-        git sparse-checkout add patched-fonts/Hack
-    else
-        # Clone all fonts
-        echo "Current git version is $cur_version, less than required version $req_version."
-        echo "Cloning specified fonts not supported."
-        echo "Cloning all fonts..."
-        git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/nerd-fonts
-    fi
-    # Install fonts
-    ~/nerd-fonts/install.sh Hack
-    # Clean-up
-    rm -rf ~/nerd-fonts
-    echo -e " <<< Nerd-fonts Installation Finished!"
-}
-
-install_gogh_color_scheme() {
-    echo -e "\n >>> Gogh Color Scheme Installation Started..."
-    # Install dependencies
-    sudo apt install dconf-cli uuid-runtime
-    # Download
-    git clone https://github.com/Gogh-Co/Gogh.git ~/gogh
-    cd ~/gogh/install
-    # Necessary in the Gnome terminal on ubuntu
-    export TERMINAL=gnome-terminal
-    # Install theme
-    ./gruvbox-dark.sh
-    echo -e " <<< Gogh Color Scheme Installation Finished!"
 }
 
 install_oh_my_zsh() {
@@ -83,8 +41,8 @@ install_oh_my_zsh() {
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
     # Source configurations
-    # echo 'source ~/dotfiles/zsh/zshrc' >> ~/.zshrc
-    # echo 'source ~/dotfiles/zsh/p10k.zsh' >> ~/.zshrc
+    # echo -e 'source ~/dotfiles/zsh/zshrc' >> ~/.zshrc
+    # echo -e 'source ~/dotfiles/zsh/p10k.zsh' >> ~/.zshrc
     echo -e " <<< Oh-my-zsh Installation Finished!"
 }
 
@@ -101,12 +59,52 @@ install_oh_my_tmux() {
     echo -e " <<< Oh-my-tmux Installation Finished!"
 }
 
+install_nerd_fonts() {
+    echo -e "\n >>> Nerd-fonts Installation Started..."
+    # Check git version
+    cur_version=`git --version | awk '{{ print $3 }}'`
+    req_version='2.26.0'
+    if [[ "$(printf '%s\n' "$req_version" "$cur_version" | sort -V | head -n1)" = "$req_version" ]]; then
+        echo -e "Current git version is $cur_version, greater than required version $req_version."
+        echo -e "Cloning specified fonts..."
+        # Clone specified fonts
+        git clone --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts ~/nerd-fonts
+        cd ~/nerd-fonts
+        git sparse-checkout add patched-fonts/Hack
+    else
+        # Clone all fonts
+        echo -e "Current git version is $cur_version, less than required version $req_version."
+        echo -e "Cloning specified fonts not supported."
+        echo -e "Cloning all fonts..."
+        git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/nerd-fonts
+    fi
+    # Install fonts
+    ~/nerd-fonts/install.sh Hack
+    # Clean-up
+    rm -rf ~/nerd-fonts
+    echo -e " <<< Nerd-fonts Installation Finished!"
+}
+
+install_gogh_color_scheme() {
+    echo -e "\n >>> Gogh Color Scheme Installation Started..."
+    # Install dependencies
+    sudo apt install dconf-cli uuid-runtime
+    # Download
+    git clone https://github.com/Gogh-Co/Gogh.git ~/gogh
+    # Necessary in the Gnome terminal on ubuntu
+    export TERMINAL=gnome-terminal
+    # Install theme
+    ~/gogh/installs/gruvbox-dark.sh
+    echo -e " <<< Gogh Color Scheme Installation Finished!"
+}
+
 install_bat() {
     echo -e "\n >>> Bat Installation Started..."
     # Download
-    wget https://github.com/sharkdp/bat/releases/download/v0.24.0/bat_0.24.0_amd64.deb -P ~/Downloads
+    wget -P ~/Downloads \
+        https://github.com/sharkdp/bat/releases/download/v0.24.0/bat_0.24.0_amd64.deb
     # Install
-    sudo apt install -i ~/Downloads/bat_0.24.0_amd64.deb
+    sudo apt install ~/Downloads/bat_0.24.0_amd64.deb
     # Clean-up
     rm ~/Downloads/bat_0.24.0_amd64.deb
     echo -e " <<< Bat Installation Finished!"
@@ -157,7 +155,7 @@ install_nvm() {
 install_pyenv() {
     echo -e "\n >>> Pyenv Installation Started..."
     # Install pyenv dependcies
-    sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+    sudo apt install -y build-essential libssl-dev zlib1g-dev \
                         libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
                         libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
     # Download pyenv
@@ -166,13 +164,13 @@ install_pyenv() {
     git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
     # Environment variables settings
     echo -e 'exporting environmental variabls...'
-    echo 'export PYENV_ROOT="~/.pyenv"' >> ~/.bashrc
-    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+    echo -e 'export PYENV_ROOT="~/.pyenv"' >> ~/.bashrc
+    echo -e 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+    echo -e 'eval "$(pyenv init -)"' >> ~/.bashrc
     # Install python with --enable-shared
-    env PYTHON_CONFIGURE_OPTS="--enable-shared" ~/.pyenv/bin/pyenv install 3.8.6
+    env PYTHON_CONFIGURE_OPTS="--enable-shared" ~/.pyenv/bin/pyenv install 3.10.8
     # Install python packages
-    ~/.pyenv/bin/pyenv global 3.8.6 system
+    ~/.pyenv/bin/pyenv global 3.10.8 system
     ~/.pyenv/shims/pip3 install --use-feature=2020-resolver \
         -U pip pip-autoremove pylint flake8 autopep8 yapf black ipdb pdbpp
     # Create symbolic links
@@ -192,6 +190,7 @@ install_vim_plugin_manager() {
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
     # Install plugins, ignore intermediate error and warnings
+    echo -e 'installing plugins...'
     vim -E -s -u "~/.vimrc" +PlugInstall +qall || true
     echo -e " <<< Vim-plugin-manager Installation Finished!"
 }
@@ -203,16 +202,17 @@ install_code_minimap() {
     #   This is for a vim plugin, "wfxr/minimap.vim"
     #
     echo -e "\n >>> Code-Minimap Installation Started..."
-    # Create if it does not exist
+    # Set target variables
     target_dir=".vim/plugged/minimap.vim/code-minimap"
     target_ver="v0.6.7"
     target_tar="code-minimap-v0.6.7-x86_64-unknown-linux-gnu.tar.gz"
     target_bin="code-minimap-v0.6.7-x86_64-unknown-linux-gnu/code-minimap"
+    # Check if configuration directory exists
+    # Create if it does not exist
     echo -e 'checking directory...'
     if [[ ! -e ~/${target_dir} ]] ; then
         mkdir -p ~/${target_dir}
     fi
-    echo ~/${target_dir}/${target_tar}
     # Download
     wget -O ~/${target_dir}/${target_tar} \
         https://github.com/wfxr/code-minimap/releases/download/${target_ver}/${target_tar}
@@ -269,20 +269,22 @@ install_cpp() {
     echo -e " <<< CPP Installation Finished!"
 }
 
-##################
-# Functions Call #
-##################
-sudo apt update && sudo apt upgrade -y
-install_ubuntu_general
-install_nerd_fonts
-install_gogh_color_scheme
-install_oh_my_zsh
-install_oh_my_tmux
-install_ranger
-install_fzf
-install_nvm
-install_pyenv
-install_vim_plugin_manager
-install_code_minimap
-install_coc
-sudo apt autoremove -y
+#################
+# Function Call #
+#################
+# sudo apt update && sudo apt upgrade -y
+# install_ubuntu_general
+# install_oh_my_zsh
+# install_oh_my_tmux
+# install_nerd_fonts
+# install_gogh_color_scheme
+# install_bat
+# install_ranger
+# install_fzf
+# install_nvm
+# install_pyenv
+# install_vim_plugin_manager
+# install_code_minimap
+# install_coc
+# install_cpp
+# sudo apt autoremove -y

@@ -176,6 +176,11 @@ set backupdir=$HOME/.vim/backupfiles
 set backup
 
 "================================================
+" Vimplug settings
+"================================================
+let g:plug_window='vertical topleft new'
+
+"================================================
 " Always show one line above and blow the cursor
 "================================================
 if !&scrolloff
