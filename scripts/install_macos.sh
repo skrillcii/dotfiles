@@ -182,6 +182,7 @@ install_cpp(){
 ##################
 brew update && brew upgrade
 install_macos_general
+install_iterm2_color_scheme
 install_oh_my_zsh
 install_oh_my_tmux
 install_ranger
