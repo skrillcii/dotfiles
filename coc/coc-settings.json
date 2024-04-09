@@ -8,7 +8,7 @@
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
     "--generated-members=numpy.*, torch.*",
-    "--disable=C0103,C0114,C0115,C0116,C0301,C0411,C0413,R0902,R0903,R0913,R0914,R0915"
+    "--disable=C0103,C0114,C0115,C0116,C0301,C0411,C0413,R0902,R0903,R0913,R0914,R0915,W0621"
   ],
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": [

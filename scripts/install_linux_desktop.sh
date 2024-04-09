@@ -275,9 +275,8 @@ install_mechatronics() {
 
 install_drawio() {
     echo -e "\n >>> Drawio Installation Started..."
-    # release notes:
-    #   https://github.com/jgraph/drawio-desktop/releases/
-    wget https://github.com/jgraph/drawio-desktop/releases/download/v21.7.5/drawio-amd64-21.7.5.deb \
+    # release notes: https://github.com/jgraph/drawio-desktop/releases/
+    wget https://github.com/jgraph/drawio-desktop/releases/download/v24.1.0/drawio-amd64-24.1.0.deb
         -P $home/Downloads
     sudo apt install $home/Downloads/drawio-amd64-21.7.5.deb
     rm $home/Downloads/drawio-amd64-21.7.5.deb
