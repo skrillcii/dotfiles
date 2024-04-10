@@ -9,7 +9,7 @@ install_ubuntu_general() {
     # Install terminal utilities
     sudo apt install -y zsh tmux vim ranger autojump ripgrep xsel xclip  \
                         git wget curl exuberant-ctags tree jq gh \
-                        exa htop glances trash-cli
+                        exa htop glances neofetch trash-cli
     # Install network utilities
     sudo apt install -y net-tools nmap
     # Install fcitx
