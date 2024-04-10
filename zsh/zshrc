@@ -108,6 +108,9 @@ source $ZSH/oh-my-zsh.sh
 # export TIMER_THRESHOLD=0
 
 # Oh-my-zsh completions settings
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 autoload -Uz compinit && compinit
 
 # User configuration
