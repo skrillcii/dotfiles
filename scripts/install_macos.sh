@@ -119,7 +119,7 @@ install_pip_packages() {
     pyenv install 3.8.10
     pyenv global 3.8.10 system
     # Install packages
-    pip3 install -U pip pip-autoremove autopep8 pylint flake8 yapf ipdb pdbpp
+    pip3 install -U pip pip-autoremove pylint flake8 autopep8 yapf black ipdb pdbpp
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/pdb/pdbrc.py ~/.pdbrc.py
