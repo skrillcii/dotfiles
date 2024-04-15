@@ -17,7 +17,7 @@ install_macos_general() {
                  pyenv pyenv-virtualenv rbenv ruby-build tfenv
     # Install desktop utilities
     brew install --cask google-chrome firefox spotify vlc \
-                        iterm2 docker visual-studio-code notion
+                        iterm2 docker visual-studio-code notion drawio
     # Install nerd-fonts
     brew tap homebrew/cask-fonts
     brew install --cask font-hack-nerd-font
