@@ -327,9 +327,23 @@ function ggg() {
 }
 # Git prune local branch
 function gu() {
-    git fetch -p ; git branch -r | awk '{print $1}' \
+    git fetch -p ; git branch -r \
+        | awk '{print $1}' \
         | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) \
         | awk '{print $1}' | xargs git branch -d
+}
+# Git pull all remote branches
+function gpa() {
+    echo "checking all remote branches..."
+    git branch -r \
+        | grep -v '\->' \
+        | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" \
+        | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+    echo "fetching all..."
+    git fetch --all
+    echo "pulling all..."
+    git pull --all
+    echo "finished pulling!"
 }
 
 # Powerlevel10k settings
