@@ -371,3 +371,10 @@ source ~/dotfiles/zsh/p10k.zsh
 # Terraform autocomplete
 # complete -o nospace -C /usr/local/bin/terraform terraform
 # complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# GVM settings
+# [[ -s "/Users/shu.morikuni/.gvm/scripts/gvm" ]] && source "/Users/shu.morikuni/.gvm/scripts/gvm"
+#
+#    if [ -z "$SSH_AUTH_SOCK" ]; then
+      eval "$(ssh-agent -s)"
+    fi
