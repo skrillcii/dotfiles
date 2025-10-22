@@ -909,13 +909,6 @@ require("lazy").setup({
 		end,
 	},
 
-	{ "ellisonleao/gruvbox.nvim",
-    priority = 1000, 
-    config = true, opts = ...
-    vim.o.background = "dark" -- or "light" for light mode
-    vim.cmd([[colorscheme gruvbox]])
-  },
-
 	-- Highlight todo, notes, etc in comments
 	{
 		"folke/todo-comments.nvim",
