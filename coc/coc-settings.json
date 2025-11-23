@@ -34,7 +34,6 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "python"
   ],
 
   "inlayHint.display": false,
@@ -43,5 +42,6 @@
   "snippets.extends": {
     "python": ["python"],
     "cpp": ["c"]
-  }
+  },
+  "eslint.migration.2_x": "off"
 }

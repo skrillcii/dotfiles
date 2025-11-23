@@ -3,14 +3,14 @@
 #########################
 # Functions Definitions #
 #########################
-#
+
 install_macos_general() {
     echo -e "\n >>> General Installation Started..."
     # Install homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # Install terminal utilities
-    brew install zsh tmux vim ranger autojump ripgrep imagemagick \
-                 wget curl git bat universal-ctags tree jq \
+    brew install zsh tmux vim ranger autojump ripgrep fzf imagemagick \
+                 wget curl git universal-ctags tree jq \
                  lsd bat htop glances watch trash-cli
     # Install pyenv dependcies
     brew install openssl readline sqlite3 xz zlib \
@@ -19,7 +19,6 @@ install_macos_general() {
     brew install --cask google-chrome firefox spotify vlc \
                         iterm2 docker visual-studio-code notion drawio
     # Install nerd-fonts
-    brew tap homebrew/cask-fonts
     brew install --cask font-hack-nerd-font
     # Install financial tools
     brew install cointop
@@ -57,9 +56,7 @@ install_oh_my_zsh() {
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
-    # Source configurations
-    # echo 'source ~/dotfiles/zsh/zshrc' >> ~/.zshrc
-    # echo 'source ~/dotfiles/zsh/p10k.zsh' >> ~/.zshrc
+    ln -sf ~/dotfiles/zsh/p10k.zsh ~/.p10k.zsh
     echo -e " <<< Oh-my-zsh Installation Finished!"
 }
 
@@ -104,20 +101,20 @@ install_fzf() {
 install_nvm() {
     echo -e "\n >>> Nvm Installation Started..."
     # Download
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+    brew install nvm
     # Install
-    export NVM_DIR="$HOME/.nvm"
+    export NVM_DIR="/opt/homebrew/opt/nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    nvm install v17.2.0
+    nvm install v20.18.1
     echo -e " <<< Nvm Installation Finished!"
 }
 
 install_pip_packages() {
     echo -e "\n >>> Pip Package Installation Started..."
     # Install python
-    pyenv install 3.8.10
-    pyenv global 3.8.10 system
+    pyenv install 3.10.9
+    pyenv global 3.10.9 system
     # Install packages
     pip3 install -U pip pip-autoremove pylint flake8 autopep8 yapf black ipdb pdbpp
     # Create symbolic links
@@ -135,7 +132,9 @@ install_vim_plugin_manager() {
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
     # Install plugins, ignore intermediate error and warnings
-    # vim -E -s -u "~/.vimrc" +PlugInstall +qall || true
+    vim -E -s -u "~/.vimrc" +PlugInstall +qall || true
+    # Install code-minimap
+    brew install code-minimap
     echo -e " <<< Vim-plugin-manager Installation Finished!"
 }
 
@@ -177,18 +176,28 @@ install_cpp(){
     echo -e " <<< CoC Installation Finished!"
 }
 
+install_aerospace(){
+    echo -e "\n >>> Aerospace Installation Started..."
+    # Install aerospace
+    brew install --cask nikitabobko/tap/aerospace
+    # Create symbolic links
+    ln -sf ~/dotfiles/aerospace/aerospace.toml ~/.config/aerospace/aerospace.toml
+    echo -e " <<< Aerospace Installation Finished!"
+}
+
 ##################
 # Functions Call #
 ##################
-brew update && brew upgrade
-install_macos_general
-install_iterm2_color_scheme
-install_oh_my_zsh
-install_oh_my_tmux
-install_ranger
-install_fzf
-install_nvm
-install_pip_packages
-install_vim_plugin_manager
-install_coc
-install_cpp
+# brew update && brew upgrade
+# install_macos_general
+# install_iterm2_color_scheme
+# install_oh_my_zsh
+# install_oh_my_tmux
+# install_ranger
+# install_fzf
+# install_nvm
+# install_pip_packages
+# install_vim_plugin_manager
+# install_coc
+# install_cpp
+# install_aerospace
