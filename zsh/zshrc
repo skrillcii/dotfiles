@@ -369,3 +369,6 @@ source ~/dotfiles/zsh/p10k.zsh
 # Terraform autocomplete
 # complete -o nospace -C /usr/local/bin/terraform terraform
 # complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# UV settings
+# source "$HOME/.local/bin/env"
