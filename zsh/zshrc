@@ -226,7 +226,18 @@ case `uname` in
 esac
 
 # Nvm settings
-export NVM_DIR="/opt/homebrew/opt/nvm"
+case `uname` in
+    Darwin)
+        if [[ -d /opt/homebrew/opt/nvm ]]; then
+            export NVM_DIR="/opt/homebrew/opt/nvm"
+        fi
+    ;;
+    Linux)
+        if [[ -d ~/.nvm ]]; then
+            export NVM_DIR="$HOME/.nvm"
+        fi
+    ;;
+esac
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
@@ -352,3 +363,9 @@ source ~/dotfiles/zsh/p10k.zsh
 # Terraform autocomplete
 # complete -o nospace -C /usr/local/bin/terraform terraform
 # complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# Neovim settings
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# Conda settings
+source $HOME/anaconda3/bin/activate

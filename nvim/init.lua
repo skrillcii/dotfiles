@@ -89,29 +89,37 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 -- Close window
-vim.keymap.set("n", "<space>w", "<cmd>:q<CR>")
+vim.keymap.set("n", "<space>w", "<cmd>:bd<CR>")
+-- Quit window
+vim.keymap.set("n", "<space>q", "<cmd>:q<CR>")
+-- Create new tab
+vim.keymap.set("n", "<space>t", "<cmd>:tabnew<CR>")
+-- Substitue
+vim.keymap.set({ "n", "v" }, "s", "c")
+
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<space>h", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<space>l", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<space>j", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<space>k", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
 -- Some terminals have colliding keymaps or are not able to send distinct keycodes
-vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
-vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
-vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
-vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+-- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
+-- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
+-- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
+-- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- Diagnostic keybindings
-vim.keymap.set("n", "g[", "vim.diagnostic.get_next", { desc = "Move cursor to the next diagnostic" })
-vim.keymap.set("n", "g]", "vim.diagnostic.get_prev", { desc = "Move cursor to the previous diagnostic" })
+vim.keymap.set("n", "gJ", "vim.diagnostic.get_next", { desc = "Move cursor to the next diagnostic" })
+vim.keymap.set("n", "gK", "vim.diagnostic.get_prev", { desc = "Move cursor to the previous diagnostic" })
 
 -- Resize window
--- vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
--- vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
--- vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
--- vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
+vim.keymap.set("n", "<C-h>", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+vim.keymap.set("n", "<C-l>", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+vim.keymap.set("n", "<C-k>", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "<C-j>", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
 
 -- NOTE: [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

@@ -78,10 +78,16 @@ require("lazy").setup({
                 row = 0,
                 col = 1,
             },
+
+            -- In your gitsigns configuration or general keymaps file
+            vim.keymap.set("n", "gk", function()
+                require("gitsigns").nav_hunk("prev")
+            end, { desc = "Go to previous hunk" }),
+            -- Or another common mapping
+            vim.keymap.set("n", "gj", function()
+                require("gitsigns").nav_hunk("next")
+            end, { desc = "Previous hunk" }),
         },
-        -- Gitsigns keymaps
-        -- vim.keymap.set("n", "gk", ":Gitsigns prev_hunk<CR>", { buffer = true, desc = "[S]earch [H]elp" }),
-        -- vim.keymap.set("n", "gj", ":Gitsigns next_hunk<CR>", { buffer = true, desc = "[S]earch [H]elp" }),
     },
 
     { -- Useful plugin to show you pending keybinds.
@@ -404,7 +410,7 @@ require("lazy").setup({
                         client
                         and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
                     then
-                        map("<leader>th", function()
+                        map("<leader>ph", function()
                             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
                         end, "[T]oggle Inlay [H]ints")
                     end
@@ -660,6 +666,33 @@ require("lazy").setup({
             -- Shows a signature help window while you type arguments for a function
             signature = { enabled = true },
         },
+    },
+
+    {
+        "goolord/alpha-nvim",
+        dependencies = { "nvim-mini/mini.icons" },
+        config = function()
+            require("alpha").setup(require("alpha.themes.startify").config)
+        end,
+    },
+
+    {
+        "romgrk/barbar.nvim",
+        dependencies = {
+            "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+            "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+        },
+        init = function()
+            vim.g.barbar_auto_setup = false
+        end,
+        opts = {
+            -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+            -- …etc-- Enable/disable animations
+        },
+        -- Re-order a tab to previous/next
+        vim.keymap.set("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>"),
+        vim.keymap.set("n", "<A->>", "<Cmd>BufferMoveNext<CR>"),
+        version = "^1.0.0", -- optional: only update when a new 1.x version is released
     },
 
     {
