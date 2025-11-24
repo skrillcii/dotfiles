@@ -193,6 +193,13 @@ install_aerospace(){
     echo -e " <<< Aerospace Installation Finished!"
 }
 
+install_anaconda(){
+    echo -e "\n >>> Anaconda Installation Started..."
+    brew install --cask anaconda
+    echo 'export PATH="/opt/homebrew/anaconda3/bin:$PATH"' >> ~/.zshrc
+    echo -e " <<< Anaconda Installation Finished!"
+}
+
 ##################
 # Functions Call #
 ##################
