@@ -98,6 +98,7 @@ plugins=(
   zsh-completions
   zsh-autosuggestions
   zsh-syntax-highlighting
+  conda-zsh-completion
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -162,19 +163,6 @@ case `uname` in
         function chpwd() {ls -a}
     ;;
 esac
-
-# Prompt to next line
-# prompt_end() {
-#     if [[ -n $CURRENT_BG ]]; then
-#         print -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
-#     else
-#         print -n "%{%k%}"
-#     fi
-#     print -n "%{%f%}"
-#     CURRENT_BG=''
-#     # Adds the new line and ➜ as the start character
-#     printf "\n ➜";
-# }
 
 # Terminal settings
 # This is for Gogh terminal color scheme specifically for Gnome terminal
@@ -241,9 +229,6 @@ esac
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# Gvm settings
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 # Pyenv settings
 export PYENV_ROOT="$HOME/.pyenv"
@@ -361,22 +346,9 @@ source ~/dotfiles/zsh/p10k.zsh
 # Use separate local .zlogin to enable the following options
 # Do not include the local settings in this repository
 
-# Wally settings
-# function wally() {~/dotfiles/zsa/wally}
-# function wally-cli() {~/dotfiles/zsa/wally-cli}
-
 # Terraform settings
 # Terraform alias
 # alias tf='terraform'
 # Terraform autocomplete
 # complete -o nospace -C /usr/local/bin/terraform terraform
 # complete -o nospace -C /opt/homebrew/bin/terraform terraform
-
-# UV settings
-# source "$HOME/.local/bin/env"
-#
-# GVM settings
-# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-# if [ -z "$SSH_AUTH_SOCK" ]; then
-#     eval "$(ssh-agent -s)"
-# fi
