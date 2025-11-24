@@ -196,6 +196,22 @@ install_vim_plugin_manager() {
     echo -e " <<< Vim-plugin-manager Installation Finished!"
 }
 
+install_neovim() {
+    echo -e "\n >>> Neovim Installation Started..."
+    # Download
+    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+    # Clean
+    sudo rm -rf /opt/nvim-linux-x86_64
+    # Install
+    sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+    # Export
+    export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+    # Create symbolic links
+    ln -sf ~/dotfiles/nvim ~/.config/nvim
+    ln -sf ~/dotfiles/stylua ~/.config/stylua
+    echo -e " <<< Neovim Installation Finished!"
+}
+
 install_code_minimap() {
     #
     # Comment:
