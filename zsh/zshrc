@@ -238,7 +238,7 @@ case `uname` in
 esac
 
 # Nvm settings
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="/opt/homebrew/opt/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
@@ -361,6 +361,12 @@ source ~/dotfiles/zsh/p10k.zsh
 # Use separate local .zlogin to enable the following options
 # Do not include the local settings in this repository
 
+# Rdp-ssh setting
+export PATH="$HOME/.local/bin:$PATH"
+
+# SSHFS listing
+alias mls="ps aux | grep -i sftp | grep -v grep"
+
 # Wally settings
 # function wally() {~/dotfiles/zsa/wally}
 # function wally-cli() {~/dotfiles/zsa/wally-cli}
@@ -374,7 +380,8 @@ source ~/dotfiles/zsh/p10k.zsh
 
 # GVM settings
 # [[ -s "/Users/shu.morikuni/.gvm/scripts/gvm" ]] && source "/Users/shu.morikuni/.gvm/scripts/gvm"
-#
-#    if [ -z "$SSH_AUTH_SOCK" ]; then
-      eval "$(ssh-agent -s)"
-    fi
+
+# SSH Agent Settings
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval "$(ssh-agent -s)"
+fi

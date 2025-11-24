@@ -36,6 +36,7 @@ install_neovim() {
     echo -e "\n >>> Neovim Installation Started..."
     brew install neovim ripgrep fd
     ln -sf ~/dotfiles/nvim ~/.config/nvim
+    ln -sf ~/dotfiles/stylua ~/.config/stylua
     echo -e " <<< Neovim Installation Finished!"
 }
 
