@@ -13,7 +13,7 @@ install_ubuntu_general() {
     # Install network utilities
     sudo apt install -y net-tools nmap
     # Install fcitx
-    sudo apt install -y fcitx-bin fcitx-chewing fcitx-mozc fcitx-googlepinyin
+    sudo apt install -y fcitx5 fcitx5-chewing fcitx5-mozc fcitx5-pinyin
     # Git global settings
     git config --global core.excludesfile ~/dotfiles/.gitignore
     git config --global diff.tool vimdiff

@@ -74,13 +74,13 @@ install_java () {
 install_gvm () {
     echo -e "\n >>> Gvm Installation Started..."
     # Install dependcies
-    sudo apt install -y curl git mercurial make binutils bison gcc build-essential golang
+    sudo apt install bison
     # Install gvm
     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
     # Install golang (using binary option -B)
-    gvm install go1.17.9 -B
+    gvm install go1.23.4 -B
     # Set golang
-    gvm use go1.17.9 --default
+    gvm use go1.23.4 --default
     echo -e " <<< Gvm Installation Finished!"
 }
 
