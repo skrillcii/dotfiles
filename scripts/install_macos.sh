@@ -32,6 +32,14 @@ install_macos_general() {
     echo -e " <<< General Installation Finished!"
 }
 
+install_neovim() {
+    echo -e "\n >>> Neovim Installation Started..."
+    brew install neovim ripgrep fd
+    ln -sf ~/dotfiles/nvim ~/.config/nvim
+    ln -sf ~/dotfiles/stylua ~/.config/stylua
+    echo -e " <<< Neovim Installation Finished!"
+}
+
 install_iterm2_color_scheme() {
     echo -e "\n >>> iTerm2 Color Scheme Installation Started..."
     # Clone
