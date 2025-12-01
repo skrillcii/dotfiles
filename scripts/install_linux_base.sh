@@ -289,6 +289,7 @@ install_cpp() {
 # install_anaconda
 # install_pyenv
 # install_vim_plugin_manager
+# install_neovim
 # install_code_minimap
 # install_coc
 # install_cpp
