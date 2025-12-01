@@ -64,15 +64,13 @@ install_oh_my_tmux() {
 install_nerd_fonts() {
     echo -e "\n >>> Nerd-fonts Installation Started..."
     # Download
-    curl --output-dir ~/Downloads -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz
+    curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz
     # Create directory
     mkdir -p ~/.local/share/fonts/NerdFonts
     # Install fonts
-    tar -xvf ~/Downloads/Hack.tar.xz
-    mv ~/Downloads/Hack/* ~/.local/share/fonts/NerdFonts
+    tar -C ~/.local/share/fonts/NerdFonts -xzf Hack.tar.xz
     # Clean-up
-    rm -rf ~/Downloads/Hack
-    rm -rf ~/Downloads/Hack.tar.xz
+    rm -rf Hack.tar.xz
     echo -e " <<< Nerd-fonts Installation Finished!"
 }
 
@@ -197,6 +195,8 @@ install_neovim() {
     # Create symbolic links
     ln -sf ~/dotfiles/nvim ~/.config/nvim
     ln -sf ~/dotfiles/stylua ~/.config/stylua
+    # Clean
+    sudo rm -rf nvim-linux-x86_64.tar.gz
     echo -e " <<< Neovim Installation Finished!"
 }
 
