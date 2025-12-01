@@ -286,6 +286,7 @@ install_cpp() {
 # install_ranger
 # install_fzf
 # install_nvm
+# install_anaconda
 # install_pyenv
 # install_vim_plugin_manager
 # install_code_minimap
