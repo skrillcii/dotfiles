@@ -241,20 +241,6 @@ esac
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Pyenv settings
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PATH"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
-export PYTHON_CONFIGURE_OPTS="--enable-shared"
-
-# Pyenv-virtualenv auto-activation
-# This automatically activates specified pyenv-virtualenv if a .python-version file exists
-# This configuration is optional
-# eval "$(pyenv virtualenv-init -)"
-
 # C/C++ settings
 alias gdb='gdb -ex start'
 alias g++='g++ -std=c++17'
@@ -357,15 +343,40 @@ source ~/dotfiles/zsh/p10k.zsh
 # Use separate local .zlogin to enable the following options
 # Do not include the local settings in this repository
 
+# SSH Agent settings
+# if [ -z "$SSH_AUTH_SOCK" ]; then
+#   eval "$(ssh-agent -s)"
+# fi
+
+# SSHFS listing
+# alias mls="ps aux | grep -i sftp | grep -v grep"
+
+# Rdp-ssh setting
+# export PATH="$HOME/.local/bin:$PATH"
+
+# Neovim settings
+# export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# Conda setting
+# export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+
+# Pyenv settings
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/shims:$PATH"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# if command -v pyenv 1>/dev/null 2>&1; then
+#     eval "$(pyenv init -)"
+# fi
+# export PYTHON_CONFIGURE_OPTS="--enable-shared"
+
+# Pyenv-virtualenv auto-activation
+# This automatically activates specified pyenv-virtualenv if a .python-version file exists
+# This configuration is optional
+# eval "$(pyenv virtualenv-init -)"
+
 # Terraform settings
 # Terraform alias
 # alias tf='terraform'
 # Terraform autocomplete
 # complete -o nospace -C /usr/local/bin/terraform terraform
 # complete -o nospace -C /opt/homebrew/bin/terraform terraform
-
-# Neovim settings
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
-# Conda settings
-source $HOME/anaconda3/bin/activate

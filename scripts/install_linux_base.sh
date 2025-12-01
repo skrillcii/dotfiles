@@ -6,10 +6,13 @@
 
 install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
-    # Install terminal utilities
-    sudo apt install -y zsh tmux vim ranger autojump ripgrep xsel xclip  \
-                        git wget curl exuberant-ctags tree jq gh \
-                        exa htop glances neofetch trash-cli
+    # Install terminal utilities basics
+    sudo apt install -y zsh tmux vim ranger \
+                        git wget curl tree exa bat \
+                        htop nvtop neofetch trash-cli
+    # Install terminal utilities advance
+    sudo apt install -y autojump ripgrep xsel xclip \
+                        jq gh glances
     # Install network utilities
     sudo apt install -y net-tools nmap
     # Install fcitx
@@ -35,15 +38,13 @@ install_oh_my_zsh() {
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-completions.git ~/.oh-my-zsh/custom/plugins/zsh-completions
     git clone https://github.com/esc/conda-zsh-completion.git ~/.oh-my-zsh/custom/plugins/conda-zsh-completion
-    # Download themes
-    curl -L https://raw.githubusercontent.com/sbugzu/gruvbox-zsh/master/gruvbox.zsh-theme > ~/.oh-my-zsh/custom/themes/gruvbox.zsh-theme
+    # Download powerlevel10k
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    # Download themes (Deprecated)
+    # curl -L https://raw.githubusercontent.com/sbugzu/gruvbox-zsh/master/gruvbox.zsh-theme > ~/.oh-my-zsh/custom/themes/gruvbox.zsh-theme
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
-    # Source configurations
-    # echo -e 'source ~/dotfiles/zsh/zshrc' >> ~/.zshrc
-    # echo -e 'source ~/dotfiles/zsh/p10k.zsh' >> ~/.zshrc
     echo -e " <<< Oh-my-zsh Installation Finished!"
 }
 
@@ -62,27 +63,16 @@ install_oh_my_tmux() {
 
 install_nerd_fonts() {
     echo -e "\n >>> Nerd-fonts Installation Started..."
-    # Check git version
-    cur_version=`git --version | awk '{{ print $3 }}'`
-    req_version='2.26.0'
-    if [[ "$(printf '%s\n' "$req_version" "$cur_version" | sort -V | head -n1)" = "$req_version" ]]; then
-        echo -e "Current git version is $cur_version, greater than required version $req_version."
-        echo -e "Cloning specified fonts..."
-        # Clone specified fonts
-        git clone --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts ~/nerd-fonts
-        cd ~/nerd-fonts
-        git sparse-checkout add patched-fonts/Hack
-    else
-        # Clone all fonts
-        echo -e "Current git version is $cur_version, less than required version $req_version."
-        echo -e "Cloning specified fonts not supported."
-        echo -e "Cloning all fonts..."
-        git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/nerd-fonts
-    fi
+    # Download
+    curl --output-dir ~/Downloads -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz
+    # Create directory
+    mkdir -p ~/.local/share/fonts/NerdFonts
     # Install fonts
-    ~/nerd-fonts/install.sh Hack
+    tar -xvf ~/Downloads/Hack.tar.xz
+    mv ~/Downloads/Hack/* ~/.local/share/fonts/NerdFonts
     # Clean-up
-    rm -rf ~/nerd-fonts
+    rm -rf ~/Downloads/Hack
+    rm -rf ~/Downloads/Hack.tar.xz
     echo -e " <<< Nerd-fonts Installation Finished!"
 }
 
@@ -97,18 +87,6 @@ install_gogh_color_scheme() {
     # Install theme
     ~/gogh/installs/gruvbox-dark.sh
     echo -e " <<< Gogh Color Scheme Installation Finished!"
-}
-
-install_bat() {
-    echo -e "\n >>> Bat Installation Started..."
-    # Download
-    wget -P ~/Downloads \
-        https://github.com/sharkdp/bat/releases/download/v0.24.0/bat_0.24.0_amd64.deb
-    # Install
-    sudo apt install ~/Downloads/bat_0.24.0_amd64.deb
-    # Clean-up
-    rm ~/Downloads/bat_0.24.0_amd64.deb
-    echo -e " <<< Bat Installation Finished!"
 }
 
 install_ranger() {
@@ -151,6 +129,16 @@ install_nvm() {
     # Install
     nvm install v20.12.1
     echo -e " <<< Nvm Installation Finished!"
+}
+
+install_anaconda() {
+    echo -e "\n >>> Anaconda Installation Started..."
+    # Download
+    cd $HOME
+    curl -O https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
+    # Install
+    bash ~/Anaconda3-2025.06-0-MacOSX-x86_64.sh -b -p $HOME/anaconda3
+    echo -e " <<< Anaconda Installation Finished!"
 }
 
 install_pyenv() {
@@ -295,7 +283,6 @@ install_cpp() {
 # install_oh_my_tmux
 # install_nerd_fonts
 # install_gogh_color_scheme
-# install_bat
 # install_ranger
 # install_fzf
 # install_nvm
