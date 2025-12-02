@@ -1,29 +1,29 @@
 #!/bin/bash
 
-########################
-# Function Definitions #
-########################
+#############################
+# Development Installations #
+#############################
 
 install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
-    # Install terminal utilities basics
+    # Install basics
     sudo apt install -y zsh tmux vim ranger \
                         git wget curl tree exa bat \
                         htop nvtop neofetch trash-cli
-    # Install terminal utilities advance
+    # Install advance
     sudo apt install -y autojump ripgrep xsel xclip \
                         jq gh glances
-    # Install network utilities
+    # Install network
     sudo apt install -y net-tools nmap
     # Install fcitx
     sudo apt install -y fcitx5 fcitx5-chewing fcitx5-mozc fcitx5-pinyin
-    # Git global settings
-    git config --global core.excludesfile ~/dotfiles/.gitignore
-    git config --global diff.tool vimdiff
-    git config --global difftool.prompt false
-    git config --global merge.tool vimdiff
-    git config --global mergetool.prompt false
-    git config --global pull.ff only
+    # Git settings
+    # git config --global core.excludesfile ~/dotfiles/.gitignore
+    # git config --global diff.tool vimdiff
+    # git config --global difftool.prompt false
+    # git config --global merge.tool vimdiff
+    # git config --global mergetool.prompt false
+    # git config --global pull.ff only
     echo -e " <<< General Installation Finished!"
 }
 
@@ -40,8 +40,6 @@ install_oh_my_zsh() {
     git clone https://github.com/esc/conda-zsh-completion.git ~/.oh-my-zsh/custom/plugins/conda-zsh-completion
     # Download powerlevel10k
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    # Download themes (Deprecated)
-    # curl -L https://raw.githubusercontent.com/sbugzu/gruvbox-zsh/master/gruvbox.zsh-theme > ~/.oh-my-zsh/custom/themes/gruvbox.zsh-theme
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
@@ -67,9 +65,9 @@ install_nerd_fonts() {
     curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz
     # Create directory
     mkdir -p ~/.local/share/fonts/NerdFonts
-    # Install fonts
+    # Install
     tar -C ~/.local/share/fonts/NerdFonts -xzf Hack.tar.xz
-    # Clean-up
+    # Clean
     rm -rf Hack.tar.xz
     echo -e " <<< Nerd-fonts Installation Finished!"
 }
@@ -91,8 +89,7 @@ install_ranger() {
     echo -e "\n >>> Ranger Installation Started..."
     # Install
     sudo apt install -y ranger atool
-    # Check if configuration directory exists
-    # Create if it does not exist
+    # Create if configuration directory it does not exist
     echo -e 'checking directory...'
     if [[ ! -e ~/.config/ranger ]] ; then
         mkdir -p ~/.config/ranger
@@ -116,6 +113,18 @@ install_fzf() {
     echo -e " <<< Fzf Installation Finished!"
 }
 
+install_anaconda() {
+    echo -e "\n >>> Anaconda Installation Started..."
+    # Download
+    cd $HOME
+    curl -O https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
+    # Install
+    bash ~/Anaconda3-2025.06-0-MacOSX-x86_64.sh -b -p $HOME/anaconda3
+    # Clean
+    rm ~/Anaconda3-2025.06-0-MacOSX-x86_64.sh
+    echo -e " <<< Anaconda Installation Finished!"
+}
+
 install_nvm() {
     echo -e "\n >>> Nvm Installation Started..."
     # Download
@@ -127,16 +136,6 @@ install_nvm() {
     # Install
     nvm install v20.12.1
     echo -e " <<< Nvm Installation Finished!"
-}
-
-install_anaconda() {
-    echo -e "\n >>> Anaconda Installation Started..."
-    # Download
-    cd $HOME
-    curl -O https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
-    # Install
-    bash ~/Anaconda3-2025.06-0-MacOSX-x86_64.sh -b -p $HOME/anaconda3
-    echo -e " <<< Anaconda Installation Finished!"
 }
 
 install_pyenv() {
@@ -166,22 +165,6 @@ install_pyenv() {
     echo -e " <<< Pyenv Installation Finished!"
 }
 
-install_vim_plugin_manager() {
-    echo -e "\n >>> Vim-plugin-manager Installation Started..."
-    # Install
-    sudo apt install -y vim
-    # Download
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    # Create symbolic links
-    echo -e 'creating symbolic links...'
-    ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
-    # Install plugins, ignore intermediate error and warnings
-    echo -e 'installing plugins...'
-    vim -E -s -u "~/.vimrc" +PlugInstall +qall || true
-    echo -e " <<< Vim-plugin-manager Installation Finished!"
-}
-
 install_neovim() {
     echo -e "\n >>> Neovim Installation Started..."
     # Download
@@ -198,6 +181,22 @@ install_neovim() {
     # Clean
     sudo rm -rf nvim-linux-x86_64.tar.gz
     echo -e " <<< Neovim Installation Finished!"
+}
+
+install_vim_plugin_manager() {
+    echo -e "\n >>> Vim-plugin-manager Installation Started..."
+    # Install
+    sudo apt install -y vim
+    # Download
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    # Create symbolic links
+    echo -e 'creating symbolic links...'
+    ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
+    # Install plugins, ignore intermediate error and warnings
+    echo -e 'installing plugins...'
+    vim -E -s -u "~/.vimrc" +PlugInstall +qall || true
+    echo -e " <<< Vim-plugin-manager Installation Finished!"
 }
 
 install_code_minimap() {
@@ -285,11 +284,11 @@ install_cpp() {
 # install_gogh_color_scheme
 # install_ranger
 # install_fzf
-# install_nvm
 # install_anaconda
+# install_nvm
 # install_pyenv
-# install_vim_plugin_manager
 # install_neovim
+# install_vim_plugin_manager
 # install_code_minimap
 # install_coc
 # install_cpp

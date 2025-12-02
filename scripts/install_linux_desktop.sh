@@ -4,21 +4,19 @@
 # Development Installations #
 #############################
 
-install_ubuntu_general () {
+install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
-    # Install
-    sudo apt install -y vlc mesa-utils lm-sensors sensors-detect powertop nvtop
-    # Optional symbolic links
-    # echo -e 'creating symbolic links...'
-    # ln -s -f ~/dotfiles/x/xprofile ~/.xprofile
-    # ln -s -f ~/dotfiles/redshift/redshift.conf ~/.config/redshift.conf
+    # Install general
+    sudo apt install -y vlc chromium-browser
+    # Install specifics
+    sudo apt install -y powertop mesa-utils lm-sensors sensors-detect 
     echo -e " <<< General Installation Finished!"
 }
 
 install_docker() {
     echo -e "\n >>> Docker Installation Started..."
     # Uninstall old versions
-    sudo apt remove -y docker docker-engine docker.io docker-compose containerd runc
+    sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
     # Add Docker's official GPG key
     sudo apt update
     sudo apt install ca-certificates curl
@@ -26,52 +24,58 @@ install_docker() {
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
     sudo chmod a+r /etc/apt/keyrings/docker.asc
     # Add the repository
-    echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    echo " Types: deb\nURIs: https://download.docker.com/linux/ubuntu\nSuites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")\nComponents: stable\nSigned-By: /etc/apt/keyrings/docker.asc\nArchitectures: amd64" \ 
+        | sudo tee /etc/apt/sources.list.d/docker.sources 
     sudo apt update
     # Install
     sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    # Verify installation
+    # Verify
+    sudo systemctl restart docker
     sudo docker run hello-world
     echo -e " <<< Docker Installation Finished!"
 }
 
 install_nvidia_driver() {
-    echo -e "\n >>> Nvidia Driver Installation Started..."
+    echo -e "\n >>> NVIDIA Driver Installation Started..."
     # Install
-    sudo apt install -y `ubuntu-drivers devices | grep recommended | awk '{{ print $3 }}'` nvidia-cuda-toolkit
-    echo -e " <<< Nvidia Driver Installation Finished!"
+    sudo apt install -y `ubuntu-drivers devices | grep recommended | awk '{{ print $3 }}'`
+    echo -e " <<< NVIDIA Driver Installation Finished!"
 }
 
-install_nvidia_docker() {
-    echo -e "\n >>> Nvidia Docker Installation Started..."
+install_nvidia_container_toolkit() {
+    echo -e "\n >>> NVIDIA Docker Installation Started..."
+    # Install dependencies
+    sudo apt-get update && sudo apt-get install -y --no-install-recommends curl gnupg2
     # Add GPG key
-    distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
-        && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
-        sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-        && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
-        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-        sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-    # Install
+    curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey \
+        | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+        && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list \
+        | sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' \
+        | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
     sudo apt-get update
-    sudo apt-get install -y nvidia-docker2
-    # Restart
+    # Install
+    export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.18.0-1
+    sudo apt-get install -y \
+        nvidia-container-toolkit=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+        nvidia-container-toolkit-base=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+        libnvidia-container-tools=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+        libnvidia-container1=${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+    # Configure
+    sudo nvidia-ctk runtime configure --runtime=docker
+    # Verify
     sudo systemctl restart docker
-    # Verify installation
-    sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
-    echo -e " <<< Nvidia Docker Installation Finished!"
+    sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+    echo -e " <<< NVIDIA Docker Installation Finished!"
 }
 
-install_java () {
+install_java() {
     echo -e "\n >>> Java Installation Started..."
     # Install
     sudo apt install -y default-jre default-jdk maven
     echo -e " <<< Java Installation Finished!"
 }
 
-install_gvm () {
+install_gvm() {
     echo -e "\n >>> Gvm Installation Started..."
     # Install dependcies
     sudo apt install bison
@@ -291,11 +295,11 @@ sudo apt update && sudo apt upgrade -y
 # install_ubuntu_general
 # install_docker
 # install_nvidia_driver
-# install_nvidia_docker
+# install_nvidia_container_toolkit
 
 # install_java
 # install_gvm
-# install_vim_build_from_source
+# install_tfenv
 
 # install_spotify
 # install_zsa
@@ -307,6 +311,8 @@ sudo apt update && sudo apt upgrade -y
 # install_cointop
 # install_mop
 # install_ticker
+
 # install_mechatronics
+# install_drawio
 
 sudo apt autoremove -y
