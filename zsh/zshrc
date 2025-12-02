@@ -359,6 +359,7 @@ source ~/dotfiles/zsh/p10k.zsh
 
 # Conda setting
 # export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+# alias sconda='source ~/anaconda3/bin/activate'
 
 # Pyenv settings
 # export PYENV_ROOT="$HOME/.pyenv"
