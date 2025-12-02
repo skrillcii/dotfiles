@@ -192,8 +192,8 @@ case `uname` in
     ;;
     Linux)
         alias ls="exa"
-        alias ll="exa -lh"
-        alias la="exa -alh"
+        alias ll="exa -lhg"
+        alias la="exa -alhg"
         alias tree="exa --tree"
     ;;
 esac
