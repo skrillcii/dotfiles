@@ -7,7 +7,7 @@
 install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
     # Install general
-    sudo apt install -y vlc chromium-browser
+    sudo apt install -y vlc chromium-browser gnome-shell-extension-manager chrome-gnome-shell
     # Install specifics
     sudo apt install -y powertop mesa-utils lm-sensors sensors-detect 
     echo -e " <<< General Installation Finished!"
