@@ -125,6 +125,18 @@ install_anaconda() {
     echo -e " <<< Anaconda Installation Finished!"
 }
 
+install_miniconda() {
+    echo -e "\n >>> Miniconda Installation Started..."
+    # Download
+    cd $HOME
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    # Install
+    bash ~/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3
+    # Clean
+    rm ~/Miniconda3-latest-Linux-x86_64.sh
+    echo -e " <<< Miniconda Installation Finished!"
+}
+
 install_nvm() {
     echo -e "\n >>> Nvm Installation Started..."
     # Download
@@ -285,6 +297,7 @@ install_cpp() {
 # install_ranger
 # install_fzf
 # install_anaconda
+# install_miniconda
 # install_nvm
 # install_pyenv
 # install_neovim
