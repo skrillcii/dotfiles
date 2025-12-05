@@ -182,16 +182,15 @@ install_neovim() {
     # Download
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
     # Clean
-    sudo rm -rf /opt/nvim-linux-x86_64
+    rm -rf $HOME/.local/share/nvim-linux-x86_64
     # Install
-    sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
-    # Export
-    export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+    tar -C $HOME/.local/share/nvim-linux-x86_64 -xzf nvim-linux-x86_64.tar.gz
     # Create symbolic links
+    ln -sf ~/.local/share/nvim-linux-x86_64/bin/nvim ~/.local/bin/nvim
     ln -sf ~/dotfiles/nvim ~/.config/nvim
     ln -sf ~/dotfiles/stylua ~/.config/stylua
     # Clean
-    sudo rm -rf nvim-linux-x86_64.tar.gz
+    rm -rf nvim-linux-x86_64.tar.gz
     echo -e " <<< Neovim Installation Finished!"
 }
 
