@@ -125,8 +125,8 @@ install_anaconda() {
     echo -e " <<< Anaconda Installation Finished!"
 }
 
-install_miniconda() {
-    echo -e "\n >>> Miniconda Installation Started..."
+install_miniconda_x86_64() {
+    echo -e "\n >>> Miniconda (x86_64) Installation Started..."
     # Download
     cd $HOME
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -134,8 +134,21 @@ install_miniconda() {
     bash ~/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3
     # Clean
     rm ~/Miniconda3-latest-Linux-x86_64.sh
-    echo -e " <<< Miniconda Installation Finished!"
+    echo -e " <<< Miniconda (x86_64) Installation Finished!"
 }
+
+install_miniconda_aarch64() {
+    echo -e "\n >>> Miniconda (aarch64) Installation Started..."
+    # Download
+    cd $HOME
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
+    # Install
+    bash ~/Miniconda3-latest-Linux-aarch64.sh -b -p $HOME/miniconda3
+    # Clean
+    rm ~/Miniconda3-latest-Linux-aarch64.sh
+    echo -e " <<< Miniconda (aarch64) Installation Finished!"
+}
+
 
 install_nvm() {
     echo -e "\n >>> Nvm Installation Started..."
@@ -177,10 +190,10 @@ install_pyenv() {
     echo -e " <<< Pyenv Installation Finished!"
 }
 
-install_neovim() {
-    echo -e "\n >>> Neovim Installation Started..."
+install_neovim_x86_64() {
+    echo -e "\n >>> Neovim (x86_64) Installation Started..."
     # Download
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
     # Clean
     rm -rf $HOME/.local/share/nvim-linux-x86_64
     # Install
@@ -191,7 +204,24 @@ install_neovim() {
     ln -sf ~/dotfiles/stylua ~/.config/stylua
     # Clean
     rm -rf nvim-linux-x86_64.tar.gz
-    echo -e " <<< Neovim Installation Finished!"
+    echo -e " <<< Neovim (x86_64) Installation Finished!"
+}
+
+install_neovim_aarch64() {
+    echo -e "\n >>> Neovim (aarch64) Installation Started..."
+    # Download
+    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-arm64.tar.gz
+    # Clean
+    rm -rf $HOME/.local/share/nvim-linux-arm64
+    # Install
+    tar -C $HOME/.local/share/nvim-linux-arm64 -xzf nvim-linux-arm64.tar.gz
+    # Create symbolic links
+    ln -sf ~/.local/share/nvim-linux-arm64/bin/nvim ~/.local/bin/nvim
+    ln -sf ~/dotfiles/nvim ~/.config/nvim
+    ln -sf ~/dotfiles/stylua ~/.config/stylua
+    # Clean
+    rm -rf nvim-linux-arm64.tar.gz
+    echo -e " <<< Neovim (aarch64) Installation Finished!"
 }
 
 install_vim_plugin_manager() {
@@ -288,6 +318,7 @@ install_cpp() {
 # Function Call #
 #################
 # sudo apt update && sudo apt upgrade -y
+
 # install_ubuntu_general
 # install_oh_my_zsh
 # install_oh_my_tmux
@@ -295,13 +326,18 @@ install_cpp() {
 # install_gogh_color_scheme
 # install_ranger
 # install_fzf
+
 # install_anaconda
-# install_miniconda
+# install_miniconda_x86_64
+# install_miniconda_aarch64
+# install_neovim_x86_64
+# install_neovim_aarch64
+
 # install_nvm
 # install_pyenv
-# install_neovim
 # install_vim_plugin_manager
 # install_code_minimap
 # install_coc
 # install_cpp
+
 # sudo apt autoremove -y
