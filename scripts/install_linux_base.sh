@@ -62,13 +62,13 @@ install_oh_my_tmux() {
 install_nerd_fonts() {
     echo -e "\n >>> Nerd-fonts Installation Started..."
     # Download
-    curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz
+    curl -OL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
     # Create directory
     mkdir -p ~/.local/share/fonts/NerdFonts
     # Install
-    tar -C ~/.local/share/fonts/NerdFonts -xzf Hack.tar.xz
+    unzip Hack.zip -d ~/.local/share/fonts/NerdFonts
     # Clean
-    rm -rf Hack.tar.xz
+    rm -rf Hack.zip
     echo -e " <<< Nerd-fonts Installation Finished!"
 }
 
@@ -119,9 +119,9 @@ install_anaconda() {
     cd $HOME
     curl -O https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
     # Install
-    bash ~/Anaconda3-2025.06-0-MacOSX-x86_64.sh -b -p $HOME/anaconda3
+    bash ~/Anaconda3-2025.06-0-Linux-x86_64.sh -b -p $HOME/anaconda3
     # Clean
-    rm ~/Anaconda3-2025.06-0-MacOSX-x86_64.sh
+    rm ~/Anaconda3-2025.06-0-Linux-x86_64.sh
     echo -e " <<< Anaconda Installation Finished!"
 }
 
