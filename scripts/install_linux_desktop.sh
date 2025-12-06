@@ -24,8 +24,7 @@ install_docker() {
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
     sudo chmod a+r /etc/apt/keyrings/docker.asc
     # Add the repository
-    echo " Types: deb\nURIs: https://download.docker.com/linux/ubuntu\nSuites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")\nComponents: stable\nSigned-By: /etc/apt/keyrings/docker.asc\nArchitectures: amd64" \ 
-        | sudo tee /etc/apt/sources.list.d/docker.sources 
+    echo " Types: deb\nURIs: https://download.docker.com/linux/ubuntu\nSuites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")\nComponents: stable\nSigned-By: /etc/apt/keyrings/docker.asc\nArchitectures: amd64" | sudo tee /etc/apt/sources.list.d/docker.sources 
     sudo apt update
     # Install
     sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -290,7 +289,7 @@ install_drawio() {
 #################
 # Function Call #
 #################
-sudo apt update && sudo apt upgrade -y
+# sudo apt update && sudo apt upgrade -y
 
 # install_ubuntu_general
 # install_docker
@@ -315,4 +314,4 @@ sudo apt update && sudo apt upgrade -y
 # install_mechatronics
 # install_drawio
 
-sudo apt autoremove -y
+# sudo apt autoremove -y
