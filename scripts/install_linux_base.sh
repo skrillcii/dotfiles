@@ -8,7 +8,7 @@ install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
     # Install basics
     sudo apt install -y zsh tmux vim ranger \
-                        git wget curl tree exa bat \
+                        git wget curl tree eza bat \
                         htop nvtop neofetch trash-cli
     # Install advance
     sudo apt install -y autojump ripgrep xsel xclip \
@@ -110,6 +110,16 @@ install_fzf() {
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     # Install
     ~/.fzf/install --key-bindings --completion --no-update-rc
+    echo -e " <<< Fzf Installation Finished!"
+}
+
+install_bat() {
+    echo -e "\n >>> Fzf Installation Started..."
+    # Download
+    sudo apt install bat
+    # Create symbolic links
+    # This is due to a name clash with antoher package in Ubuntu.
+    ln -sf /usr/bin/batcat ~/.local/bin/bat
     echo -e " <<< Fzf Installation Finished!"
 }
 

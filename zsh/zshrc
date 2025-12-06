@@ -183,7 +183,7 @@ case `uname` in
     ;;
 esac
 
-# Exa settings
+# Eza settings
 case `uname` in
     Darwin)
         alias ls="lsd"
@@ -191,9 +191,9 @@ case `uname` in
         alias la="lsd -alh"
     ;;
     Linux)
-        alias ls="exa"
-        alias ll="exa -lhg"
-        alias la="exa -alhg"
+        alias ls="eza"
+        alias ll="eza -lhg"
+        alias la="eza -alhg"
         alias tree="exa --tree"
     ;;
 esac
