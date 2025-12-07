@@ -279,19 +279,19 @@ alias te='trash-empty'
 
 # Docker settings
 # Docker show process status
-alias dkp='sudo docker ps -a'
+alias dkp='docker ps -a'
 # Docker show process status (sorted by image name)
-alias dkps='sudo docker ps -a | head -n1 ; sudo docker ps -a | tail -n+2 | sort -k2'
+alias dkps='docker ps -a | head -n1 ;docker ps -a | tail -n+2 | sort -k2'
 # Docker kill all running containers
-alias dkk='sudo docker kill $(sudo docker ps -q)'
+alias dkk='docker kill $(docker ps -q)'
 # Docker remove all stopped containers
-alias dkr='sudo docker rm $(sudo docker ps -a -q)'
+alias dkr='docker rm $(docker ps -a -q)'
 # Docker remove dangling containers
-alias dkd='sudo docker rmi $(sudo docker images --filter "dangling=true" -q --no-trunc)'
+alias dkd='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 # Docker show images
-alias dki='sudo docker images'
+alias dki='docker images'
 # Docker show images (sorted by repository name)
-alias dkis='sudo docker images | head -n1 ; sudo docker images | tail -n+2 | sort -h -k1'
+alias dkis='docker images | head -n1 ; docker images | tail -n+2 | sort -h -k1'
 
 # Git settings
 # Git show status
