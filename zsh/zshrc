@@ -194,7 +194,6 @@ case `uname` in
         alias ls="eza"
         alias ll="eza -lhg"
         alias la="eza -alhg"
-        alias tree="exa --tree"
     ;;
 esac
 
