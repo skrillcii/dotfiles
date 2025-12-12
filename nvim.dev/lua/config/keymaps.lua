@@ -25,8 +25,8 @@ vim.keymap.set("n", "<space>k", "<C-w><C-k>", { desc = "Move focus to the upper 
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- Resize window
-vim.keymap.set("n", "<C-h>", [[<cmd>vertical resize +5<cr>]])
-vim.keymap.set("n", "<C-l>", [[<cmd>vertical resize -5<cr>]])
+vim.keymap.set("n", "<C-h>", [[<cmd>vertical resize +2<cr>]])
+vim.keymap.set("n", "<C-l>", [[<cmd>vertical resize -2<cr>]])
 vim.keymap.set("n", "<C-k>", [[<cmd>horizontal resize +2<cr>]])
 vim.keymap.set("n", "<C-j>", [[<cmd>horizontal resize -2<cr>]])
 
