@@ -1,6 +1,5 @@
 #TODO
-- neotree keybindings
+
+- diagnose keybindgs
 - gitgutter keybindings
-- easymotion alternative
-- go-to-line alternative
 - lazygit test

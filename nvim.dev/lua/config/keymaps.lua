@@ -2,15 +2,21 @@
 --  See `:help vim.keymap.set()`
 
 -- Clear highlights on search
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear highlights on search" })
 -- Close window
-vim.keymap.set("n", "<space>w", "<cmd>:bd<CR>")
+vim.keymap.set("n", "<space>w", "<cmd>:bd<CR>", { desc = "Close window" })
 -- Quit window
-vim.keymap.set("n", "<space>q", "<cmd>:q<CR>")
+vim.keymap.set("n", "<space>q", "<cmd>:q<CR>", { desc = "Quit window" })
 -- Create new tab
-vim.keymap.set("n", "<space>t", "<cmd>:tabnew<CR>")
--- Substitue
-vim.keymap.set({ "n", "v" }, "s", "c")
+vim.keymap.set("n", "<space>t", "<cmd>:tabnew<CR>", { desc = "Create new tab" })
+-- Write to buffer
+vim.keymap.set("n", "<space>s", "<cmd>:w<CR>", { desc = "Wrtie to buffer" })
+-- LSP Hover
+vim.keymap.set("n", "<S-l>", vim.lsp.buf.hover, { desc = "LSP Hover" })
+
+-- Move lines
+vim.keymap.set("n", "<S-j>", "<cmd>:m +1<CR>", { desc = "Move line down" })
+vim.keymap.set("n", "<S-k>", "<cmd>:m -2<CR>", { desc = "Move line up" })
 
 -- Switch between windows
 vim.keymap.set("n", "<space>h", "<C-w><C-h>", { desc = "Move focus to the left window" })
@@ -29,10 +35,6 @@ vim.keymap.set("n", "<C-h>", [[<cmd>vertical resize +2<cr>]])
 vim.keymap.set("n", "<C-l>", [[<cmd>vertical resize -2<cr>]])
 vim.keymap.set("n", "<C-k>", [[<cmd>horizontal resize +2<cr>]])
 vim.keymap.set("n", "<C-j>", [[<cmd>horizontal resize -2<cr>]])
-
--- Diagnostic keybindings
-vim.keymap.set("n", "gJ", "vim.diagnostic.get_next", { desc = "Move cursor to the next diagnostic" })
-vim.keymap.set("n", "gK", "vim.diagnostic.get_prev", { desc = "Move cursor to the previous diagnostic" })
 
 -- Highlight when yanking text
 vim.api.nvim_create_autocmd("TextYankPost", {
