@@ -1,7 +1,6 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
     opts = {
       signs = {
         add = { text = "+" },
@@ -51,12 +50,50 @@ return {
       },
 
       -- Keymappings
-      vim.keymap.set("n", "gk", function()
-        require("gitsigns").nav_hunk("prev")
-      end, { desc = "Go to previous hunk" }),
-      vim.keymap.set("n", "gj", function()
-        require("gitsigns").nav_hunk("next")
-      end, { desc = "Previous hunk" }),
+      on_attach = function(bufnr)
+        -- Map function
+        local gitsigns = require("gitsigns")
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- Navigation
+        map("n", "gj", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "gj", bang = true })
+          else
+            gitsigns.nav_hunk("next")
+          end
+        end, { desc = "Go to next hunk" })
+        map("n", "gk", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "gk", bang = true })
+          else
+            gitsigns.nav_hunk("prev")
+          end
+        end, { desc = "Go to prev hunk" })
+
+        -- Actions
+        map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage hunk" })
+        map("n", "<leader>gu", gitsigns.undo_stage_hunk, { desc = "Unstage hunk" })
+        map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset hunk" })
+        map("v", "<leader>gs", function()
+          gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end, { desc = "Stage selected hunk(s)" })
+        map("v", "<leader>gu", function()
+          gitsigns.undo_stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end, { desc = "Unstage selected hunk(s)" })
+        map("v", "<leader>gr", function()
+          gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end, { desc = "Reset selected hunk(s)" })
+        map("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview hunk" })
+        map("n", "<leader>gd", gitsigns.diffthis, { desc = "Diff this" })
+        map("n", "<leader>gD", function()
+          gitsigns.diffthis("~")
+        end, { desc = "Diff this" })
+      end,
     },
   },
 }
