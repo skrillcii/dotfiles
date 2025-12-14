@@ -17,8 +17,10 @@ vim.keymap.set("n", "<space>c", "<cmd>:checkhealth<CR>", { desc = "Check Health"
 vim.keymap.set("n", "<space>L", "<cmd>:Lazy<CR>", { desc = "Check Lazy" })
 -- Mason
 vim.keymap.set("n", "<space>M", "<cmd>:Mason<CR>", { desc = "Check Mason" })
--- LSP Hover
-vim.keymap.set("n", "<S-l>", vim.lsp.buf.hover, { desc = "Hover LSP" })
+-- LSP
+vim.keymap.set("n", "<S-l>", vim.lsp.buf.hover, { desc = "LSP Hover" })
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "LSP Declaration" })
 
 -- Move lines
 vim.keymap.set("n", "<S-j>", "<cmd>:m +1<CR>", { desc = "Move line down" })
