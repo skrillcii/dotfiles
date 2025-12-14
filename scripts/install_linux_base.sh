@@ -163,13 +163,13 @@ install_miniconda_aarch64() {
 install_nvm() {
     echo -e "\n >>> Nvm Installation Started..."
     # Download
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
     # Source
     source ~/.nvm/nvm.sh
     source ~/.profile
     source ~/.bashrc
     # Install
-    nvm install v20.12.1
+    nvm install v20.19.6
     echo -e " <<< Nvm Installation Finished!"
 }
 
