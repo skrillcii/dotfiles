@@ -1,9 +1,3 @@
--- Set <space> as the leader key
---   Must happen before plugins are loaded.
---   Otherwise wrong leader will be used.
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Load configurations
 require("config.autocmds")
 require("config.keymaps")
