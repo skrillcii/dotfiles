@@ -4,7 +4,7 @@ return {
     build = "cd app && npm install && git restore .",
     ft = "markdown",
     lazy = true,
-    keys = { { "<leader>m", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview toggle" } },
+    keys = { { "<leader>p", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview toggle" } },
     config = function()
       vim.g.mkdp_auto_close = true
       vim.g.mkdp_open_to_the_world = false

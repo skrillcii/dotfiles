@@ -1,6 +1,9 @@
--- Enable the local custom LSP server at "~/.config/nvim/lsp/*"
--- Note: "<package_name>" must match "~/.config/nvim/lsp/<package_name>.lua".
+-- Enable LSP server(s)
+-- Note:
+--  Enabling the local custom LSP server at "~/.config/nvim/lsp/*"
+--  "<package_name>" must match "~/.config/nvim/lsp/<package_name>.lua".
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("pyright")
 
 -- Set up an LspAttach autocommand to enable features based on client
 --  capabilities. A single autocommand can work for multiple LSP servers!

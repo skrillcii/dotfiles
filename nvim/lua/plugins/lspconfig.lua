@@ -6,7 +6,13 @@ return {
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
+
     config = function()
+      -- Enable LSP completion capability
+      vim.lsp.config("*", {
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      })
+      -- Enable Mason
       require("mason").setup({
         ui = {
           icons = {
@@ -16,6 +22,8 @@ return {
           },
         },
       })
+
+      -- Enable Mason-Tool-Installer
       require("mason-tool-installer").setup({
         ensure_installed = {
           -- Language Servers
@@ -25,9 +33,14 @@ return {
           "pyright", -- A language server for Python
           -- Formatters, Linters
           "stylua", -- A formatter for Lua
+          "rustfmt", -- A formatter for Rust
           "black", -- A formatter for Python code
           "isort", -- A formatter for Python imports
           "ruff", -- A formatter & linter for Python
+          "prettier", -- A formatter & linter for Webstacks
+          "prettierd", -- A formatter & linter for Webstacks
+          -- Parser(s)
+          "tree-sitter-cli", -- A parser for syntax trees
         },
       })
     end,
