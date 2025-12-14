@@ -3,7 +3,7 @@
 --  Enabling the local custom LSP server at "~/.config/nvim/lsp/*"
 --  "<package_name>" must match "~/.config/nvim/lsp/<package_name>.lua".
 vim.lsp.enable("lua_ls")
-vim.lsp.enable("pyright")
+vim.lsp.enable("basedpyright")
 
 -- Enable rounded borders in floating windows
 vim.o.winborder = "rounded"

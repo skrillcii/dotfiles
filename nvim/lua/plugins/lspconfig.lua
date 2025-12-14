@@ -30,7 +30,7 @@ return {
           "lua-language-server", -- A language server for Lua
           "vim-language-server", -- A language server for Vim
           "bash-language-server", -- A language server for Bash
-          "pyright", -- A language server for Python
+          "basedpyright", -- A language server for Python
           -- Formatters, Linters
           "stylua", -- A formatter for Lua
           "black", -- A formatter for Python code
