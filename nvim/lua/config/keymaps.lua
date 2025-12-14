@@ -21,6 +21,9 @@ vim.keymap.set("n", "<space>M", "<cmd>:Mason<CR>", { desc = "Check Mason" })
 vim.keymap.set("n", "<S-l>", vim.lsp.buf.hover, { desc = "LSP Hover" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "LSP Declaration" })
+-- Diagnostic
+vim.keymap.set("n", "gJ", vim.diagnostic.goto_next, { desc = "Diagnostic next" })
+vim.keymap.set("n", "gK", vim.diagnostic.goto_prev, { desc = "Diagnostic previous" })
 
 -- Move lines
 vim.keymap.set("n", "<S-j>", "<cmd>:m +1<CR>", { desc = "Move line down" })
