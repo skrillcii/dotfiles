@@ -33,7 +33,6 @@ return {
           "pyright", -- A language server for Python
           -- Formatters, Linters
           "stylua", -- A formatter for Lua
-          "rustfmt", -- A formatter for Rust
           "black", -- A formatter for Python code
           "isort", -- A formatter for Python imports
           "ruff", -- A formatter & linter for Python
