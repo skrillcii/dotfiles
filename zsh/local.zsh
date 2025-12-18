@@ -1,0 +1,84 @@
+#################################
+# Specific Environment Settings #
+#################################
+
+# SSH Agent settings
+# if [ -z "$SSH_AUTH_SOCK" ]; then
+#   eval "$(ssh-agent -s)"
+# fi
+
+# SSHFS listing
+# alias mls="ps aux | grep -i sftp | grep -v grep"
+
+# Rdp-ssh setting
+# export PATH="$HOME/.local/bin:$PATH"
+
+# Neovim settings
+# export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# Conda setting
+# export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+# alias sconda='source ~/anaconda3/bin/activate'
+# alias sconda='source ~/miniconda3/bin/activate'
+
+# Pyenv settings
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/shims:$PATH"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# if command -v pyenv 1>/dev/null 2>&1; then
+#     eval "$(pyenv init -)"
+# fi
+# export PYTHON_CONFIGURE_OPTS="--enable-shared"
+
+# Pyenv-virtualenv auto-activation
+# This automatically activates specified pyenv-virtualenv if a .python-version file exists
+# This configuration is optional
+# eval "$(pyenv virtualenv-init -)"
+
+# Terraform settings
+# Terraform alias
+# alias tf='terraform'
+# Terraform autocomplete
+# complete -o nospace -C /usr/local/bin/terraform terraform
+# complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# CUDA settings$
+# List installed CUDA versions
+# lscuda() {
+#     echo -e 'Listing /etc/alternatives' &&
+#         ls /etc/alternatives | grep cuda &&
+#         echo -e '\nListing /usr/local' &&
+#         ls /usr/local | grep cuda
+# }
+# Switch CUDA version (system update-alternative)
+# switch_cuda_auto() {
+#     sudo update-alternatives --config cuda
+# }
+# Switch CUDA version (manual symbolic-relink)
+# switch_cuda_manual() {
+#     if [ -z "$1" ]; then
+#         echo "Usage: switch_cuda <version>"
+#         echo "Available versions:"
+#         ls -d /usr/local/cuda-* 2>/dev/null
+#         return 1
+#     fi
+#     local cuda_path="/usr/local/cuda-$1"$
+#     if [ ! -d "$cuda_path" ]; then
+#         echo "Error: $cuda_path does not exist"
+#         return 1
+#     fi
+#     sudo ln -sfn "$cuda_path" /usr/local/cuda
+#     echo "Switched to CUDA $1"
+# }
+# Install CUDA version (apt managed)
+# install_cuda() {
+#     if [ -z "$1" ]; then
+#         echo "Usage: install_cuda <VERSION>"
+#         echo "Example: install_cuda 12-6"
+#         return 1
+#     fi
+#     sudo apt update && sudo apt install -y "cuda-$1" "cuda-toolkit-$1"
+# }
+# Include CUDA paths
+# export PATH="/usr/local/cuda/bin:$PATH"
+# export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"

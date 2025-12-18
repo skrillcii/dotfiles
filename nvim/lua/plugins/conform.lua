@@ -3,6 +3,20 @@ return {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
+    opts = {
+      notify_on_error = false,
+      format_on_save = false,
+      formatters_by_ft = {
+        -- Shell formatter
+        sh = { "shfmt" },
+        zsh = { "shfmt" },
+        bash = { "shfmt" },
+        -- Lua formatter
+        lua = { "stylua" },
+        -- Conform can also run multiple formatters sequentially
+        python = { "isort", "black" },
+      },
+    },
     keys = {
       {
         "<leader>ff",
@@ -42,20 +56,6 @@ return {
           end
         end,
         desc = "[F]ormat [T]oggle autoformat for globally",
-      },
-    },
-    opts = {
-      notify_on_error = false,
-      format_on_save = false,
-      formatters_by_ft = {
-        -- Shell formatter
-        sh = { "shfmt" },
-        zsh = { "shfmt" },
-        bash = { "shfmt" },
-        -- Lua formatter
-        lua = { "stylua" },
-        -- Conform can also run multiple formatters sequentially
-        python = { "isort", "black" },
       },
     },
 
