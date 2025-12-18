@@ -11,7 +11,7 @@ return {
           vim.notify("Format for current buffer")
         end,
         mode = "",
-        desc = "[F]ormat buffer",
+        desc = "[F]ormat [B]uffer",
       },
       {
         "<leader>ft",
@@ -26,7 +26,7 @@ return {
             vim.notify("Disabled autoformat for current buffer")
           end
         end,
-        desc = "[T]oggle autoformat for current buffer",
+        desc = "[F]ormat [T]oggle autoformat for current buffer",
       },
       {
         "<leader>fT",
@@ -41,21 +41,21 @@ return {
             vim.notify("Disabled autoformat globally")
           end
         end,
-        desc = "[T]oggle autoformat globally",
+        desc = "[F]ormat [T]oggle autoformat for globally",
       },
     },
     opts = {
       notify_on_error = false,
       format_on_save = false,
-
       formatters_by_ft = {
+        -- Shell formatter
+        sh = { "shfmt" },
+        zsh = { "shfmt" },
+        bash = { "shfmt" },
+        -- Lua formatter
         lua = { "stylua" },
         -- Conform can also run multiple formatters sequentially
         python = { "isort", "black" },
-        -- You can customize some of the format options for the filetype (:help conform.format)
-        rust = { "rustfmt", lsp_format = "fallback" },
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
 

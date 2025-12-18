@@ -13,7 +13,7 @@ return {
         function()
           require("which-key").show({ global = false })
         end,
-        desc = "Buffer Local Keymaps (which-key)",
+        desc = "List local buffer keymaps (which-key)",
       },
     },
   },

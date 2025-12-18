@@ -12,11 +12,11 @@ vim.keymap.set("n", "<space>t", "<cmd>:tabnew<CR>", { desc = "Create new tab" })
 -- Write to buffer
 vim.keymap.set("n", "<space>s", "<cmd>:w<CR>", { desc = "Wrtie to buffer" })
 -- Check health
-vim.keymap.set("n", "<space>c", "<cmd>:checkhealth<CR>", { desc = "Check Health" })
+vim.keymap.set("n", "<space>ch", "<cmd>:checkhealth<CR>", { desc = "[C]heck [H]ealth" })
 -- Lazy
-vim.keymap.set("n", "<space>L", "<cmd>:Lazy<CR>", { desc = "Check Lazy" })
+vim.keymap.set("n", "<space>cl", "<cmd>:Lazy<CR>", { desc = "[C]heck [L]azy" })
 -- Mason
-vim.keymap.set("n", "<space>M", "<cmd>:Mason<CR>", { desc = "Check Mason" })
+vim.keymap.set("n", "<space>cm", "<cmd>:Mason<CR>", { desc = "[C]heck [M]ason" })
 -- LSP
 vim.keymap.set("n", "<S-l>", vim.lsp.buf.hover, { desc = "LSP Hover" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
