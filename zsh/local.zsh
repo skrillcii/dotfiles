@@ -2,6 +2,11 @@
 # Specific Environment Settings #
 #################################
 
+# Eza settings
+# alias ls="eza"
+# alias ll="eza -lhg"
+# alias la="eza -alhg"
+
 # SSH Agent settings
 # if [ -z "$SSH_AUTH_SOCK" ]; then
 #   eval "$(ssh-agent -s)"

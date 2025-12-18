@@ -173,11 +173,6 @@ case `uname` in
     ;;
 esac
 
-# Eza settings
-alias ls="eza"
-alias ll="eza -lhg"
-alias la="eza -alhg"
-
 # Fzf settings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
@@ -315,10 +310,10 @@ function gpa() {
     echo "finished pulling!"
 }
 
-# Powerlevel10k settings
-source ~/dotfiles/zsh/p10k.zsh
-
 # Local settings
 if [[ -f ~/.zshls ]]; then
     source ~/.zshls
 fi
+
+# Powerlevel10k settings
+source ~/dotfiles/zsh/p10k.zsh
