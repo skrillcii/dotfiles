@@ -314,8 +314,8 @@ function gpa() {
 }
 
 # Local settings
-if [[ -f ~/.zshls ]]; then
-    source ~/.zshls
+if [[ -f ~/.zshlc ]]; then
+    source ~/.zshlc
 fi
 
 # Powerlevel10k settings
