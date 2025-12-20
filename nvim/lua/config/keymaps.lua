@@ -11,6 +11,10 @@ vim.keymap.set("n", "<space>q", "<cmd>:q<CR>", { desc = "Quit window" })
 vim.keymap.set("n", "<space>t", "<cmd>:tabnew<CR>", { desc = "Create new tab" })
 -- Write to buffer
 vim.keymap.set("n", "<space>s", "<cmd>:w<CR>", { desc = "Wrtie to buffer" })
+-- Write to buffer
+vim.keymap.set("n", "<space>d", "<cmd>:diffthis<CR>", { desc = "Diff this buffer" })
+-- Write to buffer
+vim.keymap.set("n", "<space>D", "<cmd>:diffoff<CR>", { desc = "Diff mode off" })
 -- Check health
 vim.keymap.set("n", "<space>ch", "<cmd>:checkhealth<CR>", { desc = "[C]heck [H]ealth" })
 -- Lazy
