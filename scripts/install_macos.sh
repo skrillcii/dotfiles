@@ -1,43 +1,35 @@
 #!/bin/bash
 
-#########################
-# Functions Definitions #
-#########################
+#############################
+# Development Installations #
+#############################
 
 install_macos_general() {
     echo -e "\n >>> General Installation Started..."
     # Install homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # Install terminal utilities
-    brew install zsh tmux vim ranger autojump ripgrep fzf imagemagick \
-                 wget curl git universal-ctags tree jq \
-                 lsd bat htop glances watch trash-cli
-    # Install pyenv dependcies
-    brew install openssl readline sqlite3 xz zlib \
-                 pyenv pyenv-virtualenv rbenv ruby-build tfenv
+    brew install zsh tmux vim ranger \
+                 git wget curl  tree eza bat \
+                 htop watch trash-cli
+    # Install terminal utilities
+    brew install autojump ripgrep imagemagick \
+                 universal-ctags  jq glances \
+    # Install enviornment managers
+    brew install pyenv pyenv-virtualenv rbenv ruby-build tfenv
     # Install desktop utilities
     brew install --cask google-chrome firefox spotify vlc \
                         iterm2 docker visual-studio-code notion drawio
     # Install nerd-fonts
     brew install --cask font-hack-nerd-font
-    # Install financial tools
-    brew install cointop
     # Git global settings
-    git config --global core.excludesfile ~/dotfiles/.gitignore
-    git config --global diff.tool vimdiff
-    git config --global difftool.prompt false
-    git config --global merge.tool vimdiff
-    git config --global mergetool.prompt false
-    git config --global pull.ff only
+    # git config --global core.excludesfile ~/dotfiles/.gitignore
+    # git config --global diff.tool vimdiff
+    # git config --global difftool.prompt false
+    # git config --global merge.tool vimdiff
+    # git config --global mergetool.prompt false
+    # git config --global pull.ff only
     echo -e " <<< General Installation Finished!"
-}
-
-install_neovim() {
-    echo -e "\n >>> Neovim Installation Started..."
-    brew install neovim ripgrep fd
-    ln -sf ~/dotfiles/nvim ~/.config/nvim
-    ln -sf ~/dotfiles/stylua ~/.config/stylua
-    echo -e " <<< Neovim Installation Finished!"
 }
 
 install_iterm2_color_scheme() {
@@ -58,6 +50,7 @@ install_oh_my_zsh() {
     git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-completions.git ~/.oh-my-zsh/custom/plugins/zsh-completions
+    git clone https://github.com/esc/conda-zsh-completion.git ~/.oh-my-zsh/custom/plugins/conda-zsh-completion
     # Download themes
     curl -L https://raw.githubusercontent.com/sbugzu/gruvbox-zsh/master/gruvbox.zsh-theme > ~/.oh-my-zsh/custom/themes/gruvbox.zsh-theme
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -110,13 +103,43 @@ install_nvm() {
     echo -e "\n >>> Nvm Installation Started..."
     # Download
     brew install nvm
-    # Install
-    export NVM_DIR="/opt/homebrew/opt/nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    nvm install v20.18.1
+    # Export (included in .zshrc)
+    # export NVM_DIR="/opt/homebrew/opt/nvm"
+    # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    nvm install v20.19.6
     echo -e " <<< Nvm Installation Finished!"
 }
+
+install_neovim() {
+    echo -e "\n >>> Neovim Installation Started..."
+    brew install neovim ripgrep fd lazygit
+    ln -sf ~/dotfiles/nvim ~/.config/nvim
+    ln -sf ~/dotfiles/stylua ~/.config/stylua
+    echo -e " <<< Neovim Installation Finished!"
+}
+
+install_anaconda(){
+    echo -e "\n >>> Anaconda Installation Started..."
+    # Install
+    brew install --cask anaconda
+    # Export (included in .zshrc)
+    # echo 'export PATH="/opt/homebrew/anaconda3/bin:$PATH"' >> ~/.zshrc
+    echo -e " <<< Anaconda Installation Finished!"
+}
+
+install_aerospace(){
+    echo -e "\n >>> Aerospace Installation Started..."
+    # Install aerospace
+    brew install --cask nikitabobko/tap/aerospace
+    # Create symbolic links
+    ln -sf ~/dotfiles/aerospace/aerospace.toml ~/.config/aerospace/aerospace.toml
+    echo -e " <<< Aerospace Installation Finished!"
+}
+
+##########################
+# Deprecated Development #
+##########################
 
 install_pip_packages() {
     echo -e "\n >>> Pip Package Installation Started..."
@@ -184,26 +207,11 @@ install_cpp(){
     echo -e " <<< CoC Installation Finished!"
 }
 
-install_aerospace(){
-    echo -e "\n >>> Aerospace Installation Started..."
-    # Install aerospace
-    brew install --cask nikitabobko/tap/aerospace
-    # Create symbolic links
-    ln -sf ~/dotfiles/aerospace/aerospace.toml ~/.config/aerospace/aerospace.toml
-    echo -e " <<< Aerospace Installation Finished!"
-}
-
-install_anaconda(){
-    echo -e "\n >>> Anaconda Installation Started..."
-    brew install --cask anaconda
-    echo 'export PATH="/opt/homebrew/anaconda3/bin:$PATH"' >> ~/.zshrc
-    echo -e " <<< Anaconda Installation Finished!"
-}
-
 ##################
 # Functions Call #
 ##################
 # brew update && brew upgrade
+
 # install_macos_general
 # install_iterm2_color_scheme
 # install_oh_my_zsh
@@ -211,8 +219,11 @@ install_anaconda(){
 # install_ranger
 # install_fzf
 # install_nvm
+# install_neovim
+# install_anaconda
+# install_aerospace
+
 # install_pip_packages
 # install_vim_plugin_manager
 # install_coc
 # install_cpp
-# install_aerospace

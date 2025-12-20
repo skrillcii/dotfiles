@@ -78,8 +78,8 @@ install_gogh_color_scheme() {
     sudo apt install dconf-cli uuid-runtime
     # Download
     git clone https://github.com/Gogh-Co/Gogh.git ~/gogh
-    # Necessary in the Gnome terminal on ubuntu
-    export TERMINAL=gnome-terminal
+    # Export (included in .zshrc)
+    # export TERMINAL=gnome-terminal
     # Install theme
     ~/gogh/installs/gruvbox-dark.sh
     echo -e " <<< Gogh Color Scheme Installation Finished!"
@@ -123,6 +123,53 @@ install_bat() {
     echo -e " <<< Fzf Installation Finished!"
 }
 
+install_nvm() {
+    echo -e "\n >>> Nvm Installation Started..."
+    # Download
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    # Source
+    source ~/.nvm/nvm.sh
+    source ~/.profile
+    source ~/.bashrc
+    # Install
+    nvm install v20.19.6
+    echo -e " <<< Nvm Installation Finished!"
+}
+
+install_neovim_x86_64() {
+    echo -e "\n >>> Neovim (x86_64) Installation Started..."
+    # Download
+    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
+    # Clean
+    rm -rf $HOME/.local/share/nvim-linux-x86_64
+    # Install
+    tar -C $HOME/.local/share/nvim-linux-x86_64 -xzf nvim-linux-x86_64.tar.gz
+    # Create symbolic links
+    ln -sf ~/.local/share/nvim-linux-x86_64/bin/nvim ~/.local/bin/nvim
+    ln -sf ~/dotfiles/nvim ~/.config/nvim
+    ln -sf ~/dotfiles/stylua ~/.config/stylua
+    # Clean
+    rm -rf nvim-linux-x86_64.tar.gz
+    echo -e " <<< Neovim (x86_64) Installation Finished!"
+}
+
+install_neovim_aarch64() {
+    echo -e "\n >>> Neovim (aarch64) Installation Started..."
+    # Download
+    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-arm64.tar.gz
+    # Clean
+    rm -rf $HOME/.local/share/nvim-linux-arm64
+    # Install
+    tar -C $HOME/.local/share/nvim-linux-arm64 -xzf nvim-linux-arm64.tar.gz
+    # Create symbolic links
+    ln -sf ~/.local/share/nvim-linux-arm64/bin/nvim ~/.local/bin/nvim
+    ln -sf ~/dotfiles/nvim ~/.config/nvim
+    ln -sf ~/dotfiles/stylua ~/.config/stylua
+    # Clean
+    rm -rf nvim-linux-arm64.tar.gz
+    echo -e " <<< Neovim (aarch64) Installation Finished!"
+}
+
 install_anaconda() {
     echo -e "\n >>> Anaconda Installation Started..."
     # Download
@@ -159,19 +206,9 @@ install_miniconda_aarch64() {
     echo -e " <<< Miniconda (aarch64) Installation Finished!"
 }
 
-
-install_nvm() {
-    echo -e "\n >>> Nvm Installation Started..."
-    # Download
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-    # Source
-    source ~/.nvm/nvm.sh
-    source ~/.profile
-    source ~/.bashrc
-    # Install
-    nvm install v20.19.6
-    echo -e " <<< Nvm Installation Finished!"
-}
+##########################
+# Deprecated Development #
+##########################
 
 install_pyenv() {
     echo -e "\n >>> Pyenv Installation Started..."
@@ -179,11 +216,10 @@ install_pyenv() {
     sudo apt install -y build-essential libssl-dev zlib1g-dev \
                         libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
                         libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-    # Download pyenv
+    # Download 
     git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-    # Download pyenv-virtualenv
     git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
-    # Environment variables settings
+    # Export
     echo -e 'exporting environmental variabls...'
     echo -e 'export PYENV_ROOT="~/.pyenv"' >> ~/.bashrc
     echo -e 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
@@ -198,40 +234,6 @@ install_pyenv() {
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/pdb/pdbrc.py ~/.pdbrc.py
     echo -e " <<< Pyenv Installation Finished!"
-}
-
-install_neovim_x86_64() {
-    echo -e "\n >>> Neovim (x86_64) Installation Started..."
-    # Download
-    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
-    # Clean
-    rm -rf $HOME/.local/share/nvim-linux-x86_64
-    # Install
-    tar -C $HOME/.local/share/nvim-linux-x86_64 -xzf nvim-linux-x86_64.tar.gz
-    # Create symbolic links
-    ln -sf ~/.local/share/nvim-linux-x86_64/bin/nvim ~/.local/bin/nvim
-    ln -sf ~/dotfiles/nvim ~/.config/nvim
-    ln -sf ~/dotfiles/stylua ~/.config/stylua
-    # Clean
-    rm -rf nvim-linux-x86_64.tar.gz
-    echo -e " <<< Neovim (x86_64) Installation Finished!"
-}
-
-install_neovim_aarch64() {
-    echo -e "\n >>> Neovim (aarch64) Installation Started..."
-    # Download
-    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-arm64.tar.gz
-    # Clean
-    rm -rf $HOME/.local/share/nvim-linux-arm64
-    # Install
-    tar -C $HOME/.local/share/nvim-linux-arm64 -xzf nvim-linux-arm64.tar.gz
-    # Create symbolic links
-    ln -sf ~/.local/share/nvim-linux-arm64/bin/nvim ~/.local/bin/nvim
-    ln -sf ~/dotfiles/nvim ~/.config/nvim
-    ln -sf ~/dotfiles/stylua ~/.config/stylua
-    # Clean
-    rm -rf nvim-linux-arm64.tar.gz
-    echo -e " <<< Neovim (aarch64) Installation Finished!"
 }
 
 install_vim_plugin_manager() {
@@ -337,13 +339,13 @@ install_cpp() {
 # install_ranger
 # install_fzf
 
+# install_nvm
+# install_neovim_x86_64
+# install_neovim_aarch64
 # install_anaconda
 # install_miniconda_x86_64
 # install_miniconda_aarch64
-# install_neovim_x86_64
-# install_neovim_aarch64
 
-# install_nvm
 # install_pyenv
 # install_vim_plugin_manager
 # install_code_minimap
