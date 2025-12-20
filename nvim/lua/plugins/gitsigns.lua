@@ -89,10 +89,6 @@ return {
           gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, { desc = "Reset selected hunk(s)" })
         map("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview hunk" })
-        map("n", "<leader>gd", gitsigns.diffthis, { desc = "Diff this" })
-        map("n", "<leader>gD", function()
-          gitsigns.diffthis("~")
-        end, { desc = "Diff this" })
       end,
     },
   },

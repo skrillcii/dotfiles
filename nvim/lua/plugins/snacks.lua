@@ -22,5 +22,9 @@ return {
       statuscolumn = { enabled = true },
       words = { enabled = true },
     },
+    keys = {
+      { "<leader>cn", function() require("snacks").picker.notifications() end, desc = "[C]heck [N]otifications" },
+      { "<leader>cp", function() require("snacks").picker() end, desc = "[C]heck [P]icker" },
+    },
   },
 }
