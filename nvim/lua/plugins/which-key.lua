@@ -12,8 +12,13 @@ return {
       },
     },
     config = function()
-      require("which-key").add({
-        -- Add names to keymap groups
+      local wk = require("which-key")
+      -- Sort keymap list
+      wk.setup({
+        sort = { "local", "desc", "group", "alphanum", "mod" },
+      })
+      -- Add names to keymap groups
+      wk.add({
         { "<leader>c", group = "Check" },
         { "<leader>x", group = "Diagnostics" },
         { "<leader>f", group = "Format" },
