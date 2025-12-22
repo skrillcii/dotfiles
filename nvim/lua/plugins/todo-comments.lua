@@ -1,6 +1,29 @@
 return {
   {
+    -- INFO:
+    -- TODO:
+    -- TEST:
+    -- WARN:
+    -- FIX:
+
     "folke/todo-comments.nvim",
-    opts = {},
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      keywords = {
+        NOTE = { icon = " ", color = "info", alt = { "INFO", "HINT" } },
+        TODO = { icon = " ", color = "todo", alt = {} },
+        TEST = { icon = " ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+        WARN = { icon = " ", color = "warn", alt = { "WARNING", "HACK" } },
+        FIX = { icon = " ", color = "error", alt = { "FIXME", "FIXIT", "ISSUE", "BUG", "ERROR" } },
+      },
+      colors = {
+        note = { "GruvboxBlueBold" },
+        todo = { "GruvboxGreenBold" },
+        test = { "GruvboxOrangeBold" },
+        warn = { "GruvBoxYellowBold" },
+        fix = { "GruvBoxRedBold" },
+      },
+    },
+    vim.keymap.set("n", "<leader>xt", "<cmd>:TodoQuickFix<CR>", { desc = "[S]earch [T]odo List" }),
   },
 }

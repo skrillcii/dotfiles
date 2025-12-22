@@ -15,7 +15,8 @@ return {
       local wk = require("which-key")
       -- Sort keymap list
       wk.setup({
-        sort = { "local", "desc", "group", "alphanum", "mod" },
+        preset = "modern",
+        sort = {"group", "local", "desc"},
       })
       -- Add names to keymap groups
       wk.add({
