@@ -24,8 +24,8 @@ return {
         fix = { "GruvBoxRedBold" },
       },
     },
-    -- vim.keymap.set("n", "<leader>xt", "<cmd>:TodoQuickFix<CR>", { desc = "[L]ist [T]odos" }),
-    -- vim.keymap.set("n", "<leader>xt", "<cmd>:TodoTrouble<CR>", { desc = "[L]ist [T]odos" }),
-    -- vim.keymap.set("n", "<leader>xt", "<cmd>:TodoTelescope<CR>", { desc = "[L]ist [T]odos" }),
+    vim.keymap.set("n", "<leader>xt", "<cmd>:TodoQuickFix<CR>", { desc = "[L]ist [T]odos Quickfix" }),
+    vim.keymap.set("n", "<leader>xT", "<cmd>:TodoTrouble<CR>", { desc = "[L]ist [T]odos Trouble" }),
+    vim.keymap.set("n", "<leader>/t", "<cmd>:TodoTelescope<CR>", { desc = "[S]earch [T]odos" }),
   },
 }
