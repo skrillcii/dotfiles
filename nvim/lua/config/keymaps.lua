@@ -15,6 +15,8 @@ vim.keymap.set("n", "<space>s", "<cmd>:w<CR>", { desc = "Wrtie to buffer" })
 vim.keymap.set("n", "<space>d", "<cmd>:diffthis<CR>", { desc = "Diff this buffer" })
 -- Write to buffer
 vim.keymap.set("n", "<space>D", "<cmd>:diffoff<CR>", { desc = "Diff mode off" })
+-- Check current file path
+vim.keymap.set("n", "<space>cf", "<cmd>:echo expand('%p')<CR>", { desc = "Check current file path" })
 -- Check health
 vim.keymap.set("n", "<space>ch", "<cmd>:checkhealth<CR>", { desc = "[C]heck [H]ealth" })
 -- Lazy
