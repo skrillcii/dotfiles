@@ -1,6 +1,7 @@
 return {
   {
     "kdheepak/tabline.nvim",
+    enabled = false,
     dependencies = {
       { "hoob3rt/lualine.nvim", opt = true },
       { "kyazdani42/nvim-web-devicons", opt = true },

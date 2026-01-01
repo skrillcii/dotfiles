@@ -22,6 +22,8 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 4
 -- Number of spaces a Tab character counts for
 vim.o.tabstop = 4
+-- Always show tab line
+vim.o.showtabline = 2
 -- Enable auto-indentation
 vim.o.autoindent = true
 -- Enable break indent
