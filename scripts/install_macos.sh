@@ -4,41 +4,46 @@
 # Development Installations #
 #############################
 
-install_macos_general() {
-    echo -e "\n >>> General Installation Started..."
-    # Install homebrew
+install_essentials() {
+    echo -e "\n >>> Essentials Installation Started..."
+    # Install Xcode CLT
+    xcode-select --install
+    # Install Rosetta
+    softwareupdate --install-rosetta --agree-to-license
+    # Install Homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # Install terminal utilities
+    echo -e " <<< Essentials Installation Finished!"
+}
+
+install_terminal_utilities() {
+    echo -e "\n >>> Terminal Utilities Installation Started..."
+    # Install
     brew install zsh tmux vim ranger \
-                 git wget curl  tree eza bat \
-                 htop watch trash-cli
-    # Install terminal utilities
-    brew install autojump ripgrep imagemagick \
-                 universal-ctags  jq glances \
-    # Install enviornment managers
-    brew install pyenv pyenv-virtualenv rbenv ruby-build tfenv
-    # Install desktop utilities
+                 git wget curl tree eza bat jq \
+                 htop glances watch trash-cli
+    # brew install autojump universal-ctags
+    echo -e " <<< Terminal Utilities Installation Finished!"
+}
+
+install_desktop_applications() {
+    echo -e "\n >>> Desktop Applications Installation Started..."
+    # Install
     brew install --cask google-chrome firefox spotify vlc \
-                        iterm2 docker visual-studio-code notion drawio
-    # Install nerd-fonts
-    brew install --cask font-hack-nerd-font
-    # Git global settings
-    # git config --global core.excludesfile ~/dotfiles/.gitignore
-    # git config --global diff.tool vimdiff
-    # git config --global difftool.prompt false
-    # git config --global merge.tool vimdiff
-    # git config --global mergetool.prompt false
-    # git config --global pull.ff only
-    echo -e " <<< General Installation Finished!"
+                        iterm2 docker visual-studio-code notion drawio \
+                        steam battle-net
+    echo -e " <<< Desktop Applications Installation Finished!"
 }
 
 install_iterm2_color_scheme() {
     echo -e "\n >>> iTerm2 Color Scheme Installation Started..."
+    # Install nerd-fonts
+    brew install --cask font-hack-nerd-font
     # Clone
     git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/iTerm2-Color-Schemes
     # Install theme
     cd ~/iTerm2-Color-Schemes
-    ./tools/import-scheme.sh 'schemes/GruvboxDark.itermcolors'
+    ./tools/import-scheme.sh 'schemes/Gruvbox Dark.itermcolors'
+    ./tools/import-scheme.sh 'schemes/Gruvbox Light.itermcolors'
     echo -e " <<< iTerm2 Color Scheme Installation Finished!"
 }
 
@@ -57,7 +62,9 @@ install_oh_my_zsh() {
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
+    ln -sf ~/dotfiles/zsh/zshlc ~/.zshlc
     ln -sf ~/dotfiles/zsh/p10k.zsh ~/.p10k.zsh
+    echo -e 'created symbolic links!'
     echo -e " <<< Oh-my-zsh Installation Finished!"
 }
 
@@ -69,6 +76,7 @@ install_oh_my_tmux() {
     echo -e 'creating symbolic links...'
     ln -sf ~/.oh-my-tmux/.tmux.conf ~/.tmux.conf
     ln -sf ~/dotfiles/tmux/tmux.conf.local ~/.tmux.conf.local
+    echo -e 'created symbolic links!'
     echo -e " <<< Oh-my-tmux Installation Finished!"
 }
 
@@ -87,6 +95,7 @@ install_ranger() {
     ln -sf ~/dotfiles/ranger/rc.conf ~/.config/ranger/
     ln -sf ~/dotfiles/ranger/rifle.conf ~/.config/ranger/
     ln -sf ~/dotfiles/ranger/scope.sh ~/.config/ranger/
+    echo -e 'created symbolic links!'
     echo -e " <<< Ranger Installation Finished!"
 }
 
@@ -104,18 +113,22 @@ install_nvm() {
     # Download
     brew install nvm
     # Export (included in .zshrc)
-    # export NVM_DIR="/opt/homebrew/opt/nvm"
-    # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    export NVM_DIR="/opt/homebrew/opt/nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     nvm install v20.19.6
     echo -e " <<< Nvm Installation Finished!"
 }
 
 install_neovim() {
     echo -e "\n >>> Neovim Installation Started..."
+    # Install
     brew install neovim ripgrep fd lazygit
+    # Create symbolic links
+    echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/nvim ~/.config/nvim
     ln -sf ~/dotfiles/stylua ~/.config/stylua
+    echo -e 'created symbolic links!'
     echo -e " <<< Neovim Installation Finished!"
 }
 
@@ -132,8 +145,16 @@ install_aerospace(){
     echo -e "\n >>> Aerospace Installation Started..."
     # Install aerospace
     brew install --cask nikitabobko/tap/aerospace
+    # Check if configuration directory exists
+    # Create if it does not exist
+    echo -e 'creating directory...'
+    if [[ ! -e ~/.config/aerospace ]] ; then
+        mkdir -p ~/.config/aerospace
+    fi
     # Create symbolic links
+    echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/aerospace/aerospace.toml ~/.config/aerospace/aerospace.toml
+    echo -e 'created symbolic links!'
     echo -e " <<< Aerospace Installation Finished!"
 }
 
@@ -151,59 +172,20 @@ install_pip_packages() {
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/pdb/pdbrc.py ~/.pdbrc.py
+    echo -e 'created symbolic links!'
     echo -e " <<< Pip Package Installation Finished!"
 }
 
-install_vim_plugin_manager() {
-    echo -e "\n >>> Vim-plugin-manager Installation Started..."
-    # Download
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    # Create symbolic links
-    echo -e 'creating symbolic links...'
-    ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
-    # Install plugins, ignore intermediate error and warnings
-    vim -E -s -u "~/.vimrc" +PlugInstall +qall || true
-    # Install code-minimap
-    brew install code-minimap
-    echo -e " <<< Vim-plugin-manager Installation Finished!"
-}
-
-install_coc() {
-    echo -e "\n >>> CoC Installation Started..."
-    # Check if configuration directory exists
-    # Create if it does not exist
-    echo -e 'creating directory...'
-    if [[ ! -e ~/.config/coc ]] ; then
-        mkdir -p ~/.config/coc
-    fi
-    # Check if configuration directory exists
-    # Create if it does not exist
-    echo -e 'creating directory...'
-    if [[ ! -e ~/.config/coc/ultisnips ]] ; then
-        mkdir -p ~/.config/coc/ultisnips
-    fi
-    # Check if configuration directory exists
-    # Create if it does not exist
-    echo -e 'creating directory...'
-    if [[ ! -e ~/.vim/syntax ]] ; then
-        mkdir -p ~/.vim/syntax
-    fi
-    # Create symbolic links
-    echo -e 'creating symbolic links...'
-    ln -sf ~/dotfiles/coc/coc.vim ~/.config/coc/coc.vim
-    ln -sf ~/dotfiles/coc/coc-settings.json ~/.vim/coc-settings.json
-    ln -sf ~/dotfiles/coc/python.snippets ~/.config/coc/ultisnips/python.snippets
-    ln -sf ~/dotfiles/coc/proto.vim ~/.vim/syntax/proto.vim
-    echo -e " <<< CoC Installation Finished!"
-}
 
 install_cpp(){
     echo -e "\n >>> CoC Installation Started..."
     # Install compilers and debuggers
     brew install llvm lldb clang clang-format clangd gcc g++ \
     # Add foramtter configurations
+    # Create symbolic links
+    echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/coc/clang-format-macos.yml ~/.clang-format
+    echo -e 'created symbolic links!'
     echo -e " <<< CoC Installation Finished!"
 }
 
@@ -212,7 +194,9 @@ install_cpp(){
 ##################
 # brew update && brew upgrade
 
-# install_macos_general
+# install_essentials
+# install_terminal_utilities
+# install_desktop_applications
 # install_iterm2_color_scheme
 # install_oh_my_zsh
 # install_oh_my_tmux
@@ -224,6 +208,4 @@ install_cpp(){
 # install_aerospace
 
 # install_pip_packages
-# install_vim_plugin_manager
-# install_coc
 # install_cpp
