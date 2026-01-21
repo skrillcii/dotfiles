@@ -15,8 +15,7 @@
 # SSHFS listing
 # alias mls="ps aux | grep -i sftp | grep -v grep"
 
-# Conda setting
-# export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+# Conda settings
 # alias sconda='source ~/anaconda3/bin/activate'
 # alias sconda='source ~/miniconda3/bin/activate'
 
