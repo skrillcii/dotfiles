@@ -146,14 +146,7 @@ export LANG_JP=C.UTF-8
 export LC_CTYPE=$LANG_JP
 
 # Alawyas list directory after cd
-case `uname` in
-    Darwin)
-        function chpwd() {ls -a}
-    ;;
-    Linux)
-        function chpwd() {ls -a}
-    ;;
-esac
+function chpwd() {ls -a}
 
 # Terminal settings
 # This is for Gogh terminal color scheme specifically for Gnome terminal
@@ -306,6 +299,17 @@ function gpa() {
     git pull --all
     echo "finished pulling!"
 }
+
+# macOS specific settings
+case `uname` in
+    Darwin)
+        alias ls="eza"
+        alias ll="eza -lhg"
+        alias la="eza -alhg"
+        export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    ;;
+esac
 
 # Local settings
 if [[ -f ~/.zshlc ]]; then
