@@ -191,19 +191,15 @@ case `uname` in
     Darwin)
         if [[ -f /opt/homebrew/bin/nvim ]]; then
             export EDITOR=/opt/homebrew/bin/nvim
-            alias nvim='/opt/homebrew/bin/nvim'
         fi
     ;;
     Linux)
         if [[ -f $HOME/.local/bin/nvim ]]; then
             export EDITOR=$HOME/.local/bin/nvim
-            alias nvim='$HOME/.local/bin/nvim'
         elif [[ -f /opt/nvim-linux-x86_64/bin/nvim ]]; then
             export EDITOR='/opt/nvim-linux-x86_64/bin/nvim'
-            alias nvim='/opt/nvim-linux-x86_64/bin/nvim'
         else
             export EDITOR=/usr/bin/nvim
-            alias nvim='/usr/bin/nvim'
         fi
     ;;
 esac
