@@ -11,9 +11,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -105,48 +102,28 @@ if type brew &>/dev/null; then
 fi
 autoload -Uz compinit && compinit
 
-# User configuration
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 ###############################
 # Common Environment Settings #
 ###############################
 
-# Terminal color
+# Terminal color settings
 export TERM=xterm-256color
 
-# Standard encoding setting
+# Standard encoding settings
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 
-# Japanese encoding setting
+# Japanese encoding settings
 export LANG_JP=C.UTF-8
 export LC_CTYPE=$LANG_JP
 
 # Alawyas list directory after cd
 function chpwd() {ls -a}
+
+# Set PATH to includes user's local bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # Terminal settings
 # This is for Gogh terminal color scheme specifically for Gnome terminal
@@ -176,10 +153,7 @@ show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
-# Autojump settings
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
-# Setup default text editor
+# Default editor settings
 case `uname` in
     Darwin)
         if [[ -f /opt/homebrew/bin/nvim ]]; then
@@ -212,9 +186,6 @@ case `uname` in
 esac
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# Include user local installation path
-export PATH="$HOME/.local/bin:$PATH"
 
 # Pretty print all environment variables
 alias pe='env -0 | sort -z | tr "\0" "\n"'
