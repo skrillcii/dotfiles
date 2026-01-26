@@ -8,6 +8,7 @@ install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
     # Install general
     sudo apt install -y vlc chromium-browser gnome-shell-extension-manager chrome-gnome-shell
+    # Open "Extension Manager" and fine "Tiling Shell"
     echo -e " <<< General Installation Finished!"
 }
 
