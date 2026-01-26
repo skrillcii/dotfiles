@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#############################
-# Development Installations #
-#############################
+##########################
+# Base Environment Setup #
+##########################
 
 install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
@@ -33,7 +33,8 @@ install_oh_my_zsh() {
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
-    ln -sf ~/dotfiles/zsh/zshlc ~/.zshlc
+    cp ~/dotfiles/zsh/zshlc ~/.zshlc
+    echo -e 'created symbolic links!'
     echo -e " <<< Oh-my-zsh Installation Finished!"
 }
 
@@ -47,6 +48,7 @@ install_oh_my_tmux() {
     echo -e 'creating symbolic links...'
     ln -sf ~/.oh-my-tmux/.tmux.conf ~/.tmux.conf
     ln -sf ~/dotfiles/tmux/tmux.conf.local ~/.tmux.conf.local
+    echo -e 'created symbolic links!'
     echo -e " <<< Oh-my-tmux Installation Finished!"
 }
 
@@ -96,6 +98,7 @@ install_ranger() {
     ln -sf ~/dotfiles/ranger/rc.conf ~/.config/ranger/
     ln -sf ~/dotfiles/ranger/rifle.conf ~/.config/ranger/
     ln -sf ~/dotfiles/ranger/scope.sh ~/.config/ranger/
+    echo -e 'created symbolic links!'
     echo -e " <<< Ranger Installation Finished!"
 }
 
@@ -114,7 +117,9 @@ install_bat() {
     sudo apt install bat
     # Create symbolic links
     # This is due to a name clash with antoher package in Ubuntu.
+    echo -e 'creating symbolic links...'
     ln -sf /usr/bin/batcat ~/.local/bin/bat
+    echo -e 'created symbolic links!'
     echo -e " <<< Fzf Installation Finished!"
 }
 
@@ -162,9 +167,11 @@ install_neovim_x86_64() {
     # Install
     tar -C ~/.local/share/ -xzf nvim-linux-x86_64.tar.gz
     # Create symbolic links
+    echo -e 'creating symbolic links...'
     ln -sf ~/.local/share/nvim-linux-x86_64/bin/nvim ~/.local/bin/nvim
     ln -sf ~/dotfiles/nvim ~/.config/nvim
     ln -sf ~/dotfiles/stylua ~/.config/stylua
+    echo -e 'created symbolic links!'
     # Clean
     rm -rf nvim-linux-x86_64.tar.gz
     echo -e " <<< Neovim (x86_64) Installation Finished!"
@@ -187,9 +194,11 @@ install_neovim_aarch64() {
     # Install
     tar -C ~/.local/share/ -xzf nvim-linux-arm64.tar.gz
     # Create symbolic links
+    echo -e 'creating symbolic links...'
     ln -sf ~/.local/share/nvim-linux-arm64/bin/nvim ~/.local/bin/nvim
     ln -sf ~/dotfiles/nvim ~/.config/nvim
     ln -sf ~/dotfiles/stylua ~/.config/stylua
+    echo -e 'created symbolic links!'
     # Clean
     rm -rf nvim-linux-arm64.tar.gz
     echo -e " <<< Neovim (aarch64) Installation Finished!"

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#####################
-# General Utilities #
-#####################
+#############################
+# Desktop Environment Setup #
+#############################
 
 install_ubuntu_general() {
     echo -e "\n >>> General Installation Started..."
@@ -66,11 +66,22 @@ install_nvidia_cuda_toolkit() {
 # Development Utilities #
 #########################
 
+install_python() {
+    echo -e "\n >>> Python Package Installation Started..."
+    # Install packages
+    pip3 install -U pip pip-autoremove ipdb pdbpp
+    # Create symbolic links
+    echo -e 'creating symbolic links...'
+    ln -sf ~/dotfiles/pdb/pdbrc.py ~/.pdbrc.py
+    echo -e 'created symbolic links!'
+    echo -e " <<< Python Package Installation Finished!"
+}
+
 install_cpp() {
     echo -e "\n >>> CPP Installation Started..."
     # Install compilers and debuggers
     sudo apt install -y clang clang-format clang-tidy clangd \
-                        gcc g++ gdb libstdc++-12-dev llvm lldb \
+                        gcc g++ gdb libstdc++-12-dev llvm lldb
     # Add debugger configurations
     ln -sf ~/dotfiles/gdb/gdbinit ~/.gdbinit
     # Add foramtter configurations
@@ -216,6 +227,7 @@ install_drawio() {
 # install_nvidia_container_toolkit
 # install_nvidia_cuda_toolkit
 
+# install_python
 # install_cpp
 # install_java
 # install_gvm

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#############################
-# Development Installations #
-#############################
+##########################
+# Base Environment Setup #
+##########################
 
 install_essentials() {
     echo -e "\n >>> Essentials Installation Started..."
@@ -19,7 +19,7 @@ install_terminal_utilities() {
     echo -e "\n >>> Terminal Utilities Installation Started..."
     # Install
     brew install zsh tmux vim ranger \
-                 git wget curl tree eza bat jq \
+                 git lazygit wget curl tree eza bat jq \
                  htop glances watch trash-cli
     # brew install autojump universal-ctags
     echo -e " <<< Terminal Utilities Installation Finished!"
@@ -57,13 +57,11 @@ install_oh_my_zsh() {
     git clone https://github.com/zsh-users/zsh-completions.git ~/.oh-my-zsh/custom/plugins/zsh-completions
     git clone https://github.com/esc/conda-zsh-completion.git ~/.oh-my-zsh/custom/plugins/conda-zsh-completion
     # Download themes
-    curl -L https://raw.githubusercontent.com/sbugzu/gruvbox-zsh/master/gruvbox.zsh-theme > ~/.oh-my-zsh/custom/themes/gruvbox.zsh-theme
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
-    ln -sf ~/dotfiles/zsh/zshlc ~/.zshlc
-    ln -sf ~/dotfiles/zsh/p10k.zsh ~/.p10k.zsh
+    cp ~/dotfiles/zsh/zshlc ~/.zshlc
     echo -e 'created symbolic links!'
     echo -e " <<< Oh-my-zsh Installation Finished!"
 }
@@ -158,41 +156,39 @@ install_aerospace(){
     echo -e " <<< Aerospace Installation Finished!"
 }
 
-##########################
-# Deprecated Development #
-##########################
+#########################
+# Development Utilities #
+#########################
 
-install_pip_packages() {
-    echo -e "\n >>> Pip Package Installation Started..."
-    # Install python
-    pyenv install 3.10.9
-    pyenv global 3.10.9 system
+install_python() {
+    echo -e "\n >>> Python Package Installation Started..."
     # Install packages
-    pip3 install -U pip pip-autoremove pylint flake8 autopep8 yapf black ipdb pdbpp
+    pip3 install -U pip pip-autoremove ipdb pdbpp
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/pdb/pdbrc.py ~/.pdbrc.py
     echo -e 'created symbolic links!'
-    echo -e " <<< Pip Package Installation Finished!"
+    echo -e " <<< Python Package Installation Finished!"
 }
 
-
 install_cpp(){
-    echo -e "\n >>> CoC Installation Started..."
+    echo -e "\n >>> CPP Installation Started..."
     # Install compilers and debuggers
-    brew install llvm lldb clang clang-format clangd gcc g++ \
+    brew install llvm lldb clang clang-format clangd gcc g++
     # Add foramtter configurations
     # Create symbolic links
     echo -e 'creating symbolic links...'
     ln -sf ~/dotfiles/coc/clang-format-macos.yml ~/.clang-format
     echo -e 'created symbolic links!'
-    echo -e " <<< CoC Installation Finished!"
+    echo -e " <<< CPP Installation Finished!"
 }
 
 ##################
 # Functions Call #
 ##################
-# brew update && brew upgrade
+# brew update
+# brew upgrade
+# brew cleanup
 
 # install_essentials
 # install_terminal_utilities
@@ -202,10 +198,15 @@ install_cpp(){
 # install_oh_my_tmux
 # install_ranger
 # install_fzf
+
 # install_nvm
 # install_neovim
 # install_anaconda
 # install_aerospace
 
-# install_pip_packages
+# install_python
 # install_cpp
+
+# brew update
+# brew upgrade
+# brew cleanup

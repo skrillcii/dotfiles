@@ -380,7 +380,7 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'egel/tmux-gruvbox'
 
 # Tmux-gruvbox options
-set -g @tmux-gruvbox 'dark'
+set -g @tmux-gruvbox 'dark256'
 
 # Resurrect options
 set -g @resurrect-processes ' \
