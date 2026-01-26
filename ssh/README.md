@@ -13,6 +13,13 @@ Generate keys
 
 ```
 $ ssh-keygen -t ed25519 -C "skrillcii@github.com"
+or
+$ ssh-keygen -t ed25519 -C "skrillcii@github.com"
+```
+
+Get public key
+```
+$ cat ~/.ssh/id_github_skrillcii.pub
 ```
 
 Start ssh-agent in the background
@@ -24,7 +31,7 @@ $ eval "$(ssh-agent -s)"
 Add key
 
 ```
-$ ssh-add ~/.ssh/id_rsa
+$ ssh-add ~/.ssh/id_github_skrillcii
 ```
 
 Check saved keys

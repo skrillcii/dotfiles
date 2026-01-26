@@ -1,6 +1,11 @@
-# SKriLLCii GitHub account
-Host github-skrillcii
+# General GitHub account
+HOST github.com
     HostName github.com
     User git
-    IdentityFile ~/.ssh/id_ed25519_skrillcii
-    IdentitiesOnly yes
+    IdentityFile ~/.ssh/id_github
+
+# SKriLLCii GitHub account
+Host github.com.skrillcii.
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_github_skrillcii
