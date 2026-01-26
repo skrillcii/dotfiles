@@ -1,0 +1,24 @@
+[/]
+cycle-layouts=['<Alt>x']
+edge-tiling-offset=uint32 30
+enable-autotiling=true
+enable-span-multiple-tiles=true
+enable-window-border=true
+focus-window-down=['']
+focus-window-left=['<Alt>h']
+focus-window-next=['<Alt>k']
+focus-window-prev=['<Alt>j']
+focus-window-right=['<Alt>l']
+focus-window-up=['']
+inner-gaps=uint32 9
+move-window-center=['<Alt>c']
+move-window-down=['<Shift><Alt>j']
+move-window-left=['<Shift><Alt>h']
+move-window-right=['<Shift><Alt>l']
+move-window-up=['<Shift><Alt>k']
+outer-gaps=uint32 9
+quarter-tiling-threshold=uint32 50
+selected-layouts=[['3249938'], ['3249938']]
+tiling-system-activation-key=['1']
+window-border-width=uint32 1
+window-use-custom-border-color=true
