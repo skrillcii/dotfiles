@@ -5,7 +5,7 @@ HOST github.com
     IdentityFile ~/.ssh/id_user_github
 
 # SKriLLCii GitHub account
-Host github.com.skrillcii.
+Host github.com.skrillcii
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_skrillcii_github
