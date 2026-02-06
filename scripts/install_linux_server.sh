@@ -4,23 +4,8 @@
 # Base Environment Setup #
 ##########################
 
-install_ubuntu_general() {
-    echo -e "\n >>> General Installation Started..."
-    # Install basics
-    sudo apt install -y zsh tmux vim ranger ripgrep xsel xclip \
-                        git wget curl tree eza bat jq build-essential \
-                        htop nvtop glances neofetch trash-cli
-    # Install network
-    sudo apt install -y net-tools nmap
-    # Install fcitx
-    sudo apt install -y fcitx5 fcitx5-chewing fcitx5-mozc fcitx5-pinyin
-    echo -e " <<< General Installation Finished!"
-}
-
 install_oh_my_zsh() {
     echo -e "\n >>> Oh-my-zsh Installation Started..."
-    # Install
-    sudo apt install -y zsh
     # Download and install
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     # Download plugins
@@ -40,8 +25,6 @@ install_oh_my_zsh() {
 
 install_oh_my_tmux() {
     echo -e "\n >>> Oh-my-tmux Installation Started..."
-    # Install
-    sudo apt install -y tmux
     # Download
     git clone https://github.com/gpakosz/.tmux.git ~/.oh-my-tmux
     # Create symbolic links
@@ -52,40 +35,8 @@ install_oh_my_tmux() {
     echo -e " <<< Oh-my-tmux Installation Finished!"
 }
 
-install_nerd_fonts() {
-    echo -e "\n >>> Nerd-fonts Installation Started..."
-    # Download
-    curl -OL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
-    # Create directory
-    mkdir -p ~/.local/share/fonts/NerdFonts
-    # Install
-    unzip Hack.zip -d ~/.local/share/fonts/NerdFonts
-    # Clean
-    rm -rf Hack.zip
-    echo -e " <<< Nerd-fonts Installation Finished!"
-}
-
-install_gogh_color_scheme() {
-    echo -e "\n >>> Gogh Color Scheme Installation Started..."
-    # Install dependencies
-    sudo apt install dconf-cli uuid-runtime
-    # Download
-    git clone https://github.com/Gogh-Co/Gogh.git ~/gogh
-    # Export (included in .zshrc)
-    # Necessary for initial installation in the Gnome terminal on ubuntu
-    export TERMINAL=gnome-terminal
-    # Install theme
-    ~/gogh/installs/gruvbox-dark.sh
-    ~/gogh/installs/gruvbox.sh
-    # Clean
-    rm -rf ~/gogh
-    echo -e " <<< Gogh Color Scheme Installation Finished!"
-}
-
 install_ranger() {
     echo -e "\n >>> Ranger Installation Started..."
-    # Install
-    sudo apt install -y ranger atool
     # Create directory if it does not exist
     echo -e 'checking directory...'
     if [[ ! -e ~/.config/ranger ]] ; then
@@ -111,18 +62,6 @@ install_fzf() {
     echo -e " <<< Fzf Installation Finished!"
 }
 
-install_bat() {
-    echo -e "\n >>> Bat Installation Started..."
-    # Download
-    sudo apt install bat
-    # Create symbolic links
-    # This is due to a name clash with antoher package in Ubuntu.
-    echo -e 'creating symbolic links...'
-    ln -sf /usr/bin/batcat ~/.local/bin/bat
-    echo -e 'created symbolic links!'
-    echo -e " <<< Bat Installation Finished!"
-}
-
 install_lazygit() {
     echo -e "\n >>> Lazygit Installation Started..."
     # Download
@@ -131,7 +70,7 @@ install_lazygit() {
     # Extract
     tar xf lazygit.tar.gz lazygit
     # Install
-    sudo install lazygit -D -t /usr/local/bin/
+    install lazygit -D -t ~/.local/bin/
     # Clean
     rm -rf lazygit.tar.gz && rm -rf lazygit
     echo -e " <<< Lazygit Installation Finished!"
@@ -177,33 +116,6 @@ install_neovim_x86_64() {
     echo -e " <<< Neovim (x86_64) Installation Finished!"
 }
 
-install_neovim_aarch64() {
-    echo -e "\n >>> Neovim (aarch64) Installation Started..."
-    # Download
-    curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-arm64.tar.gz
-    # Clean
-    rm -rf ~/.local/share/nvim-linux-arm64
-    # Create directory if it does not exist
-    echo -e 'checking directory...'
-    if [[ ! -e ~/.local/bin ]] ; then
-        mkdir -p ~/.local/bin
-    fi
-    if [[ ! -e ~/.local/share ]] ; then
-        mkdir -p ~/.local/share
-    fi
-    # Install
-    tar -C ~/.local/share/ -xzf nvim-linux-arm64.tar.gz
-    # Create symbolic links
-    echo -e 'creating symbolic links...'
-    ln -sf ~/.local/share/nvim-linux-arm64/bin/nvim ~/.local/bin/nvim
-    ln -sf ~/dotfiles/nvim ~/.config/nvim
-    ln -sf ~/dotfiles/stylua ~/.config/stylua
-    echo -e 'created symbolic links!'
-    # Clean
-    rm -rf nvim-linux-arm64.tar.gz
-    echo -e " <<< Neovim (aarch64) Installation Finished!"
-}
-
 install_anaconda() {
     echo -e "\n >>> Anaconda Installation Started..."
     # Download
@@ -216,53 +128,27 @@ install_anaconda() {
     echo -e " <<< Anaconda Installation Finished!"
 }
 
-install_miniconda_x86_64() {
-    echo -e "\n >>> Miniconda (x86_64) Installation Started..."
-    # Download
-    cd $HOME
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    # Install
-    bash ~/Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3
-    # Clean
-    rm ~/Miniconda3-latest-Linux-x86_64.sh
-    echo -e " <<< Miniconda (x86_64) Installation Finished!"
+install_anaconda_packages() {
+    echo -e "\n >>> Anaconda Packages Installation Started..."
+    # Source anaconda
+    source ~/anaconda3/bin/activate
+    # install using conda-forge
+    conda install conda-forge::xsel -y
+    # install using pip from base conda
+    pip install ranger-fm trash-cli
+    echo -e " <<< Anaconda Packages Installation Finished!"
 }
 
-install_miniconda_aarch64() {
-    echo -e "\n >>> Miniconda (aarch64) Installation Started..."
-    # Download
-    cd $HOME
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
-    # Install
-    bash ~/Miniconda3-latest-Linux-aarch64.sh -b -p $HOME/miniconda3
-    # Clean
-    rm ~/Miniconda3-latest-Linux-aarch64.sh
-    echo -e " <<< Miniconda (aarch64) Installation Finished!"
-}
 
 #################
 # Function Call #
 #################
-# sudo apt update
-# sudo apt upgrade -y
-# sudo apt autoremove -y
-
-# install_ubuntu_general
 # install_oh_my_zsh
 # install_oh_my_tmux
-# install_nerd_fonts
-# install_gogh_color_scheme
 # install_ranger
 # install_fzf
 # install_lazygit
-
 # install_nvm
 # install_neovim_x86_64
-# install_neovim_aarch64
 # install_anaconda
-# install_miniconda_x86_64
-# install_miniconda_aarch64
-
-# sudo apt update
-# sudo apt upgrade -y
-# sudo apt autoremove -y
+# install_anaconda_packages

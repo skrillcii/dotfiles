@@ -14,7 +14,7 @@ Generate keys
 ```
 $ ssh-keygen -t ed25519 -C "skrillcii@github.com"
 or
-$ ssh-keygen -t ed25519 -C "skrillcii@github.com"
+$ ssh-keygen -t rsa -b 4096 -C "skrillcii@github.com"
 ```
 
 Get public key

@@ -165,8 +165,10 @@ case `uname` in
             export EDITOR=$HOME/.local/bin/nvim
         elif [[ -f /opt/nvim-linux-x86_64/bin/nvim ]]; then
             export EDITOR='/opt/nvim-linux-x86_64/bin/nvim'
-        else
+        elif [[ -f /usr/bin/nvim ]]; then
             export EDITOR=/usr/bin/nvim
+        else
+            export EDITOR=/usr/bin/vim
         fi
     ;;
 esac
@@ -279,6 +281,9 @@ case `uname` in
         alias la="eza -alhg"
         export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
         export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    ;;
+    Linux)
+        source ~/anaconda3/bin/activate
     ;;
 esac
 
