@@ -133,7 +133,7 @@ install_anaconda_packages() {
     # Source anaconda
     source ~/anaconda3/bin/activate
     # install using conda-forge
-    conda install conda-forge::xsel -y
+    conda install -c conda-forge xsel tree exa bat nvtop fastfetch -y
     # install using pip from base conda
     pip install ranger-fm trash-cli
     echo -e " <<< Anaconda Packages Installation Finished!"
