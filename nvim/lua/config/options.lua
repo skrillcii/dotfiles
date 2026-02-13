@@ -42,12 +42,14 @@ vim.o.timeoutlen = 300
 -- Configure how new splits should be opened
 vim.o.splitright = false
 vim.o.splitbelow = true
--- Preview substitutions live, as you type!
+-- Preview substitutions live, as you type
 vim.o.inccommand = "split"
 -- Show which line your cursor is on
 vim.o.cursorline = true
--- Minimal number of screen lines to keep above and below the cursor.
+-- Minimal number of screen lines to keep above and below the cursor
 vim.o.scrolloff = 10
+-- Views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
 
 -- If performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 --  Instead raise a dialog asking if you wish to save the current file(s)
