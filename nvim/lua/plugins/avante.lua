@@ -15,28 +15,32 @@ return {
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
-      provider = "gemini",
+      mode = "legacy",
+      provider = "moonshot",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
           model = "claude-sonnet-4-20250514",
           timeout = 30000, -- Timeout in milliseconds
+          disable_tools = true,
           extra_request_body = {
             temperature = 0.75,
             max_tokens = 20480,
           },
         },
         moonshot = {
-          endpoint = "https://api.moonshot.ai/v1",
-          model = "kimi-k2-0711-preview",
+          endpoint = "http://localhost:8001/v1",
+          model = "unsloth/Kimi-K2.5",
           timeout = 30000, -- Timeout in milliseconds
+          disable_tools = true,
           extra_request_body = {
-            temperature = 0.75,
+            temperature = 0.6,
             max_tokens = 32768,
           },
         },
         gemini = {
           model = "gemini-3-flash-preview",
+          disable_tools = true,
         },
       },
     },
