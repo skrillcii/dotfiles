@@ -17,6 +17,7 @@ return {
       -- for example
       mode = "legacy",
       provider = "moonshot",
+      auto_suggestions_provider = "moonshot",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
