@@ -16,12 +16,13 @@ return {
       instructions_file = "avante.md",
       -- for example
       mode = "legacy",
-      provider = "moonshot",
+      provider = "claude",
       auto_suggestions_provider = "moonshot",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
-          model = "claude-sonnet-4-20250514",
+          auth_type = "max",
+          model = "claude-sonnet-4-5-20250929",
           timeout = 30000, -- Timeout in milliseconds
           disable_tools = true,
           extra_request_body = {
@@ -38,10 +39,6 @@ return {
             temperature = 0.6,
             max_tokens = 32768,
           },
-        },
-        gemini = {
-          model = "gemini-3-flash-preview",
-          disable_tools = true,
         },
       },
     },
