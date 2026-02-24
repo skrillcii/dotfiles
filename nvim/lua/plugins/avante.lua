@@ -22,7 +22,7 @@ return {
         claude = {
           endpoint = "https://api.anthropic.com",
           auth_type = "max",
-          model = "claude-sonnet-4-5-20250929",
+          model = "claude-sonnet-4-20250514",
           timeout = 30000, -- Timeout in milliseconds
           disable_tools = true,
           extra_request_body = {
