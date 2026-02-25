@@ -21,7 +21,7 @@ return {
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
-          auth_type = "max",
+          auth_type = "api",
           model = "claude-sonnet-4-20250514",
           timeout = 30000, -- Timeout in milliseconds
           disable_tools = true,

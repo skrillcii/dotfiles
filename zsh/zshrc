@@ -283,7 +283,11 @@ case `uname` in
         export PATH="/opt/homebrew/anaconda3/bin:$PATH"
     ;;
     Linux)
-        source ~/anaconda3/bin/activate
+        if [[ -f ~/anaconda3/bin/activate ]]; then
+            source ~/anaconda3/bin/activate
+        elif [[ -f ~/miniconda3/bin/activate ]]; then
+            source ~/miniconda3/bin/activate
+        fi
     ;;
 esac
 
