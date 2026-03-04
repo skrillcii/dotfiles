@@ -15,16 +15,16 @@ return {
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
-      mode = "legacy",
+      mode = "agentic", -- set "agentic" or "legacy"
       provider = "claude",
       auto_suggestions_provider = "moonshot",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
-          auth_type = "api",
-          model = "claude-sonnet-4-20250514",
+          auth_type = "max",
+          -- model = "claude-sonnet-4-20250514",
+          model = "claude-opus-4-6",
           timeout = 30000, -- Timeout in milliseconds
-          disable_tools = true,
           extra_request_body = {
             temperature = 0.75,
             max_tokens = 20480,
@@ -39,6 +39,14 @@ return {
             temperature = 0.6,
             max_tokens = 32768,
           },
+        },
+      },
+      windows = {
+        edit = {
+          start_insert = true, -- Start insert mode when opening the edit window
+        },
+        ask = {
+          start_insert = false, -- Start insert mode when opening the ask window
         },
       },
     },
