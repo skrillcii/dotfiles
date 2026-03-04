@@ -29,8 +29,8 @@ return {
         },
       })
       -- Keybiding
-      vim.api.nvim_set_keymap("n", "<leader>th", ":-tabmove<CR>", { noremap = true, desc = "Move tab to previous" })
-      vim.api.nvim_set_keymap("n", "<leader>tp", ":+tabmove<CR>", { noremap = true, desc = "Move tab to next" })
+      vim.api.nvim_set_keymap("n", "<leader>th", ":-tabmove<CR>", { noremap = true, desc = "Move tab to left" })
+      vim.api.nvim_set_keymap("n", "<leader>tl", ":+tabmove<CR>", { noremap = true, desc = "Move tab to right" })
       vim.api.nvim_set_keymap(
         "n",
         "<leader>tr",
